@@ -1,6 +1,6 @@
 <?php
 
-    namespace Blog\View;
+    namespace rtff\views;
 class Layout
 {
     public function __construct(private string $title, private string $content) {}
