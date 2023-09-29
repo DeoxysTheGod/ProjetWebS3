@@ -1,8 +1,8 @@
 <?php
-namespace Rtff\Controllers\Authentication;
+namespace rtff\controllers\authentication;
 session_start();
 
-require_once 'Database.php';
+require_once 'assets/includes/database/Database.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $database = new Database();

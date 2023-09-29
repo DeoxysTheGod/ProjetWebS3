@@ -1,5 +1,5 @@
 <?php
-namespace Rtff\View;
+namespace rtff\views;
 
 class ConnexionPage
 {
@@ -7,7 +7,7 @@ class ConnexionPage
     {
         ob_start();
 ?><h1>Connectez-vous</h1>
-<form method="post"  action="/modules/rtff/controllers/authentication/connectUser.php">
+<form method="post"  action="/modules/rtff/controllers/authentication/ConnectUser.php">
     Email: <input type="email" name="account_id" required><br>
     Mot de Passe: <input type="password" name="password" required><br>
     <input type="submit" value="Se connecter">

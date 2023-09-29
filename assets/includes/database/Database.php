@@ -1,11 +1,11 @@
 <?php
-namespace Rtff\Controllers;
-class Database {
+namespace includes\database;
+class DatabaseConnexion {
     private $host = 'mysql-rtff.alwaysdata.net';       // Nom d'hôte de la base de données
     private $db_name = 'rtff_bd';   // Nom de la base de données
     private $username = 'rtff';     // Nom d'utilisateur de la base de données
     private $password = 'rootrtff1234*';    // Mot de passe de la base de données
-    public $conn;
+    private $conn;
 
     // Obtenez la connexion à la base de données
     public function getConnection() {
