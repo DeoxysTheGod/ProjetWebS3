@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once './Database.php';
+require_once './DatabaseConnexion.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $database = new Database();

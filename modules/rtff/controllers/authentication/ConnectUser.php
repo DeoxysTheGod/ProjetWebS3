@@ -2,7 +2,7 @@
 namespace rtff\controllers\authentication;
 session_start();
 
-require_once 'assets/includes/database/Database.php';
+require_once 'assets/includes/database/DatabaseConnexion.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $database = new Database();
