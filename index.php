@@ -4,7 +4,7 @@ rtff\Autoloader::register();
 
 try
 {
-    (new rtff\controllers\authentication\ConnexionPage())->execute();
+    (new rtff\views\CreateUserPage())->show();
 } catch (Exception $e) {
 
 }

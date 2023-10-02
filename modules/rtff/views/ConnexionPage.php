@@ -14,5 +14,6 @@ class ConnexionPage
 </form>
 <a href="requestMailForReset.php">réinitialiser mot de passe</a>
 <?php
+        (new \rtff\views\Layout('Login', ob_get_clean()))->show();
     }
 }
