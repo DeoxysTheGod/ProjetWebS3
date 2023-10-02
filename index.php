@@ -4,7 +4,7 @@ rtff\Autoloader::register();
 
 try
 {
-    (new rtff\views\CreateUserPage())->show();
+    (new rtff\views\Homepage())->show();
 } catch (Exception $e) {
 
 }
