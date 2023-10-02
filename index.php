@@ -13,10 +13,6 @@ $methodSegment = $segments[2] ?? 'defaultMethod';
 $controllerFile = "./modules/rtff/controllers/$controllerSegment/$actionSegment.php";
 $controllerClass = "\\rtff\\controllers\\$controllerSegment\\$actionSegment";
 
-var_dump($segments); // Ajout pour déboguer les segments
-var_dump($controllerFile);
-var_dump($controllerClass);
-
 if (file_exists($controllerFile)) {
     require_once $controllerFile;
     if (class_exists($controllerClass)) {

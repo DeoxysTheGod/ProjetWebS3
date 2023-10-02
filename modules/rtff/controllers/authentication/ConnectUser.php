@@ -2,7 +2,6 @@
 namespace rtff\controllers\authentication;
 
 class ConnectUser {
-
     public function defaultMethod() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $account_id = $_POST['account_id'];
