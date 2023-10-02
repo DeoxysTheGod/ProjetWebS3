@@ -5,21 +5,25 @@ class CreateUserPage
 	public function show(): void
 	{
 		ob_start();
-?><form method="post" action="/modules/rtff/controllers/authentication/CreateUser.php">
-	<label for="user_id">Email<br>
-        <input type="email" name="user_id" required>
-    </label><br>
-    <label for="password">Mot de Passe<br>
-        <input type="password" name="password" required>
-    </label><br>
-	<label for="display_name">Nom d'Affichage<br>
-        <input type="text" name="display_name" required>
-    </label><br>
-	<label for="image">Image<br>
-        <input type="text" name="image">
-    </label><br><br>
-	<input type="submit" value="Créer l'utilisateur">
+?>
+<form method="post" action="createPost.php" enctype="multipart/form-data">
+    <div>
+        <label for="title">Titre:</label>
+        <input type="text" name="title" id="title" required>
+    </div>
+    <div>
+        <label for="message">Message:</label>
+        <textarea name="message" id="message" required></textarea>
+    </div>
+    <div>
+        <label for="image">Image:</label>
+        <input type="file" name="image" id="image">
+    </div>
+    <div>
+        <input type="submit" value="Créer Post">
+    </div>
 </form>
+
 <?php
         (new \rtff\views\Layout('Creation d\'utilisateur', ob_get_clean()))->show();
 	}

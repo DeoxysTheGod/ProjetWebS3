@@ -6,8 +6,6 @@ session_start();
 require_once './DatabaseConnexion.php';
 require_once './navigation.php';
 
-$error_message = '';
-$success_message = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $database = DatabaseConnexion::getInstance();
