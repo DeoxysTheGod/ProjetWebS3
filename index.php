@@ -1,32 +1,34 @@
 <?php
+// index.php
 require_once './modules/rtff/Autoloader.php';
 \rtff\Autoloader::register();
-$controller = $_GET['controller'] ?? './modules/rtff/controllers/authentication/ConnectUser.php';
 
-// Vérifier si controller et action sont présents dans l'URL
-if(isset($_GET['controller']) && isset($_GET['action'])) {
-    // Récupérer le contrôleur et l'action à partir de l'URL
-    $subdirectory = $_GET['subdirectory'] ?? '';
-    $controller = $_GET['controller'];
-    $action = $_GET['action'];
+// Découpage de l'URL
+$urlPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$segments = explode('/', trim($urlPath, '/'));
+$controllerSegment = $segments[0] ?? 'authentication';
+$actionSegment = $segments[1] ?? 'ConnectUser';
+$methodSegment = $segments[2] ?? 'defaultMethod';
 
-    // Construire le nom complet de la classe de contrôleur avec le sous-répertoire
-    $controllerClassName = "\\rtff\\controllers\\" . ($subdirectory ? $subdirectory . '\\' : '') . ucfirst($controller);
+// Construction du chemin vers le fichier du contrôleur et du nom de la classe contrôleur
+$controllerFile = "./modules/rtff/controllers/$controllerSegment/$actionSegment.php";
+$controllerClass = "\\rtff\\controllers\\$controllerSegment\\$actionSegment";
 
-    // Vérifier si la classe de contrôleur et la méthode (action) existent
-    if(class_exists($controllerClassName)) {
-        $controllerObject = new $controllerClassName();
-        if(method_exists($controllerObject, $action)) {
-            $controllerObject->$action();
+if (file_exists($controllerFile)) {
+    require_once $controllerFile;
+    if (class_exists($controllerClass)) {
+        $controllerObject = new $controllerClass();
+        if (method_exists($controllerObject, $methodSegment)) {
+            $controllerObject->$methodSegment();
         } else {
             http_response_code(404);
-            echo "404 Not Found - Action non trouvée";
+            echo "Méthode $methodSegment non trouvée.";
         }
     } else {
         http_response_code(404);
-        echo "404 Not Found - Contrôleur non trouvé";
+        echo "Classe contrôleur $controllerClass non trouvée.";
     }
 } else {
-    http_response_code(400);
-    echo "400 Bad Request - Contrôleur ou action non spécifié dans l'URL";
+    http_response_code(404);
+    echo "Fichier du contrôleur $controllerFile non trouvé.";
 }
