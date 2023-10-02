@@ -9,7 +9,7 @@ class ConnexionPage
         ?>
         <div>
             <!-- Formulaire de connexion -->
-            <form method="post" action="ConnectUserController.php"> <!-- Modifié ici -->
+            <form method="post" action="../controllers/authentication/ConnectUser.php"> <!-- Modifié ici -->
                 <label for="account_id"> Email<br>
                     <input type="email" name="account_id" required>
                 </label><br>
