@@ -1,6 +1,7 @@
 <?php
 require_once './modules/rtff/Autoloader.php';
 \rtff\Autoloader::register();
+$controller = $_GET['controller'] ?? './modules/rtff/controllers/authentication/ConnectUser.php';
 
 // Vérifier si controller et action sont présents dans l'URL
 if(isset($_GET['controller']) && isset($_GET['action'])) {
