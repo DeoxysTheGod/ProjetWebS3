@@ -12,8 +12,9 @@ $actionSegment = isset($segments[1]) && $segments[1] != '' ? $segments[1] : 'Con
 $methodSegment = $segments[2] ?? 'defaultMethod';
 
 // Construction du chemin vers le fichier du contrôleur et du nom de la classe contrôleur
-$controllerFile = "./modules/rtff/controllers/$controllerSegment/$actionSegment.php";
-$controllerClass = "\\rtff\\controllers\\$controllerSegment\\$actionSegment";
+$controllerFile = "./modules/rtff/controllers/{$controllerSegment}/{$actionSegment}.php";
+$controllerClass = "\\rtff\\controllers\\{$controllerSegment}\\{$actionSegment}";
+
 
 if (file_exists($controllerFile)) {
     require_once $controllerFile;
