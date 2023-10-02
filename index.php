@@ -6,6 +6,6 @@ try {
     (new rtff\views\ConnexionPage())->show();
 } catch (Exception $e) {
 
-    header('Location: error404.php');
+    header('/error404.php');
     exit;
 }
