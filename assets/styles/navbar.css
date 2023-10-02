@@ -1,0 +1,39 @@
+@font-face {
+    font-family: 'Philosopher-Bold';
+    src: url('../fonts/Philosopher/Philosopher-Bold.ttf');
+}
+
+nav {
+    display: flex;
+    background-color: #19181B;
+    padding: 2rem;
+    color: darkgrey;
+    font-size: 2rem;
+    justify-content: center;
+    align-items: center;
+    height: 0.5rem;
+}
+
+#logo > img {
+    width: 6rem;
+}
+
+#title {
+    color: #DFD3F6;
+    padding: 0 32rem 0 32rem;
+    font-family: 'Philosopher-Bold', serif;
+}
+
+#options > button {
+    height: 2rem;
+    width: 6rem;
+    background-color: #A079F2;
+    border-color: transparent;
+    border-radius: 0.3rem;
+    font-size: 1rem;
+    font-family: 'Philosopher-Bold', serif;
+}
+
+#options > button:active {
+    scale: 0.95;
+}
