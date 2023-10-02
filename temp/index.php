@@ -1,10 +1,12 @@
 <?php
 
 // Inclure la configuration de la base de données
-require_once './Database.php';
+use rtff\database\DatabaseConnexion;
+
+require_once './DatabaseConnexion.php';
 
 // Créer une instance de la base de données pour tester la connexion
-$database = new Database();
+$database = new DatabaseConnexion();
 $db = $database->getConnection();
 
 // Pour le moment, nous allons juste renvoyer un message JSON basique pour vérifier que tout fonctionne

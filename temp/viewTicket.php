@@ -1,6 +1,9 @@
 <?php
+
+use rtff\database\DatabaseConnexion;
+
 session_start();
-require_once './Database.php';
+require_once './DatabaseConnexion.php';
 require_once './navigation.php';
 
 if(!isset($_SESSION['account_id'])) {
@@ -8,7 +11,7 @@ if(!isset($_SESSION['account_id'])) {
     exit;
 }
 
-$database = new Database();
+$database = new DatabaseConnexion();
 $db = $database->getConnection();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['comment'])) {

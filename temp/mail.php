@@ -1,9 +1,12 @@
 <?php
-require_once './Database.php';
+
+use rtff\database\DatabaseConnexion;
+
+require_once './DatabaseConnexion.php';
 
 $account_id = $_POST['account_id'];
 
-$database = new Database();
+$database = new DatabaseConnexion();
 $db = $database->getConnection();
 
 

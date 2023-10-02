@@ -1,13 +1,16 @@
 <?php
+
+use rtff\database\DatabaseConnexion;
+
 session_start();
-require_once './Database.php';
+require_once './DatabaseConnexion.php';
 require_once './navigation.php';
 
 $error_message = '';
 $success_message = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $database = Database::getInstance();
+    $database = DatabaseConnexion::getInstance();
     $db = $database->getConnection();
 
     $account_id = htmlspecialchars($_POST['account_id']);

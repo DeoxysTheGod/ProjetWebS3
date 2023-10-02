@@ -1,7 +1,10 @@
 <?php
-require_once './Database.php';
 
-$database = Database::getInstance();
+use rtff\database\DatabaseConnexion;
+
+require_once './DatabaseConnexion.php';
+
+$database = DatabaseConnexion::getInstance();
 $db = $database->getConnection();
 
 $query = "SELECT t.*, a.display_name AS username FROM TICKET t LEFT JOIN ACCOUNT a ON t.author = a.account_id";
