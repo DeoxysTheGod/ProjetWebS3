@@ -18,7 +18,8 @@ class User {
                 return "Identifiant incorrect.";
             }
 
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+
             $hashed_password = $row['password'];
 
             if (!password_verify($password, $hashed_password)) {
