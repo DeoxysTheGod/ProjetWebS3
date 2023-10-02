@@ -6,19 +6,18 @@ class CreateUserPage
 	{
 		ob_start();
 ?><form method="post" action="/modules/rtff/controllers/authentication/CreateUser.php">
-	<label for="user_id">Email
+	<label for="user_id">Email<br>
         <input type="email" name="user_id" required>
-    </label>
-    <label for="password">Mot de Passe
-        <input type="password" name="password" required><br>
-    </label>
-
-	<label for="display_name">Nom d'Affichage
-        <input type="text" name="display_name" required>
-    </label>
-	<label for="image">Image
-        <input type="text" name="image">
     </label><br>
+    <label for="password">Mot de Passe<br>
+        <input type="password" name="password" required>
+    </label><br>
+	<label for="display_name">Nom d'Affichage<br>
+        <input type="text" name="display_name" required>
+    </label><br>
+	<label for="image">Image<br>
+        <input type="text" name="image">
+    </label><br><br>
 	<input type="submit" value="Créer l'utilisateur">
 </form>
 <?php
