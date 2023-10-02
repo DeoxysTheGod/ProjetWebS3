@@ -6,7 +6,7 @@ class User {
 
     public static function connectUser($user_id, $password) {
         try {
-            $database = DatabaseConnexion::getInstance();
+            $database = \rtff\database\DatabaseConnexion::getInstance();
             $db = $database->getConnection();
 
             $query = "SELECT password FROM ACCOUNT WHERE account_id = :user_id";
