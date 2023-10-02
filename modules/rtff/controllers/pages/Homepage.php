@@ -5,8 +5,8 @@ require_once 'modules/rtff/views/Homepage.php';
 
 class Homepage
 {
-    public function execute(): void
-    {
+    public function defaultMethod() {
+
         (new \rtff\views\Homepage())->show();
     }
 }

@@ -1,6 +1,8 @@
 <?php
 namespace rtff\database;
 
+use PDO;
+
 class DatabaseConnexion
 {
     private static $instance = null;

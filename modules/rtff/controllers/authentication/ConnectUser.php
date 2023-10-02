@@ -1,20 +1,16 @@
 <?php
 namespace rtff\controllers\authentication;
 
-use rtff\models\User;
-use rtff\views\ConnexionPage;
-
 class ConnectUser {
-
     public function defaultMethod() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $user_id = $_POST['user_id'];
+            $account_id = $_POST['account_id'];
             $password = $_POST['password'];
-            $notification = User::connectUser($user_id, $password);
+            $notification = \rtff\models\User::connectUser($account_id, $password);
             echo $notification;
         }
         // Vue affichée indépendamment de la méthode de la requête
-        $view = new ConnexionPage();
+        $view = new \rtff\views\ConnexionPage();
         $view->show();
     }
 }
