@@ -1,14 +1,21 @@
 <?php
-session_start();
+namespace rtff\controllers\authentication;
+
 use rtff\models\User;
+use rtff\views\ConnexionPage;
 
-require_once '../../models/User.php';
+class ConnectUser {
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $user_id = $_POST['user_id'];
-    $password = $_POST['password'];
-    $notification = User::connectUser($user_id, $password);
-    echo $notification;
+    public function defaultMethod() {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $user_id = $_POST['user_id'];
+            $password = $_POST['password'];
+            $notification = User::connectUser($user_id, $password);
+            echo $notification;
+        } else {
+            $view = new ConnexionPage();
+            $view->show();
+        }
+    }
+
 }
-
-require_once '../../views/ConnexionPage.php';
