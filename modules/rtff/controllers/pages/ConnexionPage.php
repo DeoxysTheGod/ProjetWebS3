@@ -1,5 +1,5 @@
 <?php
-namespace rtff\controllers\authentication;
+namespace rtff\controllers\pages;
 
 require_once 'modules/rtff/views/ConnexionPage.php';
 
