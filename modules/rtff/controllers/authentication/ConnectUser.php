@@ -12,10 +12,9 @@ class ConnectUser {
             $password = $_POST['password'];
             $notification = User::connectUser($user_id, $password);
             echo $notification;
-        } else {
-            $view = new ConnexionPage();
-            $view->show();
         }
+        // Vue affichée indépendamment de la méthode de la requête
+        $view = new ConnexionPage();
+        $view->show();
     }
-
 }
