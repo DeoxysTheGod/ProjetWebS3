@@ -4,7 +4,7 @@ rtff\Autoloader::register();
 
 try
 {
-    (new rtff\views\Homepage())->show();
+    (new rtff\views\ConnexionPage())->show();
 } catch (Exception $e) {
 
 }
