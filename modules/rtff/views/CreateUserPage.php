@@ -22,6 +22,6 @@ class CreateUserPage
 	<input type="submit" value="Créer l'utilisateur">
 </form>
 <?php
-        (new \rtff\views\CreateUserPage())->show();
+        (new \rtff\views\Layout('Creation d\'utilisateur', ob_get_clean()))->show();
 	}
 }
