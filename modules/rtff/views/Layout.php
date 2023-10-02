@@ -7,11 +7,11 @@ class Layout
     public function show(): void
     {
 ?><!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="utf-8"/>
     <title><?= $this->title; ?></title>
-    <link href="/assets/styles/style.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/assets/styles/style.css"/>
 </head>
 <body>
 <?= $this->content; ?>

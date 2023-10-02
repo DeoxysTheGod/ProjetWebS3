@@ -1,12 +1,12 @@
 <?php
-    namespace Rtff\View;
+    namespace rtff\views;
 
     class Navbar
     {
         public function show(): void
         {
-            ob_start();
             ?>
+            <link rel="stylesheet" href="/assets/styles/navbar.css">
             <nav>
                 <a href="/">
                     <div id="logo">
@@ -15,7 +15,7 @@
                 </a>
 
                 <div id="title">
-                    Read The * Forum
+                    Read The F****** Forum
                 </div>
 
                 <div id="options">
@@ -24,5 +24,6 @@
                 </div>
             </nav>
             <?php
+            (new \rtff\views\Layout('Navigation', ob_get_clean()))->show();
         }
     }
