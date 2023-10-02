@@ -30,10 +30,11 @@ class User {
             $_SESSION['account_id'] = $account_id;
 
             return "Connexion réussie!";
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             error_log($e->getMessage());
             return "Une erreur est survenue lors de la connexion.";
         }
+
     }
 
     public static function createUser($account_id, $password, $display_name) {
@@ -66,7 +67,7 @@ class User {
 
                 return "Utilisateur créé avec succès!";
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             error_log($e->getMessage());
             return "Une erreur est survenue.";
         }
@@ -96,7 +97,8 @@ class User {
         $message .= '--' . $bndary . '--';
 
         if (!mail($to, $subject, $message, $headers)) {
-            throw new Exception("Un problème est survenu lors de l'envoi de l'e-mail.");
+            throw new \Exception("Un problème est survenu lors de l'envoi de l'e-mail.");
         }
+
     }
 }
