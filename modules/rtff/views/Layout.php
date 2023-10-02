@@ -11,7 +11,9 @@ class Layout
 <head>
     <meta charset="utf-8"/>
     <title><?= $this->title; ?></title>
+    <link rel="icon" type="image/x-icon" href="/assets/images/icons/favicon-white/favicon.ico">
     <link rel="stylesheet" href="/assets/styles/style.css"/>
+    <link rel="stylesheet" href="/assets/styles/navbar.css">
 </head>
 <body>
 <?= $this->content; ?>
