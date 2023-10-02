@@ -1,6 +1,8 @@
 <?php
-// importation de la classe Database et démarrage de la session
-require_once './Database.php';
+// importation de la classe DatabaseConnexion et démarrage de la session
+use rtff\database\DatabaseConnexion;
+
+require_once './DatabaseConnexion.php';
 session_start();
 
 if (!isset($_SESSION['account_id'])) {
@@ -12,7 +14,7 @@ if (!isset($_SESSION['account_id'])) {
 class Post {
     public static function createPost($title, $message, $author, $image_path) {
         try {
-            $db = Database::getInstance()->getConnection();
+            $db = DatabaseConnexion::getInstance()->getConnection();
 
             $query = "INSERT INTO TICKET (title, message, image_path, date, author) VALUES (:title, :message, :image_path, NOW(), :author)";
             $stmt = $db->prepare($query);

@@ -1,40 +1,46 @@
 <?php
-namespace rtff\controllers\authentication;
-session_start();
 
-require_once 'assets/includes/database/DatabaseConnexion.php';
+namespace rtff\controllers\authentication;
+
+session_start();
+require_once './DatabaseConnexion.php';
+require_once './navigation.php';
+
+$error_message = '';
+$success_message = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $database = new Database();
+    $database = DatabaseConnexion::getInstance();
     $db = $database->getConnection();
 
-    $account_id = $_POST['account_id'];
-    $password = $_POST['password']; // mot de passe non haché fourni par l'utilisateur
+    $account_id = htmlspecialchars($_POST['account_id']);
+    $password = $_POST['password']; // Pas besoin de htmlspecialchars car password_verify fait déjà la comparaison en toute sécurité
 
     $query = "SELECT * FROM ACCOUNT WHERE account_id = :account_id";
     $stmt = $db->prepare($query);
     $stmt->bindParam(':account_id', $account_id);
 
-    if ($stmt->execute()) {
-        if ($stmt->rowCount() > 0) {
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            $hashed_password = $row['password']; // mot de passe haché stocké dans la base de données
+    try {
+        $stmt->execute();
+
+        if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $hashed_password = $row['password'];
 
             if (password_verify($password, $hashed_password)) {
-                // Les identifiants sont corrects
                 $_SESSION['account_id'] = $row['account_id'];
                 $_SESSION['display_name'] = $row['display_name'];
-                // et autres informations que vous souhaitez stocker dans la session
-                echo "Connexion réussie ! Bienvenue " . $row['display_name'] . "!";
+                $success_message = "Connexion réussie ! Bienvenue " . $_SESSION['display_name'] . "!";
+                header("Location: viewPosts.php"); // Redirige l'utilisateur vers viewPosts.php
+                exit;
             } else {
-                // Le mot de passe est incorrect
-                echo "Identifiant/Mot de passe incorrect !";
+                $error_message = 'Identifiant/Mot de passe incorrect !';
             }
         } else {
-            // Aucun utilisateur trouvé avec cet email
-            echo "Identifiant/Mot de passe incorrect !";
+            $error_message = 'Identifiant/Mot de passe incorrect !';
         }
-    } else {
-        echo "Une erreur est survenue lors de la connexion.";
+    } catch (PDOException $e) {
+        $error_message = 'Une erreur est survenue lors de la connexion.';
+        // Loggez l'erreur $e->getMessage() dans un fichier d'erreurs ou un système de log.
     }
 }
+?>

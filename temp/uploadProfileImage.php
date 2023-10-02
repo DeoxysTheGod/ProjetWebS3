@@ -1,9 +1,12 @@
 <?php
-require_once './Database.php';
+
+use rtff\database\DatabaseConnexion;
+
+require_once './DatabaseConnexion.php';
 
 // uploadProfileImage.php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $database = new Database();
+    $database = new DatabaseConnexion();
     $db = $database->getConnection();
     if (isset($_FILES['profileImage'])) {
         $image = $_FILES['profileImage'];

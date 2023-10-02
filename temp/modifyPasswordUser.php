@@ -1,11 +1,14 @@
 <?php
-require_once './Database.php';
+
+use rtff\database\DatabaseConnexion;
+
+require_once './DatabaseConnexion.php';
 
 $message = '';
 
 if (isset($_GET['token'])) {
     $token = $_GET['token'];
-    $database = new Database();
+    $database = new DatabaseConnexion();
     $db = $database->getConnection();
 
     $query = "SELECT * FROM TOKEN WHERE token_id = :token_id AND date_creation >= NOW() - INTERVAL 30 MINUTE";

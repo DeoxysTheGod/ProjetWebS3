@@ -1,5 +1,8 @@
 <?php
-class Database {
+namespace rtff\database;
+
+class DatabaseConnexion
+{
     private static $instance = null;
     private $conn;
 
@@ -8,7 +11,8 @@ class Database {
     private $username = 'rtff';
     private $password = 'rootrtff1234*';
 
-    private function __construct() {
+    private function __construct()
+    {
         try {
             $this->conn = new PDO('mysql:host=' . $this->host . ';dbname=' . $this->db_name, $this->username, $this->password);
             $this->conn->exec('set names utf8');
@@ -17,15 +21,18 @@ class Database {
         }
     }
 
-    public static function getInstance() {
+    public static function getInstance()
+    {
         if (self::$instance == null) {
-            self::$instance = new Database();
+            self::$instance = new DatabaseConnexion();
         }
         return self::$instance;
     }
 
-    public function getConnection() {
+    public function getConnection()
+    {
         return $this->conn;
     }
 }
+
 ?>

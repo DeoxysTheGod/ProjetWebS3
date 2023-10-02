@@ -1,8 +1,11 @@
 <?php
-require_once './Database.php';
+
+use rtff\database\DatabaseConnexion;
+
+require_once './DatabaseConnexion.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $database = new Database();
+    $database = new DatabaseConnexion();
     $db = $database->getConnection();
 
     $user_id = $_POST['user_id'];
