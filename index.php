@@ -6,8 +6,9 @@ require_once './modules/rtff/Autoloader.php';
 // Découpage de l'URL
 $urlPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $segments = explode('/', trim($urlPath, '/'));
-$controllerSegment = $segments[0] ?? 'authentication';
-$actionSegment = $segments[1] ?? 'ConnectUser';
+$controllerSegment = isset($segments[0]) && $segments[0] != '' ? $segments[0] : 'authentication';
+$actionSegment = isset($segments[1]) && $segments[1] != '' ? $segments[1] : 'ConnectUser';
+
 $methodSegment = $segments[2] ?? 'defaultMethod';
 
 // Construction du chemin vers le fichier du contrôleur et du nom de la classe contrôleur
