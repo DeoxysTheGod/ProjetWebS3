@@ -3,7 +3,6 @@
 require_once './modules/rtff/Autoloader.php';
 \rtff\Autoloader::register();
 
-// Découpage de l'URL
 $urlPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $segments = explode('/', trim($urlPath, '/'));
 $controllerSegment = isset($segments[0]) && $segments[0] != '' ? $segments[0] : 'authentication';
@@ -11,13 +10,12 @@ $actionSegment = isset($segments[1]) && $segments[1] != '' ? $segments[1] : 'Con
 
 $methodSegment = $segments[2] ?? 'defaultMethod';
 
-// Construction du chemin vers le fichier du contrôleur et du nom de la classe contrôleur
-$controllerFile = "./modules/rtff/controllers/{$controllerSegment}/{$actionSegment}.php";
-$controllerClass = "\\rtff\\controllers\\{$controllerSegment}\\{$actionSegment}";
+$controllerFile = "./modules/rtff/controllers/$controllerSegment/$actionSegment.php";
+$controllerClass = "\\rtff\\controllers\\$controllerSegment\\$actionSegment";
 
-// Exemple de débogage
-var_dump($controllerFile); // Pour voir le chemin construit
-var_dump($controllerClass); // Pour voir le nom de la classe construit
+var_dump($segments); // Ajout pour déboguer les segments
+var_dump($controllerFile);
+var_dump($controllerClass);
 
 if (file_exists($controllerFile)) {
     require_once $controllerFile;
