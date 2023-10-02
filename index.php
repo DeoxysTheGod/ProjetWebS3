@@ -15,6 +15,9 @@ $methodSegment = $segments[2] ?? 'defaultMethod';
 $controllerFile = "./modules/rtff/controllers/{$controllerSegment}/{$actionSegment}.php";
 $controllerClass = "\\rtff\\controllers\\{$controllerSegment}\\{$actionSegment}";
 
+// Exemple de débogage
+var_dump($controllerFile); // Pour voir le chemin construit
+var_dump($controllerClass); // Pour voir le nom de la classe construit
 
 if (file_exists($controllerFile)) {
     require_once $controllerFile;
