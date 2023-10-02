@@ -4,14 +4,14 @@ namespace rtff\models;
 
 class User {
 
-    public static function connectUser($user_id, $password) {
+    public static function connectUser($account_id, $password) {
         try {
             $database = \rtff\database\DatabaseConnexion::getInstance();
             $db = $database->getConnection();
 
-            $query = "SELECT password FROM ACCOUNT WHERE account_id = :user_id";
+            $query = "SELECT password FROM ACCOUNT WHERE account_id = :account_id";
             $stmt = $db->prepare($query);
-            $stmt->bindParam(':user_id', $user_id);
+            $stmt->bindParam(':account_id', $account_id);
             $stmt->execute();
 
             if ($stmt->rowCount() == 0) {
@@ -26,7 +26,7 @@ class User {
             }
 
             // définition de la session
-            $_SESSION['user_id'] = $user_id;
+            $_SESSION['account_id'] = $account_id;
 
             return "Connexion réussie!";
         } catch (Exception $e) {
@@ -35,24 +35,24 @@ class User {
         }
     }
 
-    public static function createUser($user_id, $password, $display_name) {
+    public static function createUser($account_id, $password, $display_name) {
         try {
             $database = DatabaseConnexion::getInstance();
             $db = $database->getConnection();
 
             $password = password_hash($password, PASSWORD_BCRYPT);
 
-            $query_check = "SELECT COUNT(*) FROM ACCOUNT WHERE account_id = :user_id";
+            $query_check = "SELECT COUNT(*) FROM ACCOUNT WHERE account_id = :account_id";
             $stmt_check = $db->prepare($query_check);
-            $stmt_check->bindParam(':user_id', $user_id);
+            $stmt_check->bindParam(':account_id', $account_id);
             $stmt_check->execute();
 
             if ($stmt_check->fetchColumn() > 0) {
                 return "Cette adresse e-mail est déjà utilisée. Veuillez en choisir une différente.";
             } else {
-                $query = "INSERT INTO ACCOUNT (account_id, password, display_name, creation_date) VALUES (:user_id, :password, :display_name, NOW())";
+                $query = "INSERT INTO ACCOUNT (account_id, password, display_name, creation_date) VALUES (:account_id, :password, :display_name, NOW())";
                 $stmt = $db->prepare($query);
-                $stmt->bindParam(':user_id', $user_id);
+                $stmt->bindParam(':account_id', $account_id);
                 $stmt->bindParam(':password', $password);
                 $stmt->bindParam(':display_name', $display_name);
 
@@ -61,7 +61,7 @@ class User {
                 }
 
                 // Envoi de l'e-mail
-                self::sendEmail($user_id);
+                self::sendEmail($account_id);
 
                 return "Utilisateur créé avec succès!";
             }
@@ -71,8 +71,8 @@ class User {
         }
     }
 
-    private static function sendEmail($user_id) {
-        $to = 'Nom du Destinataire <' . $user_id . '>';
+    private static function sendEmail($account_id) {
+        $to = 'Nom du Destinataire <' . $account_id . '>';
         $subject = mb_encode_mimeheader('Création de compte RT*F');
         $bndary = md5(uniqid(mt_rand()));
 
