@@ -16,5 +16,8 @@ class CreateUser
             $notification = User::createUser($user_id, $password, $display_name); // Supposition d'une méthode statique
             echo $notification;
         }
+        // Vue affichée indépendamment de la méthode de la requête
+        $view = new \rtff\views\CreateUserPage();
+        $view->show();
     }
 }
