@@ -2,6 +2,8 @@
 
 namespace rtff\models;
 
+use rtff\database\DatabaseConnexion;
+
 class User {
 
     public static function connectUser($account_id, $password) {
