@@ -8,7 +8,7 @@ $message = '';
 
 if (isset($_GET['token'])) {
     $token = $_GET['token'];
-    $database = new DatabaseConnexion();
+    $database = new Database();
     $db = $database->getConnection();
 
     $query = "SELECT * FROM TOKEN WHERE token_id = :token_id AND date_creation >= NOW() - INTERVAL 30 MINUTE";
