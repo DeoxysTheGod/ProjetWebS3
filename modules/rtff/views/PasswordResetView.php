@@ -22,7 +22,7 @@ class PasswordResetView
         }
 
         if (isset($token) && $message == '') {
-            echo '<form method="post" action="modifyPasswordUser.php?token=' . $token . '">
+            echo '<form method="post" action="../authentication/ConnectUser?token=' . $token . '">
                 Nouveau Mot de Passe: <input type="password" name="new_password" required><br>
                 <input type="submit" value="Modifier Mot de Passe">
             </form>';
