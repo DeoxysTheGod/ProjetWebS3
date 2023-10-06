@@ -12,7 +12,7 @@ class Homepage
     </section>
 
     <section id="options">
-        <h1>Mettre ici les options de l\'utilisateur</h1>
+        <h1>Mettre ici les options de l'utilisateur</h1>
     </section>
 </main>
     <?php

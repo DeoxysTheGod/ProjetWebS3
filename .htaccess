@@ -1,0 +1,11 @@
+    # (1)
+    RewriteEngine On
+
+    # (2)
+    Options +FollowSymlinks
+
+    # (3)
+    # Options +SymLinksIfOwnerMatch
+
+    # (4)
+    # RewriteBase /
