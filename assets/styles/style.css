@@ -17,3 +17,15 @@ main {
 #options {
 
 }
+
+.link {
+    color: aliceblue;
+    text-decoration: none;
+}
+
+.formulaire{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

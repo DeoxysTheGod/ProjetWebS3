@@ -7,7 +7,7 @@ class ConnexionPage
     {
         ob_start();
         ?>
-        <div>
+        <div class="formulaire">
             <!-- Formulaire de connexion -->
             <form method="post" action="../authentication/ConnectUser">
                 <label for="account_id"> Email<br>
@@ -20,8 +20,8 @@ class ConnexionPage
 
                 <input type="submit" value="Se connecter"><br>
             </form><br>
-            <a href="requestMailForReset.php">Mot de passe oublié</a><br>
-            <a href="createUser.php">Créer un compte</a>
+            <a href="requestMailForReset.php" class="link">Mot de passe oublié</a><br>
+            <a href="createUser.php" class="link">Créer un compte</a>
         </div>
         <?php
         (new \rtff\views\Layout('Login', ob_get_clean()))->show();

@@ -9,7 +9,7 @@
     padding: 1rem;
     color: darkgrey;
     font-size: 2rem;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     height: 2rem;
 }

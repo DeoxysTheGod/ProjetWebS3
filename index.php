@@ -4,7 +4,7 @@ require_once './modules/rtff/Autoloader.php';
 \rtff\Autoloader::register();
 
 
-(new rtff\views\Homepage())->show();
+(new rtff\views\ConnexionPage())->show();
 
 //$urlPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 //$segments = explode('/', trim($urlPath, '/'));
