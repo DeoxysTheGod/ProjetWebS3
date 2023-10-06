@@ -1,6 +1,6 @@
 <?php
 
-namespace rtff\controllers;
+namespace rtff\controllers\pages;
 
 use rtff\models\MailModel;
 use rtff\views\MailView;
