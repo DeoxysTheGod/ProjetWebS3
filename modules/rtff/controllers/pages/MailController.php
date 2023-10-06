@@ -14,11 +14,13 @@ class MailController {
         $this->view = new MailView();
     }
 
-    public function showForm() {
+    public function showForm(): void
+    {
         $this->view->renderForm();
     }
 
-    public function sendMail($account_id) {
+    public function sendMail($account_id): void
+    {
         $result = $this->model->sendPasswordReset($account_id);
 
         if ($result === true) {
