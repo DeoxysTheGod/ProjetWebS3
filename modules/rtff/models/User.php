@@ -30,9 +30,8 @@ class User {
 
             // définition de la session
             $_SESSION['account_id'] = $account_id;
-            $view = new \rtff\views\TicketController()/listTickets();
 
-            return $view->show();
+            return new \rtff\controllers\pages\TicketController()/listTickets();
 
         } catch (\Exception $e) {
             error_log($e->getMessage());
