@@ -6,7 +6,7 @@ require_once './DatabaseConnexion.php';
 
 $account_id = $_POST['account_id'];
 
-$database = new DatabaseConnexion();
+$database = new //;
 $db = $database->getConnection();
 
 
