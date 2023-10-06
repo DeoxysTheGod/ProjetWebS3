@@ -1,11 +1,4 @@
-    # (1)
-    RewriteEngine On
-
-    # (2)
-    Options +FollowSymlinks
-
-    # (3)
-    # Options +SymLinksIfOwnerMatch
-
-    # (4)
-    # RewriteBase /
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]
