@@ -34,3 +34,9 @@ if (file_exists($controllerFile)) {
     http_response_code(404);
     echo "Fichier du contrôleur $controllerFile non trouvé.";
 }
+// Route pour gérer les erreurs 404
+if ($controllerSegment === 'error' && $actionSegment === '404') {
+    require_once './controllers/ErrorController.php';
+    $controller = new ErrorController();
+    $controller->showNotFoundPage();
+}

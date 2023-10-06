@@ -1,4 +1,13 @@
-<!DOCTYPE html>
+<?php
+
+namespace rtff\views;
+
+namespace rtff\views;
+
+class Error404View {
+    public function showNotFoundPage() {
+        ?>
+        <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -31,6 +40,9 @@
 <body>
 <h1>Erreur 404</h1>
 <p>La page que vous recherchez est introuvable.</p>
-<p><a href="/">Retour à la page d'accueil</a></p>
+<p><a href="https://rtff.alwaysdata.net/">Retour à la page d'accueil</a></p>
 </body>
 </html>
+<?php
+    }
+}
