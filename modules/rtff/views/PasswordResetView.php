@@ -15,14 +15,14 @@ class PasswordResetView
 </head>
 <body>
 <p>Cliquez sur le bouton ci-dessous pour vous connecter :</p>
-<a href="https://rtff.alwaysdata.net/connectUser.php">Cliquez ici</a>
+<a href="https://rtff.alwaysdata.net/">Cliquez ici</a>
 </body>
 </html></p>';
             }
         }
 
         if (isset($token) && $message == '') {
-            echo '<form method="post" action="../authentication/ConnectUser?token=' . $token . '">
+            echo '<form method="post" action="../../authentication/ConnectUser?token=' . $token . '">
                 Nouveau Mot de Passe: <input type="password" name="new_password" required><br>
                 <input type="submit" value="Modifier Mot de Passe">
             </form>';

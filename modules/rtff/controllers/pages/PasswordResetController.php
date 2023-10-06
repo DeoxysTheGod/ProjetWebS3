@@ -6,6 +6,7 @@ use PDO;
 class PasswordResetController {
     public function resetPassword() {
         $message = '';
+        $token = '';
         if (isset($_GET['token'])) {
             $token = $_GET['token'];
             $database = \rtff\database\DatabaseConnexion::getInstance();
