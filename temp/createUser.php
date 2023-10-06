@@ -5,7 +5,7 @@ use rtff\database\DatabaseConnexion;
 require_once './DatabaseConnexion.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $database = new DatabaseConnexion();
+    $database = \rtff\database\DatabaseConnexion::getInstance();
     $db = $database->getConnection();
 
     $user_id = $_POST['user_id'];
