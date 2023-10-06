@@ -19,8 +19,9 @@ class MailController {
         $this->view->renderForm();
     }
 
-    public function sendMail($account_id): void
+    public function sendMail(): void
     {
+        $account_id = $_POST['account_id'];
         $result = $this->model->sendPasswordReset($account_id);
 
         if ($result === true) {
