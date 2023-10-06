@@ -1,6 +1,9 @@
 <?php
+namespace rtff\controllers\MailController;
+
 // index.php
 require_once './modules/rtff/Autoloader.php';
+
 \rtff\Autoloader::register();
 
 $urlPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
