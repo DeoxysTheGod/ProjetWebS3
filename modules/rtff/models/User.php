@@ -30,8 +30,10 @@ class User {
 
             // définition de la session
             $_SESSION['account_id'] = $account_id;
+            $view = new \rtff\views\TicketController()/listTickets();
 
-            return "Connexion réussie!";
+            return $view->show();
+
         } catch (\Exception $e) {
             error_log($e->getMessage());
             return "Une erreur est survenue lors de la connexion.";
