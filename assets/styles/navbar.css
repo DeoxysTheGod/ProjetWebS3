@@ -18,21 +18,21 @@
     text-align: left;
 }
 
+.navbar-center-element {
+    margin: 0 auto;
+    text-align: center;
+}
+
 .navbar-right-element {
     text-align: right;
 }
 
-.navbar-center-element {
-    text-align: center;
-}
-
 .navbar-element {
-    flex-grow: 1;
+    width: 33%;
 }
 
 #logo > img {
     width: 3rem;
-
 }
 
 #title {
