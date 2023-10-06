@@ -7,7 +7,7 @@ class CreateUserPage {
     {
         ob_start();
 ?>
-        <form method="post" action="createUser.php">
+        <form method="post" action="../authentication/CreateUser">
             Email: <input type="email" name="user_id" required><br>
             Mot de Passe: <input type="password" name="password" required><br>
             Nom d'Affichage: <input type="text" name="display_name" required><br>
