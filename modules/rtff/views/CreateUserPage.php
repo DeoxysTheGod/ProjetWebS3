@@ -13,6 +13,7 @@ class CreateUserPage {
             Nom d'Affichage: <input type="text" name="display_name" required><br>
             Image: <input type="text" name="image"><br>
             <input type="submit" value="Créer Utilisateur">
+            <a href="../authentication/ConnectUser">Connectez-vous</a>
         </form>
     <?php
 }
