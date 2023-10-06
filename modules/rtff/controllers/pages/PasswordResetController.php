@@ -1,5 +1,5 @@
 <?php
-namespace rtff\controllers;
+namespace rtff\controllers\pages;
 
 use rtff\database\Database;
 use PDO;
