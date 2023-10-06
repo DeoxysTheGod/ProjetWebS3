@@ -15,7 +15,7 @@ class MailView {
         </head>
         <body>
         <div style="margin-left:220px; padding:10px;">
-            <form method="post" action="index.php?action=../pages/MailController/sendMail">
+            <form method="post" action="../pages/MailController/sendMail">
                 Mail : <input name="account_id" type="email"/>
                 <input name="send" type="submit"/>
             </form>
