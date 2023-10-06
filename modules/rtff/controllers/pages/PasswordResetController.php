@@ -1,7 +1,6 @@
 <?php
 namespace rtff\controllers\pages;
 
-use rtff\database\Database;
 use PDO;
 
 class PasswordResetController {
@@ -9,7 +8,7 @@ class PasswordResetController {
         $message = '';
         if (isset($_GET['token'])) {
             $token = $_GET['token'];
-            $database = new Database();
+            $database = \rtff\database\DatabaseConnexion::getInstance();
             $db = $database->getConnection();
 
             $query = "SELECT * FROM TOKEN WHERE token_id = :token_id AND date_creation >= NOW() - INTERVAL 30 MINUTE";
