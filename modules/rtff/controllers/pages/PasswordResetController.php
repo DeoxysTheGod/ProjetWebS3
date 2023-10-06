@@ -51,7 +51,8 @@ class PasswordResetController {
         }
 
         // Chargez la vue pour afficher le résultat
-        require_once 'PasswordResetView.php';
+        $view = new \rtff\views\PasswordResetView();
+        $view->show();
     }
 }
 ?>

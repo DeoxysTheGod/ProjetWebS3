@@ -27,7 +27,7 @@ class MailModel {
         $stmt->bindParam(':bndary', $bndary);
         $stmt->execute();
 
-        $link = "http://rtff.alwaysdata.net/modifyPasswordUser.php?token=" . $bndary;
+        $link = "http://rtff.alwaysdata.net/pages/PasswordResetController.php/resetPassword?token=" . $bndary;
 
         $to = $account_id;
         $subject = 'Test mail';
