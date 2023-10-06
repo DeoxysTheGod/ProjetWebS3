@@ -51,7 +51,7 @@ class PasswordResetController {
 
         // Chargez la vue pour afficher le résultat
         $view = new \rtff\views\PasswordResetView();
-        $view->render();
+        $view->render($message, $token);
     }
 }
 ?>
