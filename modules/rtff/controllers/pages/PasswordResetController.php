@@ -25,7 +25,9 @@ class PasswordResetController {
                 $stmt->execute();
             } else {
                 $account = $stmt->fetch(PDO::FETCH_ASSOC);
-
+        // Chargez la vue pour afficher le résultat
+        $view = new \rtff\views\PasswordResetView();
+        $view->render($message, $token);
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $new_password = password_hash($_POST['new_password'], PASSWORD_BCRYPT);
 
