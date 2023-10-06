@@ -13,7 +13,7 @@ $actionSegment = isset($segments[1]) && $segments[1] != '' ? $segments[1] : 'Con
 
 $methodSegment = $segments[2] ?? 'defaultMethod';
 
-$controllerFile = "./modules/rtff/controllers/$controllerSegment/$actionSegment";
+$controllerFile = "./modules/rtff/controllers/$controllerSegment/$actionSegment.php";
 $controllerClass = "\\rtff\\controllers\\$controllerSegment\\$actionSegment";
 
 if (file_exists($controllerFile)) {
