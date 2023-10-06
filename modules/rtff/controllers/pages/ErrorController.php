@@ -25,7 +25,7 @@ class ErrorController {
         header("HTTP/1.0 404 Not Found");
 
         // Redirigez vers la page d'erreur 404
-        header("Location: /index.php?controller=error&action=404");
+        header("Location: ../views/Error404View.php");
         exit;
     }
 
