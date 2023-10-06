@@ -20,7 +20,7 @@ class ConnexionPage
 
                 <input type="submit" value="Se connecter"><br>
             </form><br>
-            <a href="/pages/MailController/showForm">Mot de passe oublié</a><br>
+            <a href="/pages/MailController">Mot de passe oublié</a><br>
             <a href="createUser.php">Créer un compte</a>
         </div>
         <?php

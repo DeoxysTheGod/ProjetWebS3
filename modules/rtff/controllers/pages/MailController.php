@@ -9,7 +9,9 @@ class MailController {
 
     private $model;
     private $view;
-
+    public function defaultMethod() {
+        $this->showForm();
+    }
     public function __construct() {
         $this->model = new MailModel();
         $this->view = new MailView();
