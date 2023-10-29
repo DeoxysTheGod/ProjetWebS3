@@ -2,7 +2,10 @@
 namespace rtff\controllers\MailController;
 
 // index.php
+use rtff\controllers\ErrorController;
+
 require_once './modules/rtff/Autoloader.php';
+require_once './controllers/ErrorController.php';
 
 \rtff\Autoloader::register();
 
