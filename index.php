@@ -5,7 +5,7 @@ namespace rtff\controllers\MailController;
 use rtff\controllers\ErrorController;
 
 require_once './modules/rtff/Autoloader.php';
-require_once './controllers/ErrorController.php';
+require_once './modules/rtff/controllers/pages/ErrorController.php';
 
 \rtff\Autoloader::register();
 
