@@ -34,9 +34,13 @@ if (file_exists($controllerFile)) {
         echo "Classe contrôleur $controllerClass non trouvée.";
     }
 } else {
-    // Rediriger vers la page d'erreur 404 si le contrôleur n'est pas trouvé
-    $errorController = new ErrorController();
-    $errorController->showNotFoundPage();
+    http_response_code(404);
+    echo "Fichier du contrôleur $controllerFile non trouvé.";
+    //resourceNotFound();
 }
-
-// Autre code de votre application
+// Route pour gérer les erreurs 404
+if ($controllerSegment === 'error' && $actionSegment === '404') {
+    $controller = new ErrorController();
+    $controller->showNotFoundPage();
+}
+//
