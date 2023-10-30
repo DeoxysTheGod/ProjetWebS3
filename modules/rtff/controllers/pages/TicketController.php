@@ -15,8 +15,8 @@ class TicketController {
         $this->view = new TicketView();
     }
 
-    public function listTickets() {
-        $tickets = $this->model->getTicketsWithAuthor();
-        $this->view->renderTickets($tickets);
+    public function showAllTickets() {
+        $tickets = $this->model->getAllTickets();
+        $this->view->renderAllTickets($tickets);
     }
 }
