@@ -4,23 +4,19 @@ namespace rtff\views;
 
 class TicketView {
 
-    public function renderAllTickets($tickets) {
+    public function renderTickets($tickets) {
         echo '<!DOCTYPE html>
         <html lang="fr">
         <head>
             <meta charset="UTF-8">
-            <title>Liste des Tickets</title>
+            <title>Votre Page</title>
         </head>
         <body>
         <div style="margin-left:220px; padding:10px;">
-            <h1>Liste des Tickets</h1>';
+            <h1>Liste des Posts</h1>';
 
-        if (count($tickets) > 0) {
-            foreach ($tickets as $ticket) {
-                $this->renderTicket($ticket);
-            }
-        } else {
-            echo '<p>Aucun ticket disponible pour le moment.</p>';
+        foreach ($tickets as $ticket) {
+            $this->renderPost($ticket);
         }
 
         echo '</div>';
@@ -28,12 +24,8 @@ class TicketView {
         </html>';
     }
 
-    private function renderTicket($ticket) {
-        echo '<div style="border: 1px solid #ccc; margin-bottom: 10px; padding: 10px;">';
-        echo '<h2>' . htmlspecialchars($ticket['title']) . '</h2>';
-        echo '<p>' . htmlspecialchars($ticket['message']) . '</p>';
-        echo '<p><strong>Auteur :</strong> ' . htmlspecialchars($ticket['username']) . '</p>';
-        echo '<p><strong>Date :</strong> ' . htmlspecialchars($ticket['date']) . '</p>';
-        echo '</div>';
+    private function renderPost($ticket) {
+        // ... comme la fonction renderPost donnée ...
     }
 }
+//
