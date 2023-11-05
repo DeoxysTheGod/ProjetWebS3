@@ -30,7 +30,11 @@ class AdminModel {
     }
 
     public function deletePost($ticketId) {
-        // Supprime un post
+        $commentQuery = "DELETE FROM COMMENT WHERE ticket_id = :ticket_id";
+        $commentStmt = $this->db->prepare($commentQuery);
+        $commentStmt->bindParam(':ticket_id', $ticketId);
+        $commentStmt->execute();
+
         $query = "DELETE FROM TICKET WHERE ticket_id = :ticket_id";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':ticket_id', $ticketId);
