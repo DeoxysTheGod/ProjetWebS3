@@ -5,6 +5,11 @@ use rtff\models\CategoryModel;
 use rtff\database\DatabaseConnexion;
 
 class CreatePostView {
+    private $db;
+
+    public function __construct($db) {
+        $this->db = $db;
+    }
     public function show(): void {
         $database = DatabaseConnexion::getInstance();
         $db = $database->getConnection();

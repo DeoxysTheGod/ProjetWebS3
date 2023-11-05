@@ -30,7 +30,7 @@ $db = $database->getConnection();
 
 // Définition des routes
 $routes = [
-    '/' => function() use ($db)  {
+    '/' => function()  {
         $controller = new Homepage();
         $controller->defaultMethod();
     },
@@ -54,9 +54,10 @@ $routes = [
     },
     'post/create' => function() use ($db) {
         $model = new TicketModel($db);
-        $view = new CreatePostView();
-        $controller = new TicketController($model, $view);
+        $view = new CreatePostView($db);
+        $controller = new TicketController($db);
         $controller->createPost();
+
     },
     'pages/view-ticket' => function() use ($db) {
         $model = new TicketModel($db);
