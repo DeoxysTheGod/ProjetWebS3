@@ -54,4 +54,23 @@ class AdminModel {
         $stmt->execute();
     }
 
+    public function getAllUsers() {
+        $query = "SELECT * FROM ACCOUNT";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getAllComments() {
+        $query = "SELECT c.*, t.title as ticket_title, a.display_name as username 
+                  FROM COMMENT c 
+                  LEFT JOIN TICKET t ON c.ticket_id = t.ticket_id
+                  LEFT JOIN ACCOUNT a ON c.author = a.account_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+
 }

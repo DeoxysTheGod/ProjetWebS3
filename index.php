@@ -115,7 +115,19 @@ $routes = [
         $controller = new AdminController($model, $view);
         $controller->deleteComment();
     },
+    'admin/manage-users' => function() use ($db) {
+        $model = new AdminModel($db);
+        $view = new AdminView();
+        $controller = new AdminController($model, $view);
+        $controller->manageUsers();
+    },
 
+    'admin/manage-comments' => function() use ($db) {
+        $model = new AdminModel($db);
+        $view = new AdminView();
+        $controller = new AdminController($model, $view);
+        $controller->manageComments();
+    },
 
 ];
 

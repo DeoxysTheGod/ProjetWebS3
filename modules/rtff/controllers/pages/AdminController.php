@@ -64,5 +64,16 @@ class AdminController {
         exit;
     }
 
+    public function manageUsers() {
+        $users = $this->model->getAllUsers();
+        $this->view->showUsers($users);
+    }
+
+    public function manageComments() {
+        $comments = $this->model->getAllComments();
+        $this->view->showComments($comments);
+    }
+
+
 
 }
