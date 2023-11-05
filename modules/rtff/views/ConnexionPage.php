@@ -9,7 +9,7 @@ class ConnexionPage
         ?>
         <div>
             <!-- Formulaire de connexion -->
-            <form method="post" action="/authentication/connect-user">
+            <form method="post" action="/authentication">
 
                 <label for="account_id"> Email<br>
                     <input type="email" name="account_id" required>

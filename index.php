@@ -20,7 +20,7 @@ if ($routePath === '') {
 }
 
 $controllerSegment = $segments[0] ?? 'authentication';
-$actionSegment = $segments[1] ?? 'connect-user';
+$actionSegment = $segments[1] ?? 'ConnectUser';
 $methodSegment = $segments[2] ?? 'defaultMethod';
 
 $database = DatabaseConnexion::getInstance();
