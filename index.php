@@ -33,6 +33,14 @@ $routes = [
         $controller = new TicketController($model, $view);
         $controller->listTickets();
     },
+    'authentification' => function() {
+        $database = DatabaseConnexion::getInstance();
+        $db = $database->getConnection();
+        $model = new \rtff\models\User($db);
+        $view = new \rtff\views\ConnexionPage();
+        $controller = new \rtff\controllers\authentication\ConnectUser($model, $view);
+        $controller->defaultMethod();
+    },
     'post/view-posts' => function() use ($db) {
         $model = new TicketModel($db);
         $view = new TicketView();
