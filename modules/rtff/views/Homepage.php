@@ -37,6 +37,11 @@ class Homepage
 					<?php endforeach;?>
                 </ul>
             </section>
+
+            <section>
+                <a class='connection' href='/post/view-posts'>Fil de l'eau</a>
+
+            </section>
         </main>
         <?php
         (new Layout('Home', ob_get_clean()))->show();

@@ -71,6 +71,21 @@ class TicketModel {
         $comment_stmt->execute();
         return $comment_stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getCommentsWithLikes($ticket_id) {
+        $query = "
+        SELECT COMMENT.*, COUNT(COMMENT_LIKE.comment_id) AS like_count
+        FROM COMMENT
+        LEFT JOIN COMMENT_LIKE ON COMMENT.comment_id = COMMENT_LIKE.comment_id
+        WHERE COMMENT.ticket_id = :ticket_id
+        GROUP BY COMMENT.comment_id
+        ORDER BY like_count DESC
+    ";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':ticket_id', $ticket_id);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 
     public function addComment($comment, $author, $ticket_id) {
         $comment_query = "INSERT INTO COMMENT (text, date, author, ticket_id) VALUES (:text, NOW(), :author, :ticket_id)";
@@ -131,6 +146,24 @@ class TicketModel {
         $stmt = $this->db->prepare($query);
         $stmt->execute($params);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function likeComment($accountId, $commentId) {
+        $checkQuery = "SELECT * FROM COMMENT_LIKE WHERE account_id = :account_id AND comment_id = :comment_id";
+        $checkStmt = $this->db->prepare($checkQuery);
+        $checkStmt->bindParam(':account_id', $accountId);
+        $checkStmt->bindParam(':comment_id', $commentId);
+        $checkStmt->execute();
+
+        if ($checkStmt->fetch()) {
+            return;
+        }
+
+        $query = "INSERT INTO COMMENT_LIKE (account_id, comment_id) VALUES (:account_id, :comment_id)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':account_id', $accountId);
+        $stmt->bindParam(':comment_id', $commentId);
+        $stmt->execute();
     }
 
 

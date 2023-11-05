@@ -43,7 +43,6 @@ class TicketView {
         echo "<p><strong>Date :</strong> {$date}</p>";
         echo "<a href='/pages/view-ticket?ticket_id={$ticketId}' style='padding: 10px; background-color: blue; color: white; text-decoration: none; border-radius: 5px;'>Répondre</a>";
         echo "<button style='background-color: transparent; border: none; cursor: pointer; padding: 0; margin: 0; display: inline-block;'>";
-        echo "<img src='/like.png' alt='Like' style='width: 25px; height: 25px;'/>";
         echo "</button>";
         echo "</div>";
     }
@@ -101,9 +100,11 @@ class TicketView {
         foreach ($comments as $comment) {
             echo "<div style='border: 1px solid #ccc; margin-bottom: 10px; padding: 10px;'>";
             echo "<p>" . htmlspecialchars($comment['text']) . "</p>";
-            echo "<p><strong>Auteur :</strong> " . htmlspecialchars($comment['username'] ?? 'Auteur inconnu') . "</p>";
             echo "<p><strong>Date :</strong> " . htmlspecialchars($comment['date']) . "</p>";
+            echo "<p><strong>Likes :</strong> " . htmlspecialchars($comment['like_count']) . "</p>";
+            echo "<a href='/pages/like-comment?comment_id=" . htmlspecialchars($comment['comment_id']) . "'>Like</a>";
             echo "</div>";
+
         }
         echo "</div>";
         echo "</body>";

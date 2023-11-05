@@ -104,7 +104,7 @@ class TicketController {
         }
 
         $ticket = $this->model->getTicket($ticket_id);
-        $comments = $this->model->getComments($ticket_id);
+        $comments = $this->model->getCommentsWithLikes($ticket_id);
 
         $this->view->renderSingleTicket($ticket, $comments);
     }
