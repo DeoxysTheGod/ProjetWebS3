@@ -20,7 +20,12 @@ class TicketController {
         $this->view = new TicketView($this->model);
     }
 
-
+/**
+ * Affiche la liste des tickets en fonction des catégories sélectionnées et/ou du terme de recherche.
+ *
+ * Cette méthode récupère les tickets en fonction des catégories sélectionnées et/ou du terme de recherche,
+ * puis affiche ces tickets dans la vue TicketView.
+ */
     public function listTickets() {
         session_start();
 
@@ -39,14 +44,23 @@ class TicketController {
         $this->view->render($tickets, $categories);
     }
 
-
+/**
+ * Affiche les cinq derniers tickets.
+ *
+ * Cette méthode récupère les cinq derniers tickets et les affiche dans la vue TicketView.
+ */
     public function listLastFiveTickets() {
         session_start();
         $tickets = $this->model->getLastFiveTickets();
         $this->view->render($tickets);
     }
 
-
+/**
+ * Crée un nouveau post.
+ *
+ * Cette méthode permet de créer un nouveau post en utilisant les données du formulaire
+ * et de l'image téléchargée, puis redirige l'utilisateur vers la page de visualisation des posts.
+ */
     public function createPost() {
         session_start();
         $this->view = new CreatePostView($this->db);
@@ -84,7 +98,12 @@ class TicketController {
         $this->view->show();
     }
 
-
+/**
+ * Affiche un ticket spécifique.
+ *
+ * Cette méthode permet d'afficher un ticket spécifique en fonction de son identifiant (ticket_id).
+ * Les commentaires associés au ticket sont également affichés.
+ */
     public function viewTicket() {
         session_start();
 
