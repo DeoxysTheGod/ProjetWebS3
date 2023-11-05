@@ -21,13 +21,13 @@ class CreateUserView
                 <input type="text" name="display_name" id="display_name" required>
             </div>
             <div>
+                Sélectionnez une image de profil :
+                <input type="file" name="profileImage" accept="image/*" required>
+                <input type="submit" value="Télécharger l\'image" name="submit">
+            </div>
+            <div>
                 <input type="submit" value="Créer un compte">
             </div>
-        </form>
-        <form action="/authentication/create-user" method="post" enctype="multipart/form-data">
-            Sélectionnez une image de profil :
-            <input type="file" name="profileImage" accept="image/*" required>
-            <input type="submit" value="Télécharger l\'image" name="submit">
         </form>
         <?php
         (new Layout('Création d\'utilisateur', ob_get_clean()))->show();
