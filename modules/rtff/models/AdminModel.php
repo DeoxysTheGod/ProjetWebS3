@@ -50,17 +50,26 @@ class AdminModel {
      *
      * @param int $ticketId The ID of the post to be deleted.
      */
-    public function deletePost(int $ticketId): void {
+    public function deletePost($ticketId) {
+        // Supprime les liaisons de catégories associées au ticket
+        $categoryQuery = "DELETE FROM TICKET_CATEGORIES WHERE ticket_id = :ticket_id";
+        $categoryStmt = $this->db->prepare($categoryQuery);
+        $categoryStmt->bindParam(':ticket_id', $ticketId);
+        $categoryStmt->execute();
+
+        // Supprime les commentaires associés au ticket
         $commentQuery = "DELETE FROM COMMENT WHERE ticket_id = :ticket_id";
         $commentStmt = $this->db->prepare($commentQuery);
         $commentStmt->bindParam(':ticket_id', $ticketId);
         $commentStmt->execute();
 
+        // Enfin, supprime le ticket
         $query = "DELETE FROM TICKET WHERE ticket_id = :ticket_id";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':ticket_id', $ticketId);
         $stmt->execute();
     }
+
 
     /**
      * Deletes a user from the database.
