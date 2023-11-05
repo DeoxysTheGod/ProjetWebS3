@@ -20,6 +20,8 @@ class Homepage
                         <?php if (!empty($ticket['image_path'])): ?>
                             <img src="<?= htmlspecialchars($ticket['image_path'] ?? '') ?>" alt="Image du ticket">
                         <?php endif; ?>
+                        <a href='/pages/view-ticket?ticket_id={$ticketId}' style='padding: 10px; background-color: blue; color: white; text-decoration: none; border-radius: 5px;'>Répondre</a>
+
                     </div>
                 <?php endforeach; ?>
             </section>
