@@ -40,15 +40,16 @@ class TicketView {
         }
         echo "<p>{$message}</p>";
 
+
+        if ($imagePath !== '') {
+            echo "<img class='image-post' src='/$imagePath' alt='Image associée'/>";
+        }
+
         // Afficher l'image de profil
         if ($profileImage !== '') {
             echo "<img class='profile-image' src='/$profileImage' alt='Profile Image'/>";
         } else {
             echo "<img class='profile-image' src='$defaultProfileImage' alt='Default Profile Image'/>";
-        }
-
-        if ($imagePath !== '') {
-            echo "<img class='image-post' src='/$imagePath' alt='Image associée'/>";
         }
 
         echo "<p><strong>Auteur :</strong> {$username}</p>";
