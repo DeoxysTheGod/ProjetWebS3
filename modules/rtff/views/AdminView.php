@@ -33,7 +33,7 @@ class AdminView {
                 <li>
                     <strong><?= htmlspecialchars($category['title']) ?></strong>: <?= htmlspecialchars($category['description']) ?>
                     <!-- Lien pour supprimer une catégorie -->
-                    <a href="/admin/delete-category/<?= htmlspecialchars($category['category_id']) ?>">Supprimer</a>
+                    <a href='/admin/delete-category?id=<?= $category['category_id'] ?>' style='color: red;'>Supprimer</a>
                 </li>
             <?php endforeach; ?>
         </ul>

@@ -27,10 +27,11 @@ class AdminController {
             exit;
         }
     }
-    public function deleteCategory($categoryId) {
-        // Supprime une catégorie
+    public function deleteCategory() {
+        $categoryId = $_GET['id'];
         $this->model->deleteCategory($categoryId);
         header('Location: /admin/manage-categories');
         exit;
     }
+
 }

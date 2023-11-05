@@ -84,11 +84,11 @@ $routes = [
         $controller = new AdminController($model, $view);
         $controller->createCategory();
     },
-    'admin/delete-category/[i:id]' => function($id) use ($db) {
-        $model = new CategoryModel($db);
-        $view = new AdminView();
-        $controller = new AdminController($model, $view);
-        $controller->deleteCategory($id);
+    'admin/delete-category' => function() use ($db) {
+        $model = new \rtff\models\CategoryModel($db);
+        $view = new \rtff\views\AdminView();
+        $controller = new \rtff\controllers\pages\AdminController($model, $view);
+        $controller->deleteCategory();
     },
 
 
