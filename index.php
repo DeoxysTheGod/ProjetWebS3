@@ -132,6 +132,7 @@ $routes = [
         $controller->sendMail();
     },
     'pages/like-comment' => function() use ($db) {
+        session_start();
         $commentId = $_GET['comment_id'];
         $accountId = $_SESSION['account_id'];
         $model = new TicketModel($db);
