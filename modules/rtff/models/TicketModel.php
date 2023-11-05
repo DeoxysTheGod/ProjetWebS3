@@ -64,25 +64,6 @@ class TicketModel {
 
 
 
-    public function search($keyword) {
-        $keyword = "%$keyword%";
-
-        $query = "SELECT * FROM TICKET 
-              WHERE title LIKE :keyword OR message LIKE :keyword
-              UNION
-              SELECT * FROM COMMENT
-              WHERE text LIKE :keyword
-              UNION
-              SELECT * FROM CATEGORY
-              WHERE title LIKE :keyword OR description LIKE :keyword";
-
-        $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':keyword', $keyword);
-        $stmt->execute();
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
     public function getComments($ticket_id) {
         $comment_query = "SELECT c.*, a.display_name AS username FROM COMMENT c LEFT JOIN ACCOUNT a ON c.author = a.account_id WHERE c.ticket_id = :ticket_id ORDER BY date DESC";
         $comment_stmt = $this->db->prepare($comment_query);
