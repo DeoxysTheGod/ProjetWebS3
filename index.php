@@ -19,7 +19,6 @@ $methodSegment = $segments[2] ?? 'defaultMethod';
 
 $database = DatabaseConnexion::getInstance();
 $db = $database->getConnection();
-
 // Définition des routes
 
 $routes = [
@@ -55,6 +54,7 @@ $routes = [
 // Recherche de la route
 $routePath = $controllerSegment . '/' . $actionSegment;
 
+// Recherche de la route
 echo "URL Path: $urlPath<br>";
 echo "Route Path: $routePath<br>";
 
