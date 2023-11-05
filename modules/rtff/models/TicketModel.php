@@ -72,4 +72,12 @@ class TicketModel {
         $stmt->execute();
     }
 
+    public function addTicketCategory($ticketId, $categoryId) {
+        $query = "INSERT INTO TICKET_CATEGORIES (ticket_id, category_id) VALUES (:ticket_id, :category_id)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':ticket_id', $ticketId);
+        $stmt->bindParam(':category_id', $categoryId);
+        $stmt->execute();
+    }
+
 }
