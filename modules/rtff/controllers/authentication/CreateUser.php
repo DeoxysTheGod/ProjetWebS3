@@ -11,7 +11,7 @@ class CreateUser
             $user_id = $_POST['user_id'];
             $password = $_POST['password'];
             $display_name = $_POST['display_name'];
-            $image_path = $_POST['image_path'];
+            $image_path = ''; // Initialisation de $image_path
 
             // Vérifiez si un fichier image de profil a été téléchargé
             if (isset($_FILES['profileImage']) && $_FILES['profileImage']['error'] === 0) {
