@@ -88,3 +88,18 @@ img {
 .show-all-ticket {
     text-decoration: none;
 }
+
+.view-post {
+    justify-content: center;
+}
+
+.top-category-link {
+    text-decoration: none;
+    font-weight: bold;
+    color: #fff;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}

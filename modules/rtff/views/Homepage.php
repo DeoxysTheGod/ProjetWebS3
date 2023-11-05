@@ -3,45 +3,40 @@ namespace rtff\views;
 
 class Homepage
 {
-
-    /**
-     * Displays the main view with the latest tickets and top categories.
-     *
-     * @param array $tickets    An array of the latest tickets.
-     * @param array $categories An array of the top categories.
-     */
-    public function show(array $tickets, array $categories): void {
+    public function show(array $tickets, array $categories): void
+    {
         ob_start();
         ?>
         <main id="container">
             <section id="history">
-                <h1 class="side-panel-title">TBD</h1>
-            </section>
+                <h1 class="side-panel-title">On sait pas encore</h1>
 
+            </section>
             <section id="content">
-                <h1>The 5 Latest Tickets</h1>
+                <h1>Les 5 derniers tickets</h1>
+                <button class='classic-button' onclick="location.href = '/post/create'">Créer un post</button>
                 <div id="ticket-container">
-                    <?php for ($i = 0; $i < min(5, count($tickets)); $i++): ?>
+					<?php for ($i = 0; $i < 5; $i++): ?>
                         <div class="ticket">
                             <h2 class="ticket-title"><?= htmlspecialchars($tickets[$i]['title'] ?? '') ?></h2>
                             <p><?= htmlspecialchars($tickets[$i]['message'] ?? '') ?></p>
-                            <p><em>By <?= htmlspecialchars($tickets[$i]['username'] ?? '') ?> on <?= htmlspecialchars($tickets[$i]['date'] ?? '') ?></em></p>
-                            <?php if (!empty($tickets[$i]['image_path'])): ?>
-                                <img src="<?= htmlspecialchars($tickets[$i]['image_path']) ?>" alt="Ticket image">
-                            <?php endif; ?>
-                            <button class="classic-button" onclick="location.href = '/pages/view-ticket?ticket_id=<?= htmlspecialchars($tickets[$i]['ticket_id'] ?? '') ?>'">Reply</button>
+                            <p><em>Par <?= htmlspecialchars($tickets['username'] ?? '') ?> le <?= htmlspecialchars($tickets[$i]['date'] ?? '') ?></em></p>
+							<?php if (!empty($tickets[$i]['image_path'])): ?>
+                                <img src="<?= htmlspecialchars($tickets[$i]['image_path'] ?? '') ?>" alt="Image du ticket">
+							<?php endif; ?>
+                            <button class="classic-button" onclick="location.href = '/pages/view-ticket?ticket_id=<?= htmlspecialchars($tickets[$i]['ticket_id'] ?? '') ?>'">Répondre</button>
                         </div>
-                    <?php endfor; ?>
+					<?php endfor; ?>
                 </div>
-                <button class='classic-button' onclick="location.href = '/post/view-posts'">View All</button>
+                <button class='classic-button' onclick="location.href = '/post/view-posts'">Voir tout</button>
             </section>
 
-            <section id="top-categories">
-                <h1 class="side-panel-title">Top Categories</h1>
+            <section id="top-categrories">
+                <h1 class="side-panel-title">Top catégories</h1>
                 <ul>
-                    <?php foreach ($categories as $category): ?>
-                        <li><?= htmlspecialchars($category['title']); ?> - <?= $category['nb_usage']; ?></li>
-                    <?php endforeach; ?>
+					<?php foreach ($categories as $category): ?>
+                        <li><a class="top-category-link" href="http://localhost:8080/post/view-posts?categories%5B%5D=<?= $category['category_id']?>&search="><?= htmlspecialchars($category['title']);?></a><span> - <?= $category['nb_usage'];?></span></li>
+					<?php endforeach;?>
                 </ul>
             </section>
         </main>

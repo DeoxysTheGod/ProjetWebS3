@@ -1,60 +1,43 @@
 <?php
 namespace rtff\views;
 
-use PDO;
 use rtff\models\CategoryModel;
+use rtff\database\DatabaseConnexion;
 
-/**
- * Class CreatePostView
- *
- * Responsible for rendering the view to create a new post.
- */
 class CreatePostView {
-    private PDO $db;
+    private $db;
 
-    /**
-     * CreatePostView constructor.
-     *
-     * @param PDO $db Database connection object
-     */
-    public function __construct(PDO $db) {
+    public function __construct($db) {
         $this->db = $db;
     }
-
-    /**
-     * Render the view to create a new post.
-     */
     public function show(): void {
-        $categoriesModel = new CategoryModel($this->db);
+
+        $database = DatabaseConnexion::getInstance();
+        $db = $database->getConnection();
+        $categoriesModel = new CategoryModel($db);
         $categories = $categoriesModel->getAllCategories();
 
-        // Start capturing the output
         ob_start();
         ?>
-        <!-- Link to the stylesheets -->
-        <link rel="stylesheet" href="/assets/styles/post-create.css">
-        <link rel="stylesheet" href="/assets/styles/style.css">
+        <main id="container" class="view-post">
 
-        <!-- Content Section -->
-        <section class="content">
-            <!-- Form for creating a new post -->
-            <form method="post" action="/post/create" enctype="multipart/form-data">
-                <!-- Post Title -->
+        <section id="content">
+        <div id="ticket-container"
+        <div class="ticket">
+
+            <form class="form" method="post" action="/post/create" enctype="multipart/form-data">
                 <div>
                     <label for="title">Titre</label><br>
                     <input type="text" name="title" id="title" required>
                 </div>
-                <!-- Post Message -->
                 <div>
                     <label for="message">Message</label><br>
                     <textarea name="message" id="message" required></textarea>
                 </div>
-                <!-- Image Upload -->
                 <div>
                     <label for="image">Image</label><br>
                     <input type="file" name="image" id="image">
                 </div>
-                <!-- Categories Selection -->
                 <div>
                     <label>Catégories</label>
                     <div>
@@ -65,17 +48,15 @@ class CreatePostView {
                         ?>
                     </div>
                 </div>
-                <!-- Submit Button -->
                 <div>
-                    <input type="submit" value="Créer le post">
+                    <input class="classic-button" type="submit" value="Créer le post">
                 </div>
             </form>
+        </div>
         </section>
+        </section>
+        </main>
         <?php
-        // End capturing the output
-        $content = ob_get_clean();
-
-        // Render the layout
-        (new Layout('Création de post', $content))->show();
+        (new Layout('Création de post', ob_get_clean()))->show();
     }
 }
