@@ -23,11 +23,10 @@ class AdminController {
             $title = $_POST['title'];
             $description = $_POST['description'];
             $this->model->addCategory($title, $description);
-            header('Location: /admin/manage-categories');
+            header('Location: /admin/categories');
             exit;
         }
     }
-
     public function deleteCategory($categoryId) {
         // Supprime une catégorie
         $this->model->deleteCategory($categoryId);
