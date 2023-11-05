@@ -2,6 +2,15 @@
 namespace rtff\controllers\authentication;
 
 class LogoutController {
+
+    /**
+     * Déconnecte un utilisateur en détruisant sa session.
+     *
+     * Cette méthode se charge de déconnecter un utilisateur en détruisant sa session actuelle.
+     * Si un utilisateur est connecté, sa session est effacée, et s'il utilise des cookies,
+     * les cookies de session sont également supprimés.
+     * Ensuite, l'utilisateur est redirigé vers la page d'authentification.
+     */
     public function logout() {
         session_start();
 
@@ -18,7 +27,7 @@ class LogoutController {
 
             session_destroy();
         }
-
+        // Redirige l'utilisateur vers la page d'authentification
         header("Location: /authentication");
         exit;
     }

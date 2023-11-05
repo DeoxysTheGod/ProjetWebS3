@@ -5,6 +5,12 @@ use rtff\views\CreateUserView;
 
 class CreateUser
 {
+    /**
+     * Méthode par défaut pour la création d'un utilisateur.
+     *
+     * Cette méthode gère la création d'un utilisateur à partir des données du formulaire.
+     * Elle vérifie si un fichier image de profil a été téléchargé et le traite en conséquence.
+     */
     public function defaultMethod()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
