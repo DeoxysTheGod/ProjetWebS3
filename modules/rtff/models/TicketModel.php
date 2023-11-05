@@ -138,8 +138,8 @@ class TicketModel {
 
         // Construire la requête
         $query = "SELECT * FROM TICKET 
-              LEFT JOIN CATEGORY_TICKET ON TICKET.ticket_id = CATEGORY_TICKET.ticket_id 
-              LEFT JOIN CATEGORY ON CATEGORY_TICKET.category_id = CATEGORY.category_id";
+              LEFT JOIN TICKET_CATEGORIES ON TICKET.ticket_id = TICKET_CATEGORIES.ticket_id 
+              LEFT JOIN CATEGORY ON TICKET_CATEGORIES.category_id = CATEGORY.category_id";
 
         // Ajouter les clauses WHERE si nécessaire
         if (!empty($whereClauses)) {
