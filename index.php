@@ -65,7 +65,7 @@ $routes = [
     },
     'pages/view-ticket' => function() use ($db) {
         $model = new TicketModel($db);
-        $view = new TicketView();
+        $view = new TicketView($model);
         $controller = new TicketController($model, $view);
         $controller->viewTicket();
     },
