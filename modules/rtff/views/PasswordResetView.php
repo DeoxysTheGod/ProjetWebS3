@@ -38,7 +38,7 @@ class PasswordResetView
         }
 
         // If the token is set and the message is empty, display the password reset form
-        if (isset($token) && $message === '') {
+        if ($message === '') {
             ?>
             <form method="post" action="/authentication/reset-password-process?token=<?= $token ?>">
                 <label for="new_password">Nouveau Mot de Passe:</label>
