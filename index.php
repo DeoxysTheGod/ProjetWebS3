@@ -20,6 +20,7 @@ $database = DatabaseConnexion::getInstance();
 $db = $database->getConnection();
 
 // Définition des routes
+
 $routes = [
     '/' => function() {
         $database = DatabaseConnexion::getInstance();
@@ -54,6 +55,8 @@ $routes = [
 $routePath = $controllerSegment . '/' . $actionSegment;
 if (isset($routes[$routePath])) {
     $routes[$routePath]();
+} elseif ($routePath === '') {
+    $routes['/']();
 } else {
     http_response_code(404);
     echo "Page non trouvée";
