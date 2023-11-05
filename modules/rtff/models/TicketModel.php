@@ -13,6 +13,18 @@ class TicketModel {
         $this->db = $db;
     }
 
+    public function getLastFiveTickets() {
+        $query = "SELECT t.*, a.display_name AS username, t.image_path AS image_path 
+              FROM TICKET t 
+              LEFT JOIN ACCOUNT a ON t.author = a.account_id
+              ORDER BY t.date DESC
+              LIMIT 5";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
     public function getAllTickets() {
         $query = "SELECT t.*, a.display_name AS username, t.image_path AS image_path 
               FROM TICKET t 

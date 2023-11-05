@@ -20,6 +20,13 @@ class TicketController {
         $this->view->render($tickets);
     }
 
+    public function listLastFiveTickets() {
+        session_start();
+        $tickets = $this->model->getLastFiveTickets();
+        $this->view->render($tickets);
+    }
+
+
     public function createPost() {
         session_start();
         if (!isset($_SESSION['account_id'])) {
