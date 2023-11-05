@@ -38,7 +38,7 @@ class User {
             $updateStmt->bindParam(':account_id', $account_id);
             $updateStmt->execute();
 
-            header('Location: page_suivante.php');
+            header('Location: /post/view-posts');
             exit();
 
         } catch (\Exception $e) {  // Notez le préfixe \
