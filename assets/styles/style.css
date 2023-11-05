@@ -84,3 +84,7 @@ img {
 .classic-button:hover {
     background-color: #8234a4;
 }
+
+.show-all-ticket {
+    text-decoration: none;
+}

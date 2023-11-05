@@ -27,53 +27,75 @@ class TicketView {
         $categoryNames = array_map(function($category) {
             return htmlspecialchars($category['title']);
         }, $categories);
-        echo "<link rel=\"stylesheet\" href=\"/assets/styles/view-posts.css\">";
-        echo "<div style='border: 1px solid #ccc; margin-bottom: 10px; padding: 10px;'>";
-        echo "<h2>{$title}</h2>";
-        if (!empty($categoryNames)) {
-            echo "<p><strong>Catégories :</strong> " . implode(', ', $categoryNames) . "</p>";
-        }
-        echo "<p>{$message}</p>";
+        ?>
+		<div class='ticket'>
+			<h2><?= $title ?></h2>
+			<?php
+			if (!empty($categoryNames)) {
+				?>
+				<p><strong>Catégories :</strong><?= implode(', ', $categoryNames) ?></p>
+				<?php
+			}
+			?>
+			<p><?= $message ?></p>
+			<?php
 
-        if ($imagePath !== '') {
-            echo "<img class='image-post' src='/$imagePath' alt='Image associée'/>";
-        }
+			if ($imagePath !== '') {
+				?>
+				<img class='image-post' src='/$imagePath' alt='Image associée'/>
+				<?php
+			}
 
-        echo "<p><strong>Auteur :</strong> {$username}</p>";
-        echo "<p><strong>Date :</strong> {$date}</p>";
-        echo "<a href='/pages/view-ticket?ticket_id={$ticketId}'>Répondre</a>";
-        echo "</div>";
+			?>
+			<p><strong>Auteur :</strong><?= $username ?></p>
+			<p><strong>Date :</strong><?= $date ?></p>
+        	<button class='classic-button' onclick="location.href = '/pages/view-ticket?ticket_id={$ticketId}'">Répondre</button>
+        </div>
+		<?php
+
     }
 
 
     public function render($tickets, $categories) {
-        if (isset($_SESSION['account_id'])) {
-            // Si l'utilisateur est connecté, affichez le bouton de déconnexion
-            echo "<a href='/authentication/logout'>Déconnexion</a>";
-        } else {
-            // Si l'utilisateur n'est pas connecté, affichez le bouton de connexion
-            echo "<a class='connection' href='/authentication'>Connexion</a>";
-        }
+		ob_start();
 
         // Formulaire pour filtrer les posts par catégories et rechercher des mots-clés
-        echo "<form class='options' method='GET' action='/post/view-posts'>";
-        echo "<label for='categories'>Filtrer par catégorie:</label>";
-        echo "<select id='categories' name='categories[]' multiple>";
-        foreach ($categories as $category) {
-            echo "<option value='" . htmlspecialchars($category['category_id']) . "'>" . htmlspecialchars($category['title']) . "</option>";
-        }
-        echo "</select>";
-        echo "\t";
+		?>
+		<main id="container" class="view-post">
+            <section id="history">
+                <h1 class="side-panel-title">Filtre</h1>
+                <form class='options' method='GET' action='/post/view-posts'>
+                    <label for='categories'>Filtrer par catégorie:</label>
+                    <select id='categories' name='categories[]' multiple>
+                    <?php
+                    foreach ($categories as $category) {
+                        ?>
+                        <option value="<?= htmlspecialchars($category['category_id']);?>"><?= htmlspecialchars($category['title']) ?></option>
+                        <?php
+                    }
+                    // Champ de recherche
+                    ?>
+                    </select>
+                    <input type='text' id='search' name='search' placeholder='Recherche...'>
 
-        // Champ de recherche
-        echo "<input type='text' id='search' name='search' placeholder='Recherche...'>";
+                    <input type='submit' value='Filtrer/Rechercher'>
+                </form>
+            </section>
 
-        echo "<input type='submit' value='Filtrer/Rechercher'>";
-        echo "</form>";
+            <section id='content'>
+                <h1>Tous les tickets</h1>
+                <div id='ticket-container'>
+                <?php
+                foreach ($tickets as $row) {
+                    $this->renderPost($row);
+                }
+                ?>
+                </div>
+            </section>
+		</main>
+		<?php
 
-        foreach ($tickets as $row) {
-            $this->renderPost($row);
-        }
+		(new \rtff\views\Layout('Post', ob_get_clean()))->show();
     }
 
 

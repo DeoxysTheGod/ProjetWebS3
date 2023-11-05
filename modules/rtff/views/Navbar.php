@@ -3,6 +3,20 @@ namespace rtff\views;
 
 class Navbar
 {
+    private function displayConnected(): void
+	{
+        if (isset($_SESSION['account_id'])) {
+            // Si l'utilisateur est connecté, affichez le bouton de déconnexion
+            ?><button class="classic-button" onclick="location.href='/authentication/logout'">Déconnexion</button>
+            <?php
+        } else {
+            // Si l'utilisateur n'est pas connecté, affichez le bouton de connexion
+            ?>
+            <button class="classic-button" onclick="location.href='/authentication'">Connexion</button>
+            <?php
+        }
+    }
+
     public function show(): void
     {
         ?>
@@ -19,10 +33,10 @@ class Navbar
                 Read The F****** Forum
             </div>
             <div class="navbar-element navbar-right-element" id="options">
-                <button>Sign in</button>
-                <button>Sign up</button>
+                <?= $this->displayConnected(); ?>
             </div>
         </nav>
         <?php
     }
 }
+

@@ -13,7 +13,7 @@ class Homepage
 
             </section>
             <section id="content">
-                <h1>Derniers Tickets</h1>
+                <h1>Les 5 derniers tickets</h1>
                 <div id="ticket-container">
 					<?php for ($i = 0; $i < 5; $i++): ?>
                         <div class="ticket">
@@ -27,20 +27,16 @@ class Homepage
                         </div>
 					<?php endfor; ?>
                 </div>
+                <button class='classic-button' onclick="location.href = '/post/view-posts'">Voir tout</button>
             </section>
 
             <section id="top-categrories">
                 <h1 class="side-panel-title">Top catégories</h1>
                 <ul>
 					<?php foreach ($categories as $category): ?>
-                        <li><?= htmlspecialchars($category['title']);?></p></li>
+                        <li><?= htmlspecialchars($category['title']);?> - <?= $category['nb_usage'];?></p></li>
 					<?php endforeach;?>
                 </ul>
-            </section>
-
-            <section>
-                <a class='connection' href='/post/view-posts'>Fil de l'eau</a>
-
             </section>
         </main>
         <?php

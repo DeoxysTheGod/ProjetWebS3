@@ -47,17 +47,3 @@
     color: #DFD3F6;
     font-family: 'Philosopher-Bold', serif;
 }
-
-#options > button {
-    height: 2rem;
-    width: 6rem;
-    background-color: #A079F2;
-    border-color: transparent;
-    border-radius: 0.3rem;
-    font-size: 1rem;
-    font-family: 'Philosopher-Bold', serif;
-}
-
-#options > button:active {
-    scale: 0.95;
-}
