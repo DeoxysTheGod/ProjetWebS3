@@ -17,6 +17,10 @@ class TicketController {
 
     public function listTickets() {
         session_start();
+        if (!isset($_SESSION['account_id'])) {
+            header('Location: /authentication');
+            exit;
+        }
         $tickets = $this->model->getAllTickets();
 
         $this->view->render($tickets);
@@ -24,11 +28,15 @@ class TicketController {
 
     public function createPost() {
         session_start();
+        if (!isset($_SESSION['account_id'])) {
+            header('Location: /authentication');
+            exit;
+        }
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $title = $_POST['title'];
             $message = $_POST['message'];
-            $author = $_SESSION['account_id'];  // Assurez-vous que l'utilisateur est connecté
+            $author = $_SESSION['account_id'];
             $imagePath = '';
 
             if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {

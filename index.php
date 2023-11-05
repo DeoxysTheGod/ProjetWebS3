@@ -54,9 +54,6 @@ $routes = [
 ];
 
 // Recherche de la route
-echo "URL Path: $urlPath<br>";
-echo "Route Path: $routePath<br>";
-
 if (isset($routes[$routePath])) {
     $routes[$routePath]();
 } else {
