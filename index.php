@@ -3,8 +3,11 @@
 require_once './modules/rtff/Autoloader.php';
 rtff\Autoloader::register();
 
+use rtff\controllers\authentication\ConnectUser;
 use rtff\controllers\pages\TicketController;
 use rtff\models\TicketModel;
+use rtff\models\User;
+use rtff\views\ConnexionPage;
 use rtff\views\TicketView;
 use rtff\views\CreatePostView;
 use rtff\database\DatabaseConnexion;
@@ -34,11 +37,7 @@ $routes = [
         $controller->listTickets();
     },
     'authentification' => function() {
-        $database = DatabaseConnexion::getInstance();
-        $db = $database->getConnection();
-        $model = new \rtff\models\User($db);
-        $view = new \rtff\views\ConnexionPage();
-        $controller = new \rtff\controllers\authentication\ConnectUser($model, $view);
+        $controller = new ConnectUser();
         $controller->defaultMethod();
     },
     'post/view-posts' => function() use ($db) {
