@@ -33,7 +33,13 @@ class TicketView {
 
 
     public function render($tickets) {
-        echo "<a class='deconnection' href='/authentication/logout'>Déconnexion</a>";
+        if (isset($_SESSION['account_id'])) {
+            // Si l'utilisateur est connecté, affichez le bouton de déconnexion
+            echo "<a class='LogoutController' href='/authentication/logout'>Déconnexion</a>";
+        } else {
+            // Si l'utilisateur n'est pas connecté, affichez le bouton de connexion
+            echo "<a class='connection' href='connectUser.php'>Connexion</a>";
+        }
         foreach ($tickets as $row) {
             $this->renderPost($row);
         }
