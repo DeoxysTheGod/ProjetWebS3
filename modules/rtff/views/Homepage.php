@@ -31,7 +31,7 @@ class Homepage
             </section>
 
             <section>
-                <a>Fils de l'eau</a>
+                <a class='connection' href='/views/renderPost'>Connexion</a>
 
             </section>
         </main>
