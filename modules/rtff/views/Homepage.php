@@ -29,6 +29,11 @@ class Homepage
             <section id="options">
                 <h1>Mettre ici les options de l'utilisateur</h1>
             </section>
+
+            <section>
+                <a>Fils de l'eau</a>
+
+            </section>
         </main>
         <?php
         (new Layout('Home', ob_get_clean()))->show();
