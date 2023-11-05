@@ -30,8 +30,24 @@ class AdminController {
     public function deleteCategory() {
         $categoryId = $_GET['id'];
         $this->model->deleteCategory($categoryId);
-        header('Location: /admin/manage-categories');
+        header('Location: /admin/categories');
         exit;
     }
+
+    public function managePosts() {
+        // Récupère tous les posts pour les afficher dans la vue
+        $posts = $this->model->getAllPosts();
+        $this->view->showPosts($posts);
+    }
+
+    public function deletePost() {
+        // Supprime un post
+        if (isset($_GET['id'])) {
+            $this->model->deletePost($_GET['id']);
+        }
+        header('Location: /admin/manage-posts');
+        exit;
+    }
+
 
 }

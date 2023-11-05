@@ -85,10 +85,22 @@ $routes = [
         $controller->createCategory();
     },
     'admin/delete-category' => function() use ($db) {
-        $model = new \rtff\models\CategoryModel($db);
-        $view = new \rtff\views\AdminView();
-        $controller = new \rtff\controllers\pages\AdminController($model, $view);
+        $model = new CategoryModel($db);
+        $view = new AdminView();
+        $controller = new AdminController($model, $view);
         $controller->deleteCategory();
+    },
+    'admin/manage-posts' => function() use ($db) {
+        $model = new rtff\models\AdminModel($db);
+        $view = new rtff\views\AdminView();
+        $controller = new rtff\controllers\pages\AdminController($model, $view);
+        $controller->managePosts();
+    },
+    'admin/delete-post' => function() use ($db) {
+        $model = new rtff\models\AdminModel($db);
+        $view = new rtff\views\AdminView();
+        $controller = new rtff\controllers\pages\AdminController($model, $view);
+        $controller->deletePost();
     },
 
 

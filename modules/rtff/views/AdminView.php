@@ -5,6 +5,21 @@ namespace rtff\views;
 namespace rtff\views;
 
 class AdminView {
+
+    public function showPosts($posts) {
+        echo "<h2>Gestion des Posts</h2>";
+        echo "<ul>";
+        foreach ($posts as $post) {
+            echo "<li>";
+            echo "<strong>" . htmlspecialchars($post['title']) . "</strong> par " . htmlspecialchars($post['username']);
+            echo " <a href='/admin/delete-post?id=" . htmlspecialchars($post['ticket_id']) . "' style='color: red;'>Supprimer</a>";
+            echo "</li>";
+        }
+        echo "</ul>";
+    }
+
+
+
     public function showCategories($categories) {
         ?>
         <!DOCTYPE html>
