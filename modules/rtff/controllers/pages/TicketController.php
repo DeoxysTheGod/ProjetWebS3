@@ -48,6 +48,13 @@ class TicketController {
             }
 
             $this->model->addPost($title, $message, $author, $imagePath);
+            if (!empty($_POST['categories'])) {
+                $ticketId = $this->db->lastInsertId();
+                foreach ($_POST['categories'] as $categoryId) {
+                    $this->model->addTicketCategory($ticketId, $categoryId);
+                }
+            }
+
             header('Location: /post/view-posts');
             exit;
         }

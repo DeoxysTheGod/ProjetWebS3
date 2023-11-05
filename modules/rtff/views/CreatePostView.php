@@ -1,10 +1,16 @@
 <?php
 namespace rtff\views;
 
-class CreatePostView
-{
-    public function show(): void
-    {
+use rtff\models\CategoryModel;
+use rtff\database\DatabaseConnexion;
+
+class CreatePostView {
+    public function show(): void {
+        $database = DatabaseConnexion::getInstance();
+        $db = $database->getConnection();
+        $categoriesModel = new CategoryModel($db);
+        $categories = $categoriesModel->getAllCategories();
+
         ob_start();
         ?>
         <form method="post" action="/post/create" enctype="multipart/form-data">
@@ -19,6 +25,16 @@ class CreatePostView
             <div>
                 <label for="image">Image:</label>
                 <input type="file" name="image" id="image">
+            </div>
+            <div>
+                <label for="categories">Catégories:</label>
+                <select name="categories[]" id="categories" multiple>
+                    <?php
+                    foreach ($categories as $category) {
+                        echo "<option value='{$category['category_id']}'>{$category['title']}</option>";
+                    }
+                    ?>
+                </select>
             </div>
             <div>
                 <input type="submit" value="Créer Post">
