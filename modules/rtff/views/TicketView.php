@@ -48,6 +48,13 @@ class TicketView {
         echo "</div>";
     }
 
+    public function renderSearchForm() {
+        echo "<form method='GET' action='/search'>
+            <input type='text' name='q' placeholder='Rechercher...'>
+            <button type='submit'>Rechercher</button>
+          </form>";
+    }
+
     public function render($tickets, $categories) {
         if (isset($_SESSION['account_id'])) {
             // Si l'utilisateur est connecté, affichez le bouton de déconnexion

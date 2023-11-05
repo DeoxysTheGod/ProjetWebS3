@@ -38,6 +38,11 @@ class TicketController {
         $this->view->render($tickets, $categories);
     }
 
+    public function search() {
+        $keyword = $_GET['q'] ?? '';
+        $results = $this->model->search($keyword);
+        $this->view->renderSearchResults($results);
+    }
 
     public function listLastFiveTickets() {
         session_start();

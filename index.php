@@ -128,6 +128,12 @@ $routes = [
         $controller = new AdminController($model, $view);
         $controller->manageComments();
     },
+    'search' => function() use ($db) {
+        $model = new TicketModel($db);
+        $view = new TicketView($model);
+        $controller = new TicketController($model, $view);
+        $controller->search();
+    },
 
 ];
 
