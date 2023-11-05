@@ -33,4 +33,33 @@ class TicketView {
             $this->renderPost($row);
         }
     }
+    public function renderSingleTicket($ticket, $comments) {
+        echo "<!DOCTYPE html>";
+        echo "<html lang='fr'>";
+        echo "<head>";
+        echo "<meta charset='UTF-8'>";
+        echo "<title>View Ticket</title>";
+        echo "</head>";
+        echo "<body>";
+        echo "<div style='margin-right:220px; padding:10px;'>";
+        echo "<h1>" . htmlspecialchars($ticket['title']) . "</h1>";
+        echo "<p>" . htmlspecialchars($ticket['message']) . "</p>";
+        echo "<p><strong>Auteur :</strong> " . htmlspecialchars($ticket['username']) . "</p>";
+        echo "<p><strong>Date :</strong> " . htmlspecialchars($ticket['date']) . "</p>";
+        echo "<h2>Commentaires</h2>";
+        echo "<form method='post' action='viewTicket.php?ticket_id=" . htmlspecialchars($ticket['ticket_id']) . "'>";
+        echo "<textarea name='comment' required></textarea><br>";
+        echo "<input type='submit' value='Poster le Commentaire'>";
+        echo "</form>";
+        foreach ($comments as $comment) {
+            echo "<div style='border: 1px solid #ccc; margin-bottom: 10px; padding: 10px;'>";
+            echo "<p>" . htmlspecialchars($comment['text']) . "</p>";
+            echo "<p><strong>Auteur :</strong> " . htmlspecialchars($comment['username'] ?? 'Auteur inconnu') . "</p>";
+            echo "<p><strong>Date :</strong> " . htmlspecialchars($comment['date']) . "</p>";
+            echo "</div>";
+        }
+        echo "</div>";
+        echo "</body>";
+        echo "</html>";
+    }
 }

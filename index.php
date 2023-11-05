@@ -33,7 +33,15 @@ if ($controllerSegment === 'post' && $actionSegment === 'view-posts') {
     $controller->listTickets();
     exit;
 }
-
+if ($controllerSegment === 'pages' && $actionSegment === 'view-ticket') {
+    $database = DatabaseConnexion::getInstance();
+    $db = $database->getConnection();
+    $model = new TicketModel($db);
+    $view = new TicketView();
+    $controller = new TicketController($model, $view);
+    $controller->viewTicket();
+    exit;
+}
 $controllerFile = "./modules/rtff/controllers/$controllerSegment/$actionSegment.php";
 $controllerClass = "\\rtff\\controllers\\$controllerSegment\\$actionSegment";
 
