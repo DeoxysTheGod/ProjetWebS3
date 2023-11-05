@@ -3,6 +3,10 @@ namespace rtff\controllers\authentication;
 
 use rtff\models\User;
 
+/**
+ * Méthode par défaut du contrôleur.
+ * Gère la connexion de l'utilisateur.
+ */
 class ConnectUser {
     public function defaultMethod() {
         session_start();
