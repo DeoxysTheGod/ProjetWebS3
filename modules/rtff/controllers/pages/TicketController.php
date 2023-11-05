@@ -15,14 +15,37 @@ class TicketController {
         $this->view = $view;
     }
 
-// controllers/pages/TicketController.php
-
     public function listTickets() {
         session_start();
         $tickets = $this->model->getAllTickets();
 
         $this->view->render($tickets);
     }
+
+    public function createPost() {
+        session_start();
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $title = $_POST['title'];
+            $message = $_POST['message'];
+            $author = $_SESSION['account_id'];  // Assurez-vous que l'utilisateur est connecté
+            $imagePath = '';
+
+            if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+                $uploadsDir = 'uploads/';
+                $uploadedFile = $uploadsDir . basename($_FILES['image']['name']);
+                move_uploaded_file($_FILES['image']['tmp_name'], $uploadedFile);
+                $imagePath = $uploadedFile;
+            }
+
+            $this->model->addPost($title, $message, $author, $imagePath);
+            header('Location: /post/view-posts');
+            exit;
+        }
+
+        $this->view->show();
+    }
+
 
     public function viewTicket() {
         session_start();

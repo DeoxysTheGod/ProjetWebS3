@@ -17,7 +17,7 @@ class CreateUser
             echo $notification;
         }
         // Vue affichée indépendamment de la méthode de la requête
-        $view = new \rtff\views\CreateUserPage();
+        $view = new \rtff\views\CreatePostView();
         $view->show();
     }
 }

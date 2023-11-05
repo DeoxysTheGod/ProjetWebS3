@@ -49,4 +49,15 @@ class TicketModel {
         $comment_stmt->bindParam(':ticket_id', $ticket_id);
         $comment_stmt->execute();
     }
+
+    public function addPost($title, $message, $author, $imagePath) {
+        $query = "INSERT INTO TICKET (title, message, date, author, image_path) VALUES (:title, :message, NOW(), :author, :image_path)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':message', $message);
+        $stmt->bindParam(':author', $author);
+        $stmt->bindParam(':image_path', $imagePath);
+        $stmt->execute();
+    }
+
 }
