@@ -12,19 +12,27 @@ class AdminController {
         $this->model = $model;
         $this->view = $view;
     }
-
+    /**
+     * Vérifie si l'utilisateur est un administrateur.
+     *
+     * @return bool Vrai si l'utilisateur est un administrateur, sinon faux.
+     */
     private function isAdmin(): bool {
         session_start();
         return $_SESSION['admin'] == 1;
     }
-
+    /**
+     * Redirige l'utilisateur vers la page d'erreur.
+     */
     #[NoReturn] private function redirectToErrorPage(): void
     {
         header('Location: /error');
         exit;
     }
 
-
+    /**
+     * Affiche toutes les catégories.
+     */
     public function manageCategories(): void
     {
         if (!$this->isAdmin()) {
@@ -35,7 +43,9 @@ class AdminController {
         $categories = $this->model->getAllCategories();
         $this->view->showCategories($categories);
     }
-
+    /**
+     * Crée une nouvelle catégorie.
+     */
     public function createCategory(): void
     {
         if (!$this->isAdmin()) {
@@ -51,6 +61,9 @@ class AdminController {
             exit;
         }
     }
+        /**
+         * Supprime une catégorie.
+         */
     #[NoReturn] public function deleteCategory(): void
     {
         if (!$this->isAdmin()) {
@@ -122,7 +135,9 @@ class AdminController {
         $users = $this->model->getAllUsers();
         $this->view->showUsers($users);
     }
-
+    /**
+     * Affiche tous les commentaires.
+     */
     public function manageComments() {
         if (!$this->isAdmin()) {
             $this->redirectToErrorPage();
