@@ -36,7 +36,7 @@ $routes = [
         $controller = new TicketController($model, $view);
         $controller->listTickets();
     },
-    'authentification' => function() {
+    'authentication' => function() {
         $controller = new ConnectUser();
         $controller->defaultMethod();
     },
