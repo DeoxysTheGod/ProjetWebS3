@@ -8,7 +8,7 @@ class User {
 
     public static function connectUser($account_id, $password) {
         try {
-            $database = \rtff\database\DatabaseConnexion::getInstance();
+            $database = DatabaseConnexion::getInstance();
             $db = $database->getConnection();
 
             $query = "SELECT password FROM ACCOUNT WHERE account_id = :account_id";
@@ -20,7 +20,7 @@ class User {
                 return "Identifiant incorrect.";
             }
 
-            $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
             $hashed_password = $row['password'];
 
@@ -28,19 +28,22 @@ class User {
                 return "Mot de passe incorrect.";
             }
 
-            // définition de la session
+            // Authentification réussie
             $_SESSION['account_id'] = $account_id;
 
-            $ticketController = new \rtff\controllers\pages\TicketController();
-            $ticketController->listTickets();
-            exit(); // pour s'assurer que rien d'autre ne s'exécute après
+            // Ajoutez ici la logique SQL pour modifier la table de la base de données
+            $updateQuery = "UPDATE ACCOUNT SET last_connection_date = NOW()  WHERE account_id = :account_id";
+            $updateStmt = $db->prepare($updateQuery);
+            $updateStmt->execute();
 
+            // Redirigez vers la page suivante ou affichez un message de succès
+            header('Location: page_suivante.php');
+            exit(); // Pour s'assurer que rien d'autre ne s'exécute après
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             error_log($e->getMessage());
             return "Une erreur est survenue lors de la connexion.";
         }
-
     }
 
     public static function createUser($account_id, $password, $display_name) {
