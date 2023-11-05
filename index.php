@@ -50,6 +50,10 @@ $routes = [
         $controller = new MailController();
         $controller->showForm();
     },
+    'authentication/reset-password/send-mail' => function() use ($db) {
+        $controller = new MailController();
+        $controller->sendMail();
+    },
     'post/view-posts' => function() use ($db) {
         $model = new TicketModel($db);
         $view = new TicketView($model);
@@ -126,10 +130,6 @@ $routes = [
         $view = new AdminView();
         $controller = new AdminController($model, $view);
         $controller->manageComments();
-    },
-    'pages/MailController/sendMail' => function() use ($db) {
-        $controller = new MailController();
-        $controller->sendMail();
     },
     'pages/like-comment' => function() use ($db) {
         session_start();
