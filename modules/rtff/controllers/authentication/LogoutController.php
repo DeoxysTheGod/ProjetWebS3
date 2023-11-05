@@ -19,7 +19,7 @@ class LogoutController {
             session_destroy();
         }
 
-        header("Location: connectUser.php");
+        header("Location: authentication/logout");
         exit;
     }
 }
