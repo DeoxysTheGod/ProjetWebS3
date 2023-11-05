@@ -27,14 +27,12 @@ class CreatePostView {
                 <input type="file" name="image" id="image">
             </div>
             <div>
-                <label for="categories">Catégories:</label>
-                <select name="categories[]" id="categories" multiple>
-                    <?php
-                    foreach ($categories as $category) {
-                        echo "<option value='{$category['category_id']}'>{$category['title']}</option>";
-                    }
-                    ?>
-                </select>
+                <label>Catégories:</label>
+                <?php
+                foreach ($categories as $category) {
+                    echo "<input type='checkbox' name='categories[]' value='{$category['category_id']}'> {$category['title']}<br>";
+                }
+                ?>
             </div>
             <div>
                 <input type="submit" value="Créer Post">
