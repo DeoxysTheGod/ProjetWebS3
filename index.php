@@ -1,8 +1,9 @@
 <?php
 
 require_once './modules/rtff/Autoloader.php';
-\rtff\Autoloader::register();
+Autoloader::register();
 
+use rtff\Autoloader;
 use rtff\controllers\pages\TicketController;
 use rtff\models\TicketModel;
 use rtff\views\TicketView;
@@ -20,7 +21,7 @@ $db = $database->getConnection();
 
 // Définition des routes
 $routes = [
-    '' => function() {
+    '/' => function() {
         $database = DatabaseConnexion::getInstance();
         $db = $database->getConnection();
         $model = new TicketModel($db);
