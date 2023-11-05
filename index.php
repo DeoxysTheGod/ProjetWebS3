@@ -8,6 +8,7 @@ use rtff\controllers\authentication\CreateUser;
 use rtff\controllers\pages\AdminController;
 use rtff\controllers\pages\Homepage;
 use rtff\controllers\pages\MailController;
+use rtff\controllers\pages\PasswordResetController;
 use rtff\controllers\pages\TicketController;
 use rtff\models\AdminModel;
 use rtff\models\CategoryModel;
@@ -49,6 +50,10 @@ $routes = [
     'authentication/reset-password' => function() {
         $controller = new MailController();
         $controller->showForm();
+    },
+    'authentication/reset-password/send-mail' => function() use ($db) {
+        $controller = new MailController();
+        $controller->sendMail();
     },
     'post/view-posts' => function() use ($db) {
         $model = new TicketModel($db);
@@ -127,17 +132,28 @@ $routes = [
         $controller = new AdminController($model, $view);
         $controller->manageComments();
     },
-    'pages/MailController/sendMail' => function() use ($db) {
-        $controller = new MailController();
-        $controller->sendMail();
-    },
     'pages/like-comment' => function() use ($db) {
+        session_start();
         $commentId = $_GET['comment_id'];
         $accountId = $_SESSION['account_id'];
         $model = new TicketModel($db);
         $model->likeComment($accountId, $commentId);
 
         header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    },
+    'authentication/reset-password-process' => function() use ($db) {
+        session_start();
+        if (isset($_GET['token'])) {
+            $token = $_GET['token'];
+            $controller = new PasswordResetController();
+            $controller->resetPassword($token);
+
+        } else {
+            // Vous pouvez gérer le cas où le token n'est pas présent ici
+            echo "Paramètre token manquant !";
+        }
+
         exit;
     },
 

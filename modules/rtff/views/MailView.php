@@ -15,7 +15,7 @@ class MailView {
         </head>
         <body>
         <div style="margin-left:220px; padding:10px;">
-            <form method="post" action="/pages/MailController/sendMail">
+            <form method="post" action="/authentication/reset-password/send-mail">
                 Mail : <input name="account_id" type="email"/>
                 <input name="send" type="submit"/>
             </form>

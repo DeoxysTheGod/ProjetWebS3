@@ -3,7 +3,10 @@
     namespace rtff\views;
 class Layout
 {
-    public function __construct(private string $title, private string $content) {}
+    private Navbar $navbar;
+    public function __construct(private string $title, private string $content) {
+        $this->navbar = new Navbar();
+    }
     public function show(): void
     {
 ?><!DOCTYPE html>
@@ -16,7 +19,12 @@ class Layout
     <link rel="stylesheet" href="/assets/styles/navbar.css">
 </head>
 <body>
-<?= $this->content; ?>
+<header>
+	<?= $this->navbar->show() ?>
+</header>
+<div id="content-page">
+	<?= $this->content; ?>
+</div>
 </body>
 </html>
 <?php
