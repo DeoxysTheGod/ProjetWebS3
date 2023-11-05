@@ -3,18 +3,84 @@ body {
     margin: 0;
     background-color: #2C2B2E;
     color: white;
+    height: 100vh;
+    overflow: auto;
 }
 
-main {
+header {
+    z-index: 1000;
+}
+
+.side-panel-title {
+    text-align: center;
+}
+
+#container {
     display: flex;
-    gap: 1.5rem
+    align-items: center;
+    gap: 1.5rem;
+    height: 90vh;
+}
+
+#history {
+    display: block;
+    width: 20vw;
+    background-color: #211A24;
+    height: 100%;
 }
 
 #content {
-
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
 }
 
-#options {
-
+.ticket-title {
+    margin: 0 0 0.5rem 0;
 }
 
+#ticket-container {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    width: 60vw;
+    gap: 1rem;
+    overflow: scroll;
+    height: 100%;
+}
+
+.ticket {
+    padding: 1rem;
+    border-radius: 0.3rem;
+    background-color: #211A24;
+}
+
+#top-categrories {
+    background-color: #211A24;
+    width: 20vw;
+}
+
+section {
+    height: 100%;
+}
+
+img {
+    max-height: 30rem;
+}
+
+.image-post {
+    max-height: 30rem;
+}
+
+.classic-button {
+    transition-duration: 300ms;
+    border: none;
+    border-radius: 0.3rem;
+    background-color: #732a93;
+    color: #fff;
+    padding: 1rem;
+}
+
+.classic-button:hover {
+    background-color: #8234a4;
+}
