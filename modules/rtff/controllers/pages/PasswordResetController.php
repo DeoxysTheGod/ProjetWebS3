@@ -6,7 +6,8 @@ use rtff\database\DatabaseConnexion;
 use rtff\views\PasswordResetView;
 
 class PasswordResetController {
-    public function resetPassword($token) {
+    public function resetPassword($token): void
+    {
         $message = '';
         $database = DatabaseConnexion::getInstance();
         $db = $database->getConnection();
