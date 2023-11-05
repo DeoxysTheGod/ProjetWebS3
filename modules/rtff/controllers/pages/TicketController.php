@@ -17,7 +17,7 @@ class TicketController {
         $database = DatabaseConnexion::getInstance();
         $this->db = $database->getConnection();
         $this->model = new TicketModel($this->db);
-        $this->view = new TicketView();
+        $this->view = new TicketView($this->model);
     }
 
 
