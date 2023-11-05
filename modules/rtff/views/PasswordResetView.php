@@ -10,14 +10,14 @@ class PasswordResetView
             echo "<p>$message</p>";
             if ($message === "Mot de passe modifié avec succès !") {
                 echo '<p><html>
-<head>
-    <title>Connectez-vous</title>
-</head>
-<body>
-<p>Cliquez sur le bouton ci-dessous pour vous connecter :</p>
-<a href="https://rtff.alwaysdata.net/">Cliquez ici</a>
-</body>
-</html></p>';
+                <head>
+                    <title>Connectez-vous</title>
+                </head>
+                <body>
+                <p>Cliquez sur le bouton ci-dessous pour vous connecter :</p>
+                <a href="https://rtff.alwaysdata.net/">Cliquez ici</a>
+                </body>
+                </html></p>';
             }
         }
 
