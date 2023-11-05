@@ -1,0 +1,30 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10rem 0 0 0;
+    font-size: 1.5rem;
+    font-family: 'Philosopher-Bold', serif;
+    color: #DFD3F6;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.6rem;
+}
+
+input[type="submit"] {
+    height: 3rem;
+    width: 13rem;
+    background-color: #A079F2;
+    border-color: transparent;
+    border-radius: 0.3rem;
+    font-size: 1.5rem;
+    font-family: 'Philosopher-Bold', serif;
+}
+
+input[type="submit"]:active {
+    scale: 0.95;
+}

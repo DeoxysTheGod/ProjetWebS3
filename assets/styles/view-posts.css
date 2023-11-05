@@ -1,0 +1,25 @@
+body {
+    margin: 0 20rem;
+    background-color: #19181B;
+    color: #DFD3F6;
+}
+
+a {
+    border-color: transparent;
+    font-size: 1.5rem;
+    font-family: 'Philosopher-Bold', serif;
+    color: white;
+    transition: ease 100ms;
+    text-decoration: none;
+}
+
+a:hover {
+    letter-spacing: 2px;
+}
+
+.options {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    height: 1.3rem;
+}

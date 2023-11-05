@@ -27,7 +27,7 @@ class TicketView {
         $categoryNames = array_map(function($category) {
             return htmlspecialchars($category['title']);
         }, $categories);
-
+        echo "<link rel=\"stylesheet\" href=\"/assets/styles/view-posts.css\">";
         echo "<div style='border: 1px solid #ccc; margin-bottom: 10px; padding: 10px;'>";
         echo "<h2>{$title}</h2>";
         if (!empty($categoryNames)) {
@@ -41,9 +41,7 @@ class TicketView {
 
         echo "<p><strong>Auteur :</strong> {$username}</p>";
         echo "<p><strong>Date :</strong> {$date}</p>";
-        echo "<a href='/pages/view-ticket?ticket_id={$ticketId}' style='padding: 10px; background-color: blue; color: white; text-decoration: none; border-radius: 5px;'>Répondre</a>";
-        echo "<button style='background-color: transparent; border: none; cursor: pointer; padding: 0; margin: 0; display: inline-block;'>";
-        echo "</button>";
+        echo "<a href='/pages/view-ticket?ticket_id={$ticketId}'>Répondre</a>";
         echo "</div>";
     }
 
@@ -58,16 +56,16 @@ class TicketView {
         }
 
         // Formulaire pour filtrer les posts par catégories et rechercher des mots-clés
-        echo "<form method='GET' action='/post/view-posts'>";
+        echo "<form class='options' method='GET' action='/post/view-posts'>";
         echo "<label for='categories'>Filtrer par catégorie:</label>";
         echo "<select id='categories' name='categories[]' multiple>";
         foreach ($categories as $category) {
             echo "<option value='" . htmlspecialchars($category['category_id']) . "'>" . htmlspecialchars($category['title']) . "</option>";
         }
         echo "</select>";
+        echo "\t";
 
         // Champ de recherche
-        echo "<label for='search'>Rechercher:</label>";
         echo "<input type='text' id='search' name='search' placeholder='Recherche...'>";
 
         echo "<input type='submit' value='Filtrer/Rechercher'>";
@@ -87,7 +85,7 @@ class TicketView {
         echo "<title>View Ticket</title>";
         echo "</head>";
         echo "<body>";
-        echo "<div style='margin-right:220px; padding:10px;'>";
+        echo "<div>";
         echo "<h1>" . htmlspecialchars($ticket['title']) . "</h1>";
         echo "<p>" . htmlspecialchars($ticket['message']) . "</p>";
         echo "<p><strong>Auteur :</strong> " . htmlspecialchars($ticket['username']) . "</p>";
@@ -98,7 +96,7 @@ class TicketView {
         echo "<input type='submit' value='Poster le Commentaire'>";
         echo "</form>";
         foreach ($comments as $comment) {
-            echo "<div style='border: 1px solid #ccc; margin-bottom: 10px; padding: 10px;'>";
+            echo "<div>";
             echo "<p>" . htmlspecialchars($comment['text']) . "</p>";
             echo "<p><strong>Date :</strong> " . htmlspecialchars($comment['date']) . "</p>";
             echo "<p><strong>Likes :</strong> " . htmlspecialchars($comment['like_count']) . "</p>";

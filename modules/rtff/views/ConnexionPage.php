@@ -7,7 +7,8 @@ class ConnexionPage
     {
         ob_start();
         ?>
-        <div>
+        <link rel="stylesheet" href="/assets/styles/connexion-page.css">
+        <div class="content">
             <!-- Formulaire de connexion -->
             <form method="post" action="/authentication">
 
