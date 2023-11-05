@@ -31,32 +31,32 @@ class TicketView {
 
         // Image de profil par défaut
         $defaultProfileImage = "/uploads/profiles/defaultprofile.jpeg";
-
-        echo "<link rel=\"stylesheet\" href=\"/assets/styles/view-posts.css\">";
-        echo "<div style='border: 1px solid #ccc; margin-bottom: 10px; padding: 10px;'>";
-        echo "<h2>{$title}</h2>";
-        if (!empty($categoryNames)) {
-            echo "<p><strong>Catégories :</strong> " . implode(', ', $categoryNames) . "</p>";
-        }
-        echo "<p>{$message}</p>";
-
-
-        if ($imagePath !== '') {
-            echo "<img class='image-post' src='/$imagePath' alt='Image associée'/>";
-        }
-
-        // Afficher l'image de profil
-        if ($profileImage !== '') {
-            echo "<img class='profile-image' src='/$profileImage' alt='Profile Image'/>";
-        } else {
-            echo "<img class='profile-image' src='$defaultProfileImage' alt='Default Profile Image'/>";
-        }
-
-        echo "<p><strong>Auteur :</strong> {$username}</p>";
-        echo "<p><strong>Date :</strong> {$date}</p>";
-        echo "<a href='/pages/view-ticket?ticket_id={$ticketId}'>Répondre</a>";
-        echo "</div>";
+        ?>
+        <link rel="stylesheet" href="/assets/styles/view-posts.css">
+        <div style='border: 1px solid #ccc; margin-bottom: 10px; padding: 10px;'>
+            <h2><?= $title ?></h2>
+            <?php if (!empty($categoryNames)): ?>
+                <p><strong>Catégories :</strong> <?= implode(', ', $categoryNames) ?></p>
+            <?php endif; ?>
+            <p><?= $message ?></p>
+            <?php if ($imagePath !== ''): ?>
+                <img class='image-post' src='/<?= $imagePath ?>' alt='Image associée'/>
+            <?php endif; ?>
+            <p>
+                <strong>Auteur :</strong>
+                <?php if ($profileImage !== ''): ?>
+                    <img class='profile-image' src='/<?= $profileImage ?>' alt='Profile Image' style='width: 30px; height: 30px; border-radius: 50%; margin-right: 5px;' />
+                <?php else: ?>
+                    <img class='profile-image' src='<?= $defaultProfileImage ?>' alt='Default Profile Image' style='width: 30px; height: 30px; border-radius: 50%; margin-right: 5px;' />
+                <?php endif; ?>
+                <?= $username ?>
+            </p>
+            <p><strong>Date :</strong> <?= $date ?></p>
+            <a href='/pages/view-ticket?ticket_id=<?= $ticketId ?>'>Répondre</a>
+        </div>
+        <?php
     }
+
 
 
     public function render($tickets, $categories) {
