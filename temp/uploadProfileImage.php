@@ -6,7 +6,7 @@ require_once './DatabaseConnexion.php';
 
 // uploadProfileImage.php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $database = new DatabaseConnexion();
+    $database = DatabaseConnexion::getInstance();
     $db = $database->getConnection();
     if (isset($_FILES['profileImage'])) {
         $image = $_FILES['profileImage'];
@@ -55,11 +55,9 @@ require_once './navigation.php';
 </body>
 </html>
 
-<?php ?>
     <!-- uploadProfileImage.php -->
     <form action="uploadProfileImage.php" method="post" enctype="multipart/form-data">
         Sélectionnez une image de profil :
         <input type="file" name="profileImage" accept="image/*" required>
         <input type="submit" value="Télécharger l'image" name="submit">
     </form>
-<?php?>
