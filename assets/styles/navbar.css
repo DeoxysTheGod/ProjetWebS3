@@ -3,24 +3,41 @@
     src: url('../fonts/Philosopher/Philosopher-Bold.ttf');
 }
 
-nav {
+.navbar {
     display: flex;
     background-color: #19181B;
-    padding: 2rem;
+    padding: 1rem;
     color: darkgrey;
     font-size: 2rem;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    height: 0.5rem;
+    height: 2rem;
+}
+
+.navbar-left-element {
+    text-align: left;
+}
+
+.navbar-center-element {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.navbar-right-element {
+    text-align: right;
+}
+
+.navbar-element {
+    width: 33%;
 }
 
 #logo > img {
-    width: 6rem;
+    width: 3rem;
 }
 
 #title {
     color: #DFD3F6;
-    padding: 0 30rem 0 30rem;
+    /*padding: 0 30rem 0 30rem;*/
     font-family: 'Philosopher-Bold', serif;
 }
 

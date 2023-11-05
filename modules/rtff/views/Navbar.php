@@ -7,18 +7,17 @@ class Navbar
     {
         ?>
         <link rel="stylesheet" href="/assets/styles/navbar.css">
-        <nav>
-            <a href="/">
+        <nav class="navbar">
+            <a class="navbar-element navbar-left-element" href="/">
                 <div id="logo">
                     <img src="../../../assets/images/logo.png" alt="logo">
                 </div id="logo">
             </a>
 
-            <div id="title">
+            <div class="navbar-element navbar-center-element" id="title">
                 Read The F****** Forum
             </div>
-
-            <div id="options">
+            <div class="navbar-element navbar-right-element" id="options">
                 <button>Sign in</button>
                 <button>Sign up</button>
             </div>
