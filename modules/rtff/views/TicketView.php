@@ -23,7 +23,7 @@ class TicketView {
         $date = htmlspecialchars($row['date'] ?? 'Date inconnue');
         $imagePath = htmlspecialchars($row['image_path'] ?? '');
         $ticketId = htmlspecialchars($row['ticket_id'] ?? '');
-        $authorImagePath = htmlspecialchars($row['author_image_path']);
+        $authorImagePath = $row['author_image_path'];
 
         // Retrieve categories associated with the ticket
         $categories = $this->model->getCategoriesForTicket($ticketId);
