@@ -3,6 +3,12 @@ namespace rtff\views;
 
 class ConnexionPage
 {
+    /**
+     * Affiche la page de connexion.
+     *
+     * Cette méthode génère la page de connexion avec un formulaire et des liens pour la réinitialisation de mot de passe
+     * et la création d'un compte.
+     */
     public function show(): void
     {
         ob_start();
