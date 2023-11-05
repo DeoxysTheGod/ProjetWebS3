@@ -20,6 +20,14 @@ $db = $database->getConnection();
 
 // Définition des routes
 $routes = [
+    '' => function() {
+        $database = DatabaseConnexion::getInstance();
+        $db = $database->getConnection();
+        $model = new TicketModel($db);
+        $view = new TicketView();
+        $controller = new TicketController($model, $view);
+        $controller->listTickets();
+    },
     'post/view-posts' => function() use ($db) {
         $model = new TicketModel($db);
         $view = new TicketView();
