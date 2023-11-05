@@ -77,8 +77,8 @@ class User {
 
                 // Envoi de l'e-mail
                 self::sendEmail($account_id);
+                echo "Utilisateur créé avec succès  !";
                 self::connectUser($account_id, $password);
-                return "Utilisateur créé avec succès  !";
             }
         } catch (\Exception $e) {
             error_log($e->getMessage());
