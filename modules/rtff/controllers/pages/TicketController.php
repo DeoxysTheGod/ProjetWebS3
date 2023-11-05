@@ -24,10 +24,17 @@ class TicketController {
     public function listTickets() {
         session_start();
 
-        $categories = $this->model->getAllCategories();
-        $selectedCategories = $_GET['categories'] ?? [];
-        $tickets = $this->model->getTicketsByCategories($selectedCategories);
+        $categoriesSelected = $_GET['categories'] ?? [];
 
+        if (empty($categoriesSelected)) {
+            // Si aucune catégorie n'est sélectionnée, récupérez tous les tickets
+            $tickets = $this->model->getAllTickets();
+        } else {
+            // Sinon, récupérez les tickets des catégories sélectionnées
+            $tickets = $this->model->getTicketsByCategories($categoriesSelected);
+        }
+
+        $categories = $this->model->getAllCategories();
         $this->view->render($tickets, $categories);
     }
 
