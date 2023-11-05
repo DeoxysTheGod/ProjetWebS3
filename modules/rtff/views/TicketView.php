@@ -18,7 +18,7 @@ class TicketView {
         echo "<p>{$message}</p>";
 
         if ($imagePath !== '') {
-            echo "<img src='/$imagePath' alt='Image associée' style='width: 200px; height: auto;'/>";
+            echo "<img class='image-post' src='/$imagePath' alt='Image associée'/>";
         }
 
         echo "<p><strong>Auteur :</strong> {$username}</p>";

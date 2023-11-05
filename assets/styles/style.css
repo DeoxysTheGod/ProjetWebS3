@@ -17,3 +17,11 @@ main {
 #options {
 
 }
+
+img {
+    max-height: 30rem;
+}
+
+.image-post {
+    max-height: 30rem;
+}
