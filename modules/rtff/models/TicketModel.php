@@ -63,19 +63,6 @@ class TicketModel {
     }
 
 
-    public function getTicketsByCategories($categories) {
-        if (empty($categories)) {
-            return [];
-        }
-
-        $placeholders = str_repeat('?,', count($categories) - 1) . '?';
-        $query = "SELECT * FROM TICKET 
-              JOIN TICKET_CATEGORIES ON TICKET.ticket_id = TICKET_CATEGORIES.ticket_id
-              WHERE TICKET_CATEGORIES.category_id IN ($placeholders)";
-        $stmt = $this->db->prepare($query);
-        $stmt->execute($categories);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
 
     public function search($keyword) {
         $keyword = "%$keyword%";
@@ -130,5 +117,21 @@ class TicketModel {
         $stmt->bindParam(':category_id', $categoryId);
         $stmt->execute();
     }
+
+    public function getTicketsByCategoriesAndSearch($categories, $searchTerm) {
+
+        $categoryPlaceholders = implode(',', array_fill(0, count($categories), '?'));
+        $searchTermWithWildcards = '%' . $searchTerm . '%';
+
+        $query = "SELECT * FROM TICKET 
+              LEFT JOIN CATEGORY_TICKET ON TICKET.ticket_id = CATEGORY_TICKET.ticket_id 
+              LEFT JOIN CATEGORY ON CATEGORY_TICKET.category_id = CATEGORY.category_id 
+              WHERE (TICKET.title LIKE ? OR TICKET.message LIKE ? OR CATEGORY.title LIKE ? OR CATEGORY.description LIKE ?)
+              AND (CATEGORY.category_id IN ($categoryPlaceholders) OR '$categoryPlaceholders' = '')";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute(array_merge([$searchTermWithWildcards, $searchTermWithWildcards, $searchTermWithWildcards, $searchTermWithWildcards], $categories));
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 
 }

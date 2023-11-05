@@ -25,24 +25,20 @@ class TicketController {
         session_start();
 
         $categoriesSelected = $_GET['categories'] ?? [];
+        $searchTerm = $_GET['search'] ?? '';
 
-        if (empty($categoriesSelected)) {
-            // Si aucune catégorie n'est sélectionnée, récupérez tous les tickets
+        if (empty($categoriesSelected) && empty($searchTerm)) {
+            // Si aucune catégorie n'est sélectionnée et aucun terme de recherche, récupérez tous les tickets
             $tickets = $this->model->getAllTickets();
         } else {
-            // Sinon, récupérez les tickets des catégories sélectionnées
-            $tickets = $this->model->getTicketsByCategories($categoriesSelected);
+            // Sinon, récupérez les tickets des catégories sélectionnées et/ou correspondant au terme de recherche
+            $tickets = $this->model->getTicketsByCategoriesAndSearch($categoriesSelected, $searchTerm);
         }
 
         $categories = $this->model->getAllCategories();
         $this->view->render($tickets, $categories);
     }
 
-    public function search() {
-        $keyword = $_GET['q'] ?? '';
-        $results = $this->model->search($keyword);
-        $this->view->renderSearchResults($results);
-    }
 
     public function listLastFiveTickets() {
         session_start();
