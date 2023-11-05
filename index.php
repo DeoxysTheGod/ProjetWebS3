@@ -78,6 +78,19 @@ $routes = [
         $controller = new AdminController($model, $view);
         $controller->manageCategories();
     },
+    'admin/create-category' => function() use ($db) {
+        $model = new CategoryModel($db);
+        $view = new AdminView();
+        $controller = new AdminController($model, $view);
+        $controller->createCategory();
+    },
+    'admin/delete-category/[i:id]' => function($id) use ($db) {
+        $model = new CategoryModel($db);
+        $view = new AdminView();
+        $controller = new AdminController($model, $view);
+        $controller->deleteCategory($id);
+    },
+
 
 ];
 
