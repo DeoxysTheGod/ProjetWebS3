@@ -55,6 +55,13 @@ class TicketModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getAllCategories() {
+        $query = "SELECT * FROM CATEGORY";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 
     public function getComments($ticket_id) {
         $comment_query = "SELECT c.*, a.display_name AS username FROM COMMENT c LEFT JOIN ACCOUNT a ON c.author = a.account_id WHERE c.ticket_id = :ticket_id ORDER BY date DESC";
