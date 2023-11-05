@@ -48,12 +48,6 @@ class TicketView {
         echo "</div>";
     }
 
-    public function renderSearchForm() {
-        echo "<form method='GET' action='/search'>
-            <input type='text' name='q' placeholder='Rechercher...'>
-            <button type='submit'>Rechercher</button>
-          </form>";
-    }
 
     public function render($tickets, $categories) {
         if (isset($_SESSION['account_id'])) {
@@ -64,7 +58,7 @@ class TicketView {
             echo "<a class='connection' href='/authentication'>Connexion</a>";
         }
 
-        // Formulaire pour filtrer les posts par catégories
+        // Formulaire pour filtrer les posts par catégories et rechercher des mots-clés
         echo "<form method='GET' action='/post/view-posts'>";
         echo "<label for='categories'>Filtrer par catégorie:</label>";
         echo "<select id='categories' name='categories[]' multiple>";
@@ -72,13 +66,19 @@ class TicketView {
             echo "<option value='" . htmlspecialchars($category['category_id']) . "'>" . htmlspecialchars($category['title']) . "</option>";
         }
         echo "</select>";
-        echo "<input type='submit' value='Filtrer'>";
+
+        // Champ de recherche
+        echo "<label for='search'>Rechercher:</label>";
+        echo "<input type='text' id='search' name='search' placeholder='Recherche...'>";
+
+        echo "<input type='submit' value='Filtrer/Rechercher'>";
         echo "</form>";
 
         foreach ($tickets as $row) {
             $this->renderPost($row);
         }
     }
+
 
     public function renderSingleTicket($ticket, $comments) {
         echo "<!DOCTYPE html>";
