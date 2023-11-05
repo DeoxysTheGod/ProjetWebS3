@@ -43,7 +43,7 @@ class TicketView {
 
 			if ($imagePath !== '') {
 				?>
-				<img class='image-post' src='/$imagePath' alt='Image associée'/>
+                <img class='image-post' src='/<?= $imagePath ?>' alt='Image associée'/>
 				<?php
 			}
 
@@ -53,7 +53,6 @@ class TicketView {
         	<button class='classic-button' onclick="location.href = '/pages/view-ticket?ticket_id={$ticketId}'">Répondre</button>
         </div>
 		<?php
-
     }
 
 
