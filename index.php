@@ -16,7 +16,6 @@ require_once './modules/rtff/views/TicketView.php';
 require_once './modules/rtff/database/DatabaseConnexion.php';
 
 \rtff\Autoloader::register();
-session_start();
 
 $urlPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $segments = explode('/', trim($urlPath, '/'));

@@ -14,14 +14,19 @@ class TicketModel {
     }
 
     public function getAllTickets() {
-        $query = "SELECT t.*, a.display_name AS username FROM TICKET t LEFT JOIN ACCOUNT a ON t.author = a.account_id";
+        $query = "SELECT t.*, a.display_name AS username, t.image_path AS image_path 
+              FROM TICKET t 
+              LEFT JOIN ACCOUNT a ON t.author = a.account_id";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getTicket($ticket_id) {
-        $query = "SELECT t.*, a.display_name AS username FROM TICKET t LEFT JOIN ACCOUNT a ON t.author = a.account_id WHERE t.ticket_id = :ticket_id";
+        $query = "SELECT t.*, a.display_name AS username, t.image_path AS image_path 
+              FROM TICKET t 
+              LEFT JOIN ACCOUNT a ON t.author = a.account_id 
+              WHERE t.ticket_id = :ticket_id";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':ticket_id', $ticket_id);
         $stmt->execute();
