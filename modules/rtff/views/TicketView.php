@@ -35,18 +35,14 @@ class TicketView {
             <h2><?= $title ?></h2>
             <?php
             if (!empty($categoryNames)) {
-                ?>
-                <p><strong>Catégories :</strong><?= implode(', ', $categoryNames) ?></p>
-                <?php
+                echo "<p><strong>Catégories :</strong><?= implode(', ', $categoryNames) ?></p>";
             }
             ?>
             <p><?= $message ?></p>
             <?php
 
             if ($imagePath !== '') {
-                ?>
-                <img class='image-post' src='/$imagePath' alt='Image associée'/>
-                <?php
+                echo "<img class='image-post' src='/$imagePath' alt='Image associée'/>";
             }
 
             ?>
