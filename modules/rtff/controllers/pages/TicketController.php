@@ -3,9 +3,6 @@
 // modules/rtff/controllers/pages/TicketController.php
 namespace rtff\controllers\pages;
 
-use rtff\models\TicketModel;
-use rtff\views\TicketView;
-
 class TicketController {
     private $model;
     private $view;

@@ -7,7 +7,7 @@ class CreateUserView
     {
         ob_start();
         ?>
-        <form method="post" action="/authentication/CreateUser" enctype="multipart/form-data">
+        <form method="post" action="/authentication/create-user" enctype="multipart/form-data">
             <div>
                 <label for="user_id">Adresse e-mail :</label>
                 <input type="email" name="user_id" id="user_id" required>
