@@ -6,7 +6,7 @@ use rtff\database\DatabaseConnexion;
 
 class User {
 
-        public static function connectUser($account_id, $password) {
+    public static function connectUser($account_id, $password) {
         try {
             $database = DatabaseConnexion::getInstance();
             $db = $database->getConnection();
@@ -20,7 +20,7 @@ class User {
                 return "Identifiant incorrect.";
             }
 
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $row = $stmt->fetch(\PDO::FETCH_ASSOC);  // Notez le préfixe \
 
             $hashed_password = $row['password'];
 
@@ -31,22 +31,21 @@ class User {
             // Authentification réussie
             $_SESSION['account_id'] = $account_id;
 
-            // Ajoutez ici la logique SQL pour modifier la table de la base de données
             $updateQuery = "UPDATE ACCOUNT
             SET last_connection_date = DATE_FORMAT(NOW(), '%Y-%m-%d')
             WHERE account_id = :account_id";
             $updateStmt = $db->prepare($updateQuery);
             $updateStmt->execute();
 
-            // Redirigez vers la page suivante ou affichez un message de succès
             header('Location: page_suivante.php');
-            exit(); // Pour s'assurer que rien d'autre ne s'exécute après
+            exit();
 
-        } catch (Exception $e) {
+        } catch (\Exception $e) {  // Notez le préfixe \
             error_log($e->getMessage());
             return "Une erreur est survenue lors de la connexion.";
         }
     }
+
 
     public static function createUser($account_id, $password, $display_name) {
         try {
