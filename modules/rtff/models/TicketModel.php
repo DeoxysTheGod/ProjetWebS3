@@ -56,7 +56,7 @@ class TicketModel {
      * @return array|false Tableau associatif contenant les informations du ticket ou false si le ticket n'existe pas.
      */
     public function getTicket($ticket_id) {
-        $query = "SELECT t.*, a.display_name AS username, t.image_path AS image_path 
+        $query = "SELECT t.*, a.display_name AS username, t.image_path AS image_path , a.image_path AS author_image_path
               FROM TICKET t 
               LEFT JOIN ACCOUNT a ON t.author = a.account_id 
               WHERE t.ticket_id = :ticket_id";
