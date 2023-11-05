@@ -30,7 +30,7 @@ class MailModel {
         $link = "http://rtff.alwaysdata.net/pages/PasswordResetController/resetPassword?token=" . $bndary;
 
         $to = $account_id;
-        $subject = 'Test mail';
+        $subject = 'Changement de mot de passe';
 
         $headers = 'Content-type: multipart/alternative; boundary="' . $bndary . '"';
 // Message texte brut
