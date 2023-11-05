@@ -14,11 +14,11 @@ class Homepage
                 <h1>Derniers Tickets</h1>
                 <?php foreach ($tickets as $ticket): ?>
                     <div class="ticket">
-                        <h2><?= htmlspecialchars($ticket['title']) ?></h2>
-                        <p><?= htmlspecialchars($ticket['message']) ?></p>
-                        <p><em>Par <?= htmlspecialchars($ticket['username']) ?> le <?= htmlspecialchars($ticket['date']) ?></em></p>
+                        <h2><?= htmlspecialchars($ticket['title'] ?? '') ?></h2>
+                        <p><?= htmlspecialchars($ticket['message'] ?? '') ?></p>
+                        <p><em>Par <?= htmlspecialchars($ticket['username'] ?? '') ?> le <?= htmlspecialchars($ticket['date'] ?? '') ?></em></p>
                         <?php if (!empty($ticket['image_path'])): ?>
-                            <img src="<?= htmlspecialchars($ticket['image_path']) ?>" alt="Image du ticket">
+                            <img src="<?= htmlspecialchars($ticket['image_path'] ?? '') ?>" alt="Image du ticket">
                         <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
