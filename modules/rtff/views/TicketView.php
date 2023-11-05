@@ -11,6 +11,8 @@ class TicketView {
         $imagePath = htmlspecialchars($row['image_path'] ?? '');
         $ticketId = htmlspecialchars($row['ticket_id'] ?? '');
 
+        echo "<a class='deconnection' href='/authentication/logout'>Déconnexion</a>";
+
         echo "<div style='border: 1px solid #ccc; margin-bottom: 10px; padding: 10px;'>";
         echo "<h2>{$title}</h2>";
         echo "<p>{$message}</p>";
