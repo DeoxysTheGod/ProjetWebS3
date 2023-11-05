@@ -1,9 +1,8 @@
 <?php
 
 require_once './modules/rtff/Autoloader.php';
-Autoloader::register();
+rtff\Autoloader::register();
 
-use rtff\Autoloader;
 use rtff\controllers\pages\TicketController;
 use rtff\models\TicketModel;
 use rtff\views\TicketView;
