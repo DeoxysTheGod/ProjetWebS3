@@ -11,6 +11,7 @@ use rtff\models\TicketModel;
 use rtff\views\TicketView;
 use rtff\views\CreatePostView;
 use rtff\database\DatabaseConnexion;
+use rtff\controllers\authentication\LogoutController;
 
 $urlPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $segments = explode('/', trim($urlPath, '/'));
@@ -66,6 +67,11 @@ $routes = [
         $controller = new TicketController($model, $view);
         $controller->viewTicket();
     },
+    'authentication/logout' => function() {
+        $logoutController = new LogoutController();
+        $logoutController->logout();
+    },
+
 ];
 
 // Recherche de la route
