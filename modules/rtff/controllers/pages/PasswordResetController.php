@@ -42,6 +42,7 @@ class PasswordResetController {
                     $stmt = $db->prepare($query);
                     $stmt->bindParam(':token_id', $token);
                     $stmt->execute();
+                    header('Location: /authentication');
                 } else {
                     $message = "Une erreur est survenue lors de la modification du mot de passe.";
                 }
