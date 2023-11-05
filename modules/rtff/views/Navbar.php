@@ -10,7 +10,7 @@ class Navbar
         <nav>
             <a href="/">
                 <div id="logo">
-                    <img src="../../../assets/images/logo-test.png" alt="logo">
+                    <img src="../../../assets/images/logo.png" alt="logo">
                 </div id="logo">
             </a>
 
