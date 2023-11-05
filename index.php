@@ -6,7 +6,7 @@ rtff\Autoloader::register();
 use rtff\controllers\pages\TicketController;
 use rtff\models\TicketModel;
 use rtff\views\TicketView;
-use rtff\views\CreateUserPost;
+use rtff\views\CreatePostView;
 use rtff\database\DatabaseConnexion;
 
 $urlPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -41,7 +41,7 @@ $routes = [
     },
     'post/create' => function() use ($db) {
         $model = new TicketModel($db);
-        $view = new CreateUserPost();
+        $view = new CreatePostView();
         $controller = new TicketController($model, $view);
         $controller->createPost();
     },
