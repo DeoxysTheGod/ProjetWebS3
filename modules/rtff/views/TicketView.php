@@ -2,7 +2,18 @@
 
 namespace rtff\views;
 
+// modules/rtff/views/TicketView.php
+namespace rtff\views;
+
+use rtff\models\TicketModel;
+
 class TicketView {
+    private $model;
+
+    public function __construct(TicketModel $model) {
+        $this->model = $model;
+    }
+
     public function renderPost($row) {
         $title = htmlspecialchars($row['title'] ?? 'Titre inconnu');
         $message = htmlspecialchars($row['message'] ?? 'Message inconnu');
@@ -11,10 +22,17 @@ class TicketView {
         $imagePath = htmlspecialchars($row['image_path'] ?? '');
         $ticketId = htmlspecialchars($row['ticket_id'] ?? '');
 
-
+        // Récupérer les catégories
+        $categories = $this->model->getCategoriesForTicket($ticketId);
+        $categoryNames = array_map(function($category) {
+            return htmlspecialchars($category['title']);
+        }, $categories);
 
         echo "<div style='border: 1px solid #ccc; margin-bottom: 10px; padding: 10px;'>";
         echo "<h2>{$title}</h2>";
+        if (!empty($categoryNames)) {
+            echo "<p><strong>Catégories :</strong> " . implode(', ', $categoryNames) . "</p>";
+        }
         echo "<p>{$message}</p>";
 
         if ($imagePath !== '') {
@@ -23,14 +41,12 @@ class TicketView {
 
         echo "<p><strong>Auteur :</strong> {$username}</p>";
         echo "<p><strong>Date :</strong> {$date}</p>";
-        // Modifier le lien ci-dessous
         echo "<a href='/pages/view-ticket?ticket_id={$ticketId}' style='padding: 10px; background-color: blue; color: white; text-decoration: none; border-radius: 5px;'>Répondre</a>";
         echo "<button style='background-color: transparent; border: none; cursor: pointer; padding: 0; margin: 0; display: inline-block;'>";
         echo "<img src='/like.png' alt='Like' style='width: 25px; height: 25px;'/>";
         echo "</button>";
         echo "</div>";
     }
-
 
     public function render($tickets) {
         if (isset($_SESSION['account_id'])) {

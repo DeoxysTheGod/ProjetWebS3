@@ -26,6 +26,7 @@ class TicketController {
 
         $tickets = $this->model->getAllTickets();
 
+        $this->view = new TicketView($this->model);
         $this->view->render($tickets);
     }
 
