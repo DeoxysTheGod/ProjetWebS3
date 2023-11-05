@@ -149,6 +149,16 @@ class TicketModel {
     }
 
     public function likeComment($accountId, $commentId) {
+        $checkQuery = "SELECT * FROM COMMENT_LIKE WHERE account_id = :account_id AND comment_id = :comment_id";
+        $checkStmt = $this->db->prepare($checkQuery);
+        $checkStmt->bindParam(':account_id', $accountId);
+        $checkStmt->bindParam(':comment_id', $commentId);
+        $checkStmt->execute();
+
+        if ($checkStmt->fetch()) {
+            return;
+        }
+
         $query = "INSERT INTO COMMENT_LIKE (account_id, comment_id) VALUES (:account_id, :comment_id)";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':account_id', $accountId);
