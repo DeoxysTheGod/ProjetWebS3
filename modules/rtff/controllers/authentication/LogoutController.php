@@ -19,7 +19,7 @@ class LogoutController {
             session_destroy();
         }
 
-        header("Location: authentication/logout");
+        header("Location: /authentication/logout");
         exit;
     }
 }
