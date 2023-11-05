@@ -6,16 +6,17 @@
 .navbar {
     display: flex;
     background-color: #19181B;
-    padding: 1rem;
     color: darkgrey;
     font-size: 2rem;
     justify-content: space-between;
     align-items: center;
-    height: 2rem;
+    height: 10vh;
+    padding: 0 1rem 0 1rem;
 }
 
-.navbar-left-element {
-    text-align: left;
+.navbar-left-element > a {
+    display: flex;
+    align-content: center;
 }
 
 .navbar-center-element {
@@ -24,14 +25,21 @@
 }
 
 .navbar-right-element {
-    text-align: right;
+    display: flex;
+    justify-content: right;
+    align-content: center;
+    gap: 0.5rem;
+}
+
+.navbar-right-element > button {
+    /*margin: 0 0.2rem 0 0.2rem;*/
 }
 
 .navbar-element {
     width: 33%;
 }
 
-#logo > img {
+#logo {
     width: 3rem;
 }
 

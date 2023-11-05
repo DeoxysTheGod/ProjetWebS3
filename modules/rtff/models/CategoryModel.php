@@ -19,12 +19,11 @@ class CategoryModel {
     }
     public function getCategoriesSortedByUsage() {
         $query = "
-            SELECT CATEGORY.*, COUNT(TICKET_CATEGORIES.id_ticket) AS usage_count
-            FROM CATEGORY
-            LEFT JOIN TICKET_CATEGORIES ON CATEGORY.category_id = TICKET_CATEGORIES.id_category
-            GROUP BY CATEGORY.category_id
-            ORDER BY usage_count DESC
-        ";
+            SELECT CATEGORY.title, COUNT(TICKET_CATEGORIES.category_id) AS nb_usage
+			FROM CATEGORY
+			LEFT JOIN TICKET_CATEGORIES ON CATEGORY.category_id = TICKET_CATEGORIES.category_id
+			GROUP BY CATEGORY.title
+			ORDER BY nb_usage DESC";
 
         $stmt = $this->db->prepare($query);
         $stmt->execute();
