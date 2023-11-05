@@ -16,6 +16,7 @@ class TicketController {
     }
 
     public function listTickets() {
+        session_start();
         $tickets = $this->model->getAllTickets();
         $this->view->render($tickets);
     }
@@ -23,7 +24,7 @@ class TicketController {
     public function viewTicket() {
         session_start();
         if (!isset($_SESSION['account_id'])) {
-            header('Location:   /authentication');
+            header('Location: /authentication');
             exit;
         }
 
