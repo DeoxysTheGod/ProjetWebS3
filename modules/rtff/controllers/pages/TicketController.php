@@ -23,7 +23,7 @@ class TicketController {
     public function viewTicket() {
         session_start();
         if (!isset($_SESSION['account_id'])) {
-            header('Location: /ConnexionPage');
+            header('Location:   /authentication');
             exit;
         }
 
