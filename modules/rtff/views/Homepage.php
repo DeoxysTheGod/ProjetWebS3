@@ -14,6 +14,7 @@ class Homepage
             </section>
             <section id="content">
                 <h1>Les 5 derniers tickets</h1>
+                <button class='classic-button' onclick="location.href = '/post/create'">Créer un post</button>
                 <div id="ticket-container">
 					<?php for ($i = 0; $i < 5; $i++): ?>
                         <div class="ticket">
