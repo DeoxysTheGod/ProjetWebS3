@@ -45,9 +45,9 @@ class TicketView {
             <p>
                 <strong>Auteur :</strong>
                 <?php if ($profileImage !== ''): ?>
-                    <img class='profile-image' src='/<?= $profileImage ?>' alt='Profile Image' style='width: 30px; height: 30px; border-radius: 50%; margin-right: 5px;' />
+                    <img class='profile-image' src='/<?= $profileImage ?>' alt='Profile Image' />
                 <?php else: ?>
-                    <img class='profile-image' src='<?= $defaultProfileImage ?>' alt='Default Profile Image' style='width: 30px; height: 30px; border-radius: 50%; margin-right: 5px;' />
+                    <img class='profile-image' src='<?= $defaultProfileImage ?>' alt='Default Profile Image' />
                 <?php endif; ?>
                 <?= $username ?>
             </p>
