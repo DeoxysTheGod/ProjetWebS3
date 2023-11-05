@@ -23,7 +23,6 @@ class TicketView {
         $date = htmlspecialchars($row['date'] ?? 'Date inconnue');
         $imagePath = htmlspecialchars($row['image_path'] ?? '');
         $ticketId = htmlspecialchars($row['ticket_id'] ?? '');
-        $authorImagePath = $row['author_image_path'];
 
         // Retrieve categories associated with the ticket
         $categories = $this->model->getCategoriesForTicket($ticketId);
@@ -44,9 +43,7 @@ class TicketView {
                 <img class='image-post' src='/<?= $imagePath ?>'/>
             <?php endif; ?>
 
-            <span><?php if ($authorImagePath !== ''):?>
-                <img src='/<?= $authorImagePath ?>'/>
-                <?php endif;?>
+            <span>
                 <strong>Auteur :</strong> <?= $username ?>
             </span>
             <p><strong>Date :</strong> <?= $date ?></p>
@@ -112,7 +109,6 @@ class TicketView {
         $ticketUsername = htmlspecialchars($ticket['username']);
         $ticketDate = htmlspecialchars($ticket['date']);
         $ticketId = htmlspecialchars($ticket['ticket_id']);
-        $ticketAuthorImagePath = htmlspecialchars($ticket['image_path']);
 
         ob_start();
         ?>
@@ -124,7 +120,7 @@ class TicketView {
 
                 <h1><?= $ticketTitle ?></h1>
                 <p><?= $ticketMessage ?></p>
-                <span><img src="<?= $ticketAuthorImagePath ?>"/><strong>Auteur :</strong> <?= $ticketUsername ?></span>
+                <span><strong>Auteur :</strong> <?= $ticketUsername ?></span>
                 <p><strong>Date :</strong> <?= $ticketDate ?></p>
                 <h2>Commentaires</h2>
                 <form method="post" action="/pages/view-ticket?ticket_id=<?= $ticketId ?>">
