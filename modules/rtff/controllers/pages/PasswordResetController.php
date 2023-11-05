@@ -2,11 +2,13 @@
 namespace rtff\controllers\pages;
 
 use PDO;
+use rtff\database\DatabaseConnexion;
+use rtff\views\PasswordResetView;
 
 class PasswordResetController {
     public function resetPassword($token) {
         $message = '';
-        $database = \rtff\database\DatabaseConnexion::getInstance();
+        $database = DatabaseConnexion::getInstance();
         $db = $database->getConnection();
 
         $query = "SELECT * FROM TOKEN WHERE token_id = :token_id AND date_creation >= NOW() - INTERVAL 30 MINUTE";
@@ -22,9 +24,9 @@ class PasswordResetController {
             $stmt->execute();
         } else {
             $account = $stmt->fetch(PDO::FETCH_ASSOC);
-    // Chargez la vue pour afficher le résultat
-    $view = new \rtff\views\PasswordResetView();
-    $view->render($message, $token);
+        // Chargez la vue pour afficher le résultat
+        $view = new PasswordResetView();
+        $view->render($message, $token);
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $new_password = password_hash($_POST['new_password'], PASSWORD_BCRYPT);
 
@@ -48,7 +50,7 @@ class PasswordResetController {
 
 
         // Chargez la vue pour afficher le résultat
-        $view = new \rtff\views\PasswordResetView();
+        $view = new PasswordResetView();
         $view->render($message, $token);
     }
 }

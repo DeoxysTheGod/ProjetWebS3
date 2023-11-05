@@ -149,7 +149,6 @@ $routes = [
             $controller = new PasswordResetController();
             $controller->resetPassword($token);
 
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
         } else {
             // Vous pouvez gérer le cas où le token n'est pas présent ici
             echo "Paramètre token manquant !";
