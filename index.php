@@ -14,6 +14,7 @@ use rtff\models\AdminModel;
 use rtff\models\CategoryModel;
 use rtff\models\TicketModel;
 use rtff\views\AdminView;
+use rtff\views\Error404View;
 use rtff\views\TicketView;
 use rtff\views\CreatePostView;
 use rtff\database\DatabaseConnexion;
@@ -170,6 +171,6 @@ $routes = [
 if (isset($routes[$routePath])) {
     $routes[$routePath]();
 } else {
-    http_response_code(404);
-    echo "Page non trouvée";
+    $view = new Error404View();
+    $view->showNotFoundPage();
 }
