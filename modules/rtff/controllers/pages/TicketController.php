@@ -16,6 +16,7 @@ class TicketController {
     }
 
     public function listTickets() {
+        session_start();
         $tickets = $this->model->getAllTickets();
         $this->view->render($tickets);
     }
