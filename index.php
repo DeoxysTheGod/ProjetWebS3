@@ -5,6 +5,7 @@ rtff\Autoloader::register();
 
 use rtff\controllers\authentication\ConnectUser;
 use rtff\controllers\authentication\CreateUser;
+use rtff\controllers\pages\Homepage;
 use rtff\controllers\pages\MailController;
 use rtff\controllers\pages\TicketController;
 use rtff\models\TicketModel;
@@ -29,13 +30,9 @@ $db = $database->getConnection();
 
 // Définition des routes
 $routes = [
-    '/' => function() {
-        $database = DatabaseConnexion::getInstance();
-        $db = $database->getConnection();
-        $model = new TicketModel($db);
-        $view = new TicketView();
-        $controller = new TicketController($model, $view);
-        $controller->listTickets();
+    '/' => function() use ($db)  {
+        $controller = new Homepage();
+        $controller->defaultMethod();
     },
     'authentication' => function() {
         $controller = new ConnectUser();
