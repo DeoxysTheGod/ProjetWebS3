@@ -121,12 +121,15 @@ $routes = [
         $controller = new AdminController($model, $view);
         $controller->manageUsers();
     },
-
     'admin/manage-comments' => function() use ($db) {
         $model = new AdminModel($db);
         $view = new AdminView();
         $controller = new AdminController($model, $view);
         $controller->manageComments();
+    },
+    'pages/MailController/sendMail' => function() use ($db) {
+        $controller = new MailController();
+        $controller->sendMail();
     },
 
 ];
