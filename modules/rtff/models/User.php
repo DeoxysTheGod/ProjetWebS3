@@ -35,6 +35,7 @@ class User {
             SET last_connection_date = DATE_FORMAT(NOW(), '%Y-%m-%d')
             WHERE account_id = :account_id";
             $updateStmt = $db->prepare($updateQuery);
+            $updateStmt->bindParam(':account_id', $account_id);
             $updateStmt->execute();
 
             header('Location: page_suivante.php');
