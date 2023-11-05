@@ -21,12 +21,14 @@ class TicketView {
 
         echo "<p><strong>Auteur :</strong> {$username}</p>";
         echo "<p><strong>Date :</strong> {$date}</p>";
-        echo "<a href='viewTicket.php?ticket_id={$ticketId}' style='padding: 10px; background-color: blue; color: white; text-decoration: none; border-radius: 5px;'>Répondre</a>";
+        // Modifier le lien ci-dessous
+        echo "<a href='/pages/view-ticket?ticket_id={$ticketId}' style='padding: 10px; background-color: blue; color: white; text-decoration: none; border-radius: 5px;'>Répondre</a>";
         echo "<button style='background-color: transparent; border: none; cursor: pointer; padding: 0; margin: 0; display: inline-block;'>";
         echo "<img src='like.png' alt='Like' style='width: 25px; height: 25px;'/>";
         echo "</button>";
         echo "</div>";
     }
+
 
     public function render($tickets) {
         foreach ($tickets as $row) {
@@ -47,7 +49,7 @@ class TicketView {
         echo "<p><strong>Auteur :</strong> " . htmlspecialchars($ticket['username']) . "</p>";
         echo "<p><strong>Date :</strong> " . htmlspecialchars($ticket['date']) . "</p>";
         echo "<h2>Commentaires</h2>";
-        echo "<form method='post' action='viewTicket.php?ticket_id=" . htmlspecialchars($ticket['ticket_id']) . "'>";
+        echo "<form method='post' action='/pages/view-ticket?ticket_id=" . htmlspecialchars($ticket['ticket_id']) . "'>";
         echo "<textarea name='comment' required></textarea><br>";
         echo "<input type='submit' value='Poster le Commentaire'>";
         echo "</form>";
