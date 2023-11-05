@@ -6,12 +6,20 @@ use rtff\database\DatabaseConnexion;
 use rtff\views\PasswordResetView;
 
 class PasswordResetController {
+    /**
+     * Réinitialise le mot de passe à l'aide d'un token.
+     *
+     * Cette méthode permet de réinitialiser le mot de passe en vérifiant le token et en utilisant le nouveau mot de passe
+     * fourni dans la requête POST.
+     *
+     * @param string $token Le token de réinitialisation du mot de passe.
+     */
     public function resetPassword($token): void
     {
         $message = '';
         $database = DatabaseConnexion::getInstance();
         $db = $database->getConnection();
-
+// Vérifie la validité du token et sa non-expiration.
         $query = "SELECT * FROM TOKEN WHERE token_id = :token_id AND date_creation >= NOW() - INTERVAL 30 MINUTE";
         $stmt = $db->prepare($query);
         $stmt->bindParam(':token_id', $token);
