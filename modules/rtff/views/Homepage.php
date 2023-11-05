@@ -14,7 +14,6 @@ class Homepage
             </section>
             <section id="content">
                 <h1>Les 5 derniers tickets</h1>
-                <button class='classic-button' onclick="location.href = '/post/create'">Créer un post</button>
                 <div id="ticket-container">
 					<?php for ($i = 0; $i < 5; $i++): ?>
                         <div class="ticket">
@@ -35,12 +34,7 @@ class Homepage
                 <h1 class="side-panel-title">Top catégories</h1>
                 <ul>
 					<?php foreach ($categories as $category): ?>
-                        <li>
-                            <a class="top-category-link" href="/post/view-posts?categories[]=<?= $category['category_id']?>">
-                                <?= $category['title'];?>
-                            </a>
-                            <span> - <?= $category['nb_usage'];?></span>
-                        </li>
+                        <li><a class="top-category-link" href="post/view-posts?categories%5B%5D=<?= $category['category_id']?>&search="><?= htmlspecialchars($category['title']);?></a><span> - <?= $category['nb_usage'];?></span></li>
 					<?php endforeach;?>
                 </ul>
             </section>
