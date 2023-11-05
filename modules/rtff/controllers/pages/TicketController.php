@@ -3,14 +3,22 @@
 // modules/rtff/controllers/pages/TicketController.php
 namespace rtff\controllers\pages;
 
+use rtff\database\DatabaseConnexion;
+use rtff\models\TicketModel;
+use rtff\views\TicketView;
+
 class TicketController {
     private $model;
     private $view;
+    private $db;
 
-    public function __construct($model, $view) {
-        $this->model = $model;
-        $this->view = $view;
+    public function __construct() {
+        $database = DatabaseConnexion::getInstance();
+        $this->db = $database->getConnection();
+        $this->model = new TicketModel($this->db);
+        $this->view = new TicketView();
     }
+
 
     public function listTickets() {
         session_start();

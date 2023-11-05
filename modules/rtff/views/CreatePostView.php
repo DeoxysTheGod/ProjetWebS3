@@ -5,6 +5,11 @@ use rtff\models\CategoryModel;
 use rtff\database\DatabaseConnexion;
 
 class CreatePostView {
+    private $db;
+
+    public function __construct($db) {
+        $this->db = $db;
+    }
     public function show(): void {
         $database = DatabaseConnexion::getInstance();
         $db = $database->getConnection();
@@ -27,14 +32,14 @@ class CreatePostView {
                 <input type="file" name="image" id="image">
             </div>
             <div>
-                <label for="categories">Catégories:</label>
-                <select name="categories[]" id="categories" multiple>
+                <label>Catégories:</label>
+                <div style="column-count: 1;">
                     <?php
                     foreach ($categories as $category) {
-                        echo "<option value='{$category['category_id']}'>{$category['title']}</option>";
+                        echo "<label><input type='checkbox' name='categories[]' value='{$category['category_id']}'> {$category['title']}</label><br>";
                     }
                     ?>
-                </select>
+                </div>
             </div>
             <div>
                 <input type="submit" value="Créer Post">
