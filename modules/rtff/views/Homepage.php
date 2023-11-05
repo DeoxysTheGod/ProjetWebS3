@@ -31,7 +31,7 @@ class Homepage
             </section>
 
             <section>
-                <a class='connection' href='/views/renderPost'>Connexion</a>
+                <a class='connection' href='/post/view-posts'>Connexion</a>
 
             </section>
         </main>
