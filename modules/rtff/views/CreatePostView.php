@@ -7,7 +7,7 @@ class CreatePostView
     {
         ob_start();
         ?>
-        <form method="post" action="/post/create-post" enctype="multipart/form-data">
+        <form method="post" action="/post/create" enctype="multipart/form-data">
             <div>
                 <label for="title">Titre:</label>
                 <input type="text" name="titree" id="title" required>
