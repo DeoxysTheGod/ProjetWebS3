@@ -11,7 +11,7 @@ class AdminView {
         echo "<ul>";
         foreach ($posts as $post) {
             echo "<li>";
-            echo "<strong>" . htmlspecialchars($post['title']) . "</strong> par " . htmlspecialchars($post['username']);
+            echo "<strong>" . htmlspecialchars($post['title'] ?? '') . "</strong>: " . htmlspecialchars($post['message'] ?? '');
             echo " <a href='/admin/delete-post?id=" . htmlspecialchars($post['ticket_id']) . "' style='color: red;'>Supprimer</a>";
             echo "</li>";
         }
