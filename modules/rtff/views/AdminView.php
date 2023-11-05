@@ -17,6 +17,29 @@ class AdminView {
         }
         echo "</ul>";
     }
+    public function showUsers($users) {
+        echo "<h2>Gestion des Utilisateurs</h2>";
+        echo "<ul>";
+        foreach ($users as $user) {
+            echo "<li>";
+            echo "<strong>" . htmlspecialchars($user['display_name']) . "</strong> (ID: " . htmlspecialchars($user['account_id']) . ")";
+            echo " <a href='/admin/delete-user?id=" . htmlspecialchars($user['account_id']) . "' style='color: red;'>Supprimer</a>";
+            echo "</li>";
+        }
+        echo "</ul>";
+    }
+
+    public function showComments($comments) {
+        echo "<h2>Gestion des Commentaires</h2>";
+        echo "<ul>";
+        foreach ($comments as $comment) {
+            echo "<li>";
+            echo "<strong>" . htmlspecialchars($comment['text']) . "</strong> (ID: " . htmlspecialchars($comment['comment_id']) . ")";
+            echo " <a href='/admin/delete-comment?id=" . htmlspecialchars($comment['comment_id']) . "' style='color: red;'>Supprimer</a>";
+            echo "</li>";
+        }
+        echo "</ul>";
+    }
 
 
 

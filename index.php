@@ -9,6 +9,7 @@ use rtff\controllers\pages\AdminController;
 use rtff\controllers\pages\Homepage;
 use rtff\controllers\pages\MailController;
 use rtff\controllers\pages\TicketController;
+use rtff\models\AdminModel;
 use rtff\models\CategoryModel;
 use rtff\models\TicketModel;
 use rtff\views\AdminView;
@@ -101,6 +102,18 @@ $routes = [
         $view = new rtff\views\AdminView();
         $controller = new rtff\controllers\pages\AdminController($model, $view);
         $controller->deletePost();
+    },
+    'admin/delete-user' => function() use ($db) {
+        $model = new AdminModel($db);
+        $view = new AdminView();
+        $controller = new AdminController($model, $view);
+        $controller->deleteUser();
+    },
+    'admin/delete-comment' => function() use ($db) {
+        $model = new AdminModel($db);
+        $view = new AdminView();
+        $controller = new AdminController($model, $view);
+        $controller->deleteComment();
     },
 
 

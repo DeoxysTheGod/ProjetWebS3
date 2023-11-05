@@ -40,5 +40,18 @@ class AdminModel {
         $stmt->bindParam(':ticket_id', $ticketId);
         $stmt->execute();
     }
+    public function deleteUser($userId) {
+        $query = "DELETE FROM ACCOUNT WHERE account_id = :account_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':account_id', $userId);
+        $stmt->execute();
+    }
+
+    public function deleteComment($commentId) {
+        $query = "DELETE FROM COMMENT WHERE comment_id = :comment_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':comment_id', $commentId);
+        $stmt->execute();
+    }
 
 }

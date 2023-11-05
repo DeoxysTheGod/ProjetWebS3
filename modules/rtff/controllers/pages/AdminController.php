@@ -34,6 +34,21 @@ class AdminController {
         exit;
     }
 
+    public function deleteUser() {
+        if (isset($_GET['id'])) {
+            $this->model->deleteUser($_GET['id']);
+        }
+        header('Location: /admin/manage-users');
+        exit;
+    }
+
+    public function deleteComment() {
+        if (isset($_GET['id'])) {
+            $this->model->deleteComment($_GET['id']);
+        }
+        header('Location: /admin/manage-comments');
+        exit;
+    }
     public function managePosts() {
         // Récupère tous les posts pour les afficher dans la vue
         $posts = $this->model->getAllPosts();
