@@ -33,7 +33,7 @@ class TicketView {
         ?>
         <div class='ticket'>
             <h2><?= $title ?></h2>
-            <link rel="stylesheet\" href="/assets/styles/view-posts.css\">
+            <link rel="stylesheet" href="/assets/styles/view-posts.css">
             <div style='border: 1px solid #ccc; margin-bottom: 10px; padding: 10px;'>
 
             <?php if (!empty($categoryNames)): ?>
@@ -43,7 +43,7 @@ class TicketView {
             <p><?= $message ?></p>
 
             <?php if ($imagePath !== ''): ?>
-                <img class='image-post' src='/<?= $imagePath ?>' alt='Image associée'/>
+                <img class='image-post' src='<?= $imagePath ?>' alt='Image associée'/>
             <?php endif; ?>
 
             <p><strong>Auteur :</strong> <?= $username ?></p>
