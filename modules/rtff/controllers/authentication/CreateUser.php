@@ -13,11 +13,11 @@ class CreateUser
             $display_name = $_POST['display_name'];
             $image_path = '';
 
-            // Vérifiez si un fichier image de profil a été téléchargé
+            // Vérifie si un fichier image de profil a été téléchargé
             if (isset($_FILES['profileImage']) && $_FILES['profileImage']['error'] === 0) {
                 $uploadsDir = 'uploads/profiles/';
 
-                // Assurez-vous que le répertoire d'upload existe
+                // Assure que le répertoire d'upload existe
                 if (!file_exists($uploadsDir)) {
                     mkdir($uploadsDir, 0777, true);
                 }
@@ -25,7 +25,7 @@ class CreateUser
                 $fileName = uniqid() . '.' . pathinfo($_FILES['profileImage']['name'], PATHINFO_EXTENSION);
                 $destination = realpath($uploadsDir) . '/' . $fileName;
 
-                // Déplacez le fichier téléchargé vers le répertoire d'images de profil
+                // Déplace le fichier téléchargé vers le répertoire d'images de profil
                 if (move_uploaded_file($_FILES['profileImage']['tmp_name'], $destination)) {
                     $image_path = $destination;
                 } else {
@@ -33,11 +33,11 @@ class CreateUser
                 }
             }
 
-            // Créez l'utilisateur avec l'image de profil en utilisant le modèle User
+            // Crée l'utilisateur avec l'image de profil en utilisant le modèle User
             $notification = User::createUser($user_id, $password, $image_path, $display_name);
 
             if ($notification === "Compte créé avec succès !") {
-                // Redirigez l'utilisateur vers une page de confirmation ou une autre page
+                // Redirige l'utilisateur vers une page de confirmation ou une autre page
                 header('Location: confirmation.php');
                 exit;
             } else {
