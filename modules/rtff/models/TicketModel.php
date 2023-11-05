@@ -119,19 +119,39 @@ class TicketModel {
     }
 
     public function getTicketsByCategoriesAndSearch($categories, $searchTerm) {
+        $params = [];
+        $whereClauses = [];
 
-        $categoryPlaceholders = implode(',', array_fill(0, count($categories), '?'));
-        $searchTermWithWildcards = '%' . $searchTerm . '%';
+        // Filtrer par catégories si sélectionné
+        if (!empty($categories)) {
+            $categoryPlaceholders = implode(',', array_fill(0, count($categories), '?'));
+            $whereClauses[] = "CATEGORY.category_id IN ($categoryPlaceholders)";
+            $params = array_merge($params, $categories);
+        }
 
+        // Filtrer par terme de recherche si fourni
+        if (!empty($searchTerm)) {
+            $searchTermWithWildcards = '%' . $searchTerm . '%';
+            $whereClauses[] = "(TICKET.title LIKE ? OR TICKET.message LIKE ? OR CATEGORY.title LIKE ? OR CATEGORY.description LIKE ?)";
+            $params = array_merge($params, [$searchTermWithWildcards, $searchTermWithWildcards, $searchTermWithWildcards, $searchTermWithWildcards]);
+        }
+
+        // Construire la requête
         $query = "SELECT * FROM TICKET 
               LEFT JOIN CATEGORY_TICKET ON TICKET.ticket_id = CATEGORY_TICKET.ticket_id 
-              LEFT JOIN CATEGORY ON CATEGORY_TICKET.category_id = CATEGORY.category_id 
-              WHERE (TICKET.title LIKE ? OR TICKET.message LIKE ? OR CATEGORY.title LIKE ? OR CATEGORY.description LIKE ?)
-              AND (CATEGORY.category_id IN ($categoryPlaceholders) OR '$categoryPlaceholders' = '')";
+              LEFT JOIN CATEGORY ON CATEGORY_TICKET.category_id = CATEGORY.category_id";
+
+        // Ajouter les clauses WHERE si nécessaire
+        if (!empty($whereClauses)) {
+            $query .= ' WHERE ' . implode(' AND ', $whereClauses);
+        }
+
+        // Exécuter la requête
         $stmt = $this->db->prepare($query);
-        $stmt->execute(array_merge([$searchTermWithWildcards, $searchTermWithWildcards, $searchTermWithWildcards, $searchTermWithWildcards], $categories));
+        $stmt->execute($params);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
 
 
 }
