@@ -52,6 +52,10 @@ $routes = [
 
 // Recherche de la route
 $routePath = $controllerSegment . '/' . $actionSegment;
+
+echo "URL Path: $urlPath<br>";
+echo "Route Path: $routePath<br>";
+
 if (isset($routes[$routePath])) {
     $routes[$routePath]();
 } elseif ($routePath === '') {
