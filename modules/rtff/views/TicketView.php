@@ -38,7 +38,7 @@ class TicketView {
             echo "<a class='LogoutController' href='/authentication/logout'>Déconnexion</a>";
         } else {
             // Si l'utilisateur n'est pas connecté, affichez le bouton de connexion
-            echo "<a class='connection' href='connectUser.php'>Connexion</a>";
+            echo "<a class='connection' href='/authentication'>Connexion</a>";
         }
         foreach ($tickets as $row) {
             $this->renderPost($row);
