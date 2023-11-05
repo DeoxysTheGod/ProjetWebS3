@@ -52,15 +52,14 @@ $routes = [
 ];
 
 // Recherche de la route
-$routePath = $controllerSegment . '/' . $actionSegment;
+$routePath = empty($segments) ? '/' : $controllerSegment . '/' . $actionSegment;
 
-// Recherche de la route
 echo "URL Path: $urlPath<br>";
 echo "Route Path: $routePath<br>";
 
 if (isset($routes[$routePath])) {
     $routes[$routePath]();
-} elseif (empty($routePath)) {
+} elseif (empty($routePath) || $routePath === '/') {
     $routes['/']();
 } else {
     http_response_code(404);
