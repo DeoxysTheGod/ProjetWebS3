@@ -9,7 +9,7 @@ class ConnexionPage
         ?>
         <div>
             <!-- Formulaire de connexion -->
-            <form method="post" action="/authentication/ConnectUser">
+            <form method="post" action="/authentication/connect-user">
 
                 <label for="account_id"> Email<br>
                     <input type="email" name="account_id" required>
@@ -21,10 +21,10 @@ class ConnexionPage
 
                 <input type="submit" value="Se connecter"><br>
             </form><br>
-            <a href="../pages/MailController/showForm">Mot de passe oublié</a><br>
-            <a href="../authentication/CreateUser">Créer un compte</a>
+            <a href="/authentication/reset-password">Mot de passe oublié</a><br>
+            <a href="/authentication/create-user">Créer un compte</a>
         </div>
         <?php
-        (new \rtff\views\Layout('Login', ob_get_clean()))->show();
+        (new Layout('Login', ob_get_clean()))->show();
     }
 }

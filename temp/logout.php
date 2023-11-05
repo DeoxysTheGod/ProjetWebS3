@@ -15,6 +15,6 @@ if(isset($_SESSION['account_id'])) {
     session_destroy();
 }
 
-header("Location: connectUser.php");
+header("Location: connect-user.php");
 exit;
 ?>

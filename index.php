@@ -4,10 +4,10 @@ require_once './modules/rtff/Autoloader.php';
 rtff\Autoloader::register();
 
 use rtff\controllers\authentication\ConnectUser;
+use rtff\controllers\authentication\CreateUser;
+use rtff\controllers\pages\MailController;
 use rtff\controllers\pages\TicketController;
 use rtff\models\TicketModel;
-use rtff\models\User;
-use rtff\views\ConnexionPage;
 use rtff\views\TicketView;
 use rtff\views\CreatePostView;
 use rtff\database\DatabaseConnexion;
@@ -20,7 +20,7 @@ if ($routePath === '') {
 }
 
 $controllerSegment = $segments[0] ?? 'authentication';
-$actionSegment = $segments[1] ?? 'ConnectUser';
+$actionSegment = $segments[1] ?? 'connect-user';
 $methodSegment = $segments[2] ?? 'defaultMethod';
 
 $database = DatabaseConnexion::getInstance();
@@ -39,6 +39,14 @@ $routes = [
     'authentication' => function() {
         $controller = new ConnectUser();
         $controller->defaultMethod();
+    },
+    'authentication/create-user' => function() {
+        $controller = new CreateUser();
+        $controller->defaultMethod();
+    },
+    'authentication/reset-password' => function() {
+        $controller = new MailController();
+        $controller->showForm();
     },
     'post/view-posts' => function() use ($db) {
         $model = new TicketModel($db);
