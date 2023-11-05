@@ -6,7 +6,7 @@ use rtff\database\DatabaseConnexion;
 
 class User {
 
-            public static function connectUser($account_id, $password) {
+        public static function connectUser($account_id, $password) {
         try {
             $database = DatabaseConnexion::getInstance();
             $db = $database->getConnection();
@@ -33,8 +33,8 @@ class User {
 
             // Ajoutez ici la logique SQL pour modifier la table de la base de données
             $updateQuery = "UPDATE ACCOUNT
-SET last_connection_date = DATE_FORMAT(NOW(), '%Y-%m-%d')
-WHERE account_id = :account_id";
+            SET last_connection_date = DATE_FORMAT(NOW(), '%Y-%m-%d')
+            WHERE account_id = :account_id";
             $updateStmt = $db->prepare($updateQuery);
             $updateStmt->execute();
 
