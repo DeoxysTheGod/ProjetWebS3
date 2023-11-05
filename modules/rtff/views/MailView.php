@@ -15,7 +15,7 @@ class MailView {
         </head>
         <body>
         <div style="margin-left:220px; padding:10px;">
-            <form method="post" action="authentication/reset-password/send-mail">
+            <form method="post" action="/reset-password/send-mail">
                 Mail : <input name="account_id" type="email"/>
                 <input name="send" type="submit"/>
             </form>
