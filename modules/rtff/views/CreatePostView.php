@@ -10,7 +10,7 @@ class CreatePostView
         <form method="post" action="/post/create-post" enctype="multipart/form-data">
             <div>
                 <label for="title">Titre:</label>
-                <input type="text" name="title" id="title" required>
+                <input type="text" name="titree" id="title" required>
             </div>
             <div>
                 <label for="message">Message:</label>
