@@ -2,6 +2,8 @@
 
 namespace rtff\controllers\pages;
 
+use JetBrains\PhpStorm\NoReturn;
+
 class AdminController {
     private $model;
     private $view;
@@ -11,13 +13,34 @@ class AdminController {
         $this->view = $view;
     }
 
-    public function manageCategories() {
+    private function isAdmin(): bool {
+        return isset($_SESSION['account_id']) && $_SESSION['admin'] == 1;
+    }
+
+    #[NoReturn] private function redirectToErrorPage(): void
+    {
+        header('Location: /error');
+        exit;
+    }
+
+
+    public function manageCategories(): void
+    {
+        if (!$this->isAdmin()) {
+            $this->redirectToErrorPage();
+        }
+
         // Récupère toutes les catégories pour les afficher dans la vue
         $categories = $this->model->getAllCategories();
         $this->view->showCategories($categories);
     }
 
-    public function createCategory() {
+    public function createCategory(): void
+    {
+        if (!$this->isAdmin()) {
+            $this->redirectToErrorPage();
+        }
+
         // Crée une nouvelle catégorie
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $title = $_POST['title'];
@@ -27,14 +50,24 @@ class AdminController {
             exit;
         }
     }
-    public function deleteCategory() {
+    #[NoReturn] public function deleteCategory(): void
+    {
+        if (!$this->isAdmin()) {
+            $this->redirectToErrorPage();
+        }
+
         $categoryId = $_GET['id'];
         $this->model->deleteCategory($categoryId);
         header('Location: /admin/categories');
         exit;
     }
 
-    public function deleteUser() {
+    #[NoReturn] public function deleteUser(): void
+    {
+        if (!$this->isAdmin()) {
+            $this->redirectToErrorPage();
+        }
+
         if (isset($_GET['id'])) {
             $this->model->deleteUser($_GET['id']);
         }
@@ -42,20 +75,35 @@ class AdminController {
         exit;
     }
 
-    public function deleteComment() {
+    #[NoReturn] public function deleteComment(): void
+    {
+        if (!$this->isAdmin()) {
+            $this->redirectToErrorPage();
+        }
+
         if (isset($_GET['id'])) {
             $this->model->deleteComment($_GET['id']);
         }
         header('Location: /admin/manage-comments');
         exit;
     }
-    public function managePosts() {
+    public function managePosts(): void
+    {
+        if (!$this->isAdmin()) {
+            $this->redirectToErrorPage();
+        }
+
         // Récupère tous les posts pour les afficher dans la vue
         $posts = $this->model->getAllPosts();
         $this->view->showPosts($posts);
     }
 
-    public function deletePost() {
+    #[NoReturn] public function deletePost(): void
+    {
+        if (!$this->isAdmin()) {
+            $this->redirectToErrorPage();
+        }
+
         // Supprime un post
         if (isset($_GET['id'])) {
             $this->model->deletePost($_GET['id']);
@@ -64,16 +112,23 @@ class AdminController {
         exit;
     }
 
-    public function manageUsers() {
+    public function manageUsers(): void
+    {
+        if (!$this->isAdmin()) {
+            $this->redirectToErrorPage();
+        }
+
         $users = $this->model->getAllUsers();
         $this->view->showUsers($users);
     }
 
     public function manageComments() {
+        if (!$this->isAdmin()) {
+            $this->redirectToErrorPage();
+        }
+
         $comments = $this->model->getAllComments();
         $this->view->showComments($comments);
     }
-
-
 
 }

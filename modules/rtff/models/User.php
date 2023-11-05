@@ -2,6 +2,7 @@
 
 namespace rtff\models;
 
+use PDO;
 use rtff\database\DatabaseConnexion;
 
 class User {
@@ -11,7 +12,8 @@ class User {
             $database = DatabaseConnexion::getInstance();
             $db = $database->getConnection();
 
-            $query = "SELECT password FROM ACCOUNT WHERE account_id = :account_id";
+            // Récupère le mot de passe et le statut d'administrateur
+            $query = "SELECT password, admin FROM ACCOUNT WHERE account_id = :account_id";
             $stmt = $db->prepare($query);
             $stmt->bindParam(':account_id', $account_id);
             $stmt->execute();
@@ -20,7 +22,7 @@ class User {
                 return "Identifiant incorrect.";
             }
 
-            $row = $stmt->fetch(\PDO::FETCH_ASSOC);  // Notez le préfixe \
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
             $hashed_password = $row['password'];
 
@@ -30,10 +32,11 @@ class User {
 
             // Authentification réussie
             $_SESSION['account_id'] = $account_id;
+            $_SESSION['admin'] = $row['admin'];  // Stocke le statut d'administrateur
 
             $updateQuery = "UPDATE ACCOUNT
-            SET last_connection_date = DATE_FORMAT(NOW(), '%Y-%m-%d')
-            WHERE account_id = :account_id";
+                        SET last_connection_date = DATE_FORMAT(NOW(), '%Y-%m-%d')
+                        WHERE account_id = :account_id";
             $updateStmt = $db->prepare($updateQuery);
             $updateStmt->bindParam(':account_id', $account_id);
             $updateStmt->execute();
@@ -41,7 +44,7 @@ class User {
             header('Location: /post/view-posts');
             exit();
 
-        } catch (\Exception $e) {  // Notez le préfixe \
+        } catch (\Exception $e) {
             error_log($e->getMessage());
             return "Une erreur est survenue lors de la connexion.";
         }

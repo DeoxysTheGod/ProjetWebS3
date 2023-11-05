@@ -14,7 +14,8 @@ class TicketView {
         $this->model = $model;
     }
 
-    public function renderPost($row) {
+    public function renderPost($row): void
+    {
         $title = htmlspecialchars($row['title'] ?? 'Titre inconnu');
         $message = htmlspecialchars($row['message'] ?? 'Message inconnu');
         $username = htmlspecialchars($row['username'] ?? 'Auteur inconnu');
