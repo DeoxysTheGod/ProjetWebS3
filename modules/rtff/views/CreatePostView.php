@@ -25,6 +25,6 @@ class CreatePostView
             </div>
         </form>
         <?php
-        (new \rtff\views\Layout('Création de post', ob_get_clean()))->show();
+        (new Layout('Création de post', ob_get_clean()))->show();
     }
 }

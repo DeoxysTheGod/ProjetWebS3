@@ -1,6 +1,7 @@
 <?php
 namespace rtff\controllers\authentication;
 use rtff\models\User;
+use rtff\views\CreateUserView;
 
 session_start();
 
@@ -13,11 +14,11 @@ class CreateUser
             $password = $_POST['password'];
             $display_name = $_POST['display_name'];
 
-            $notification = User::createUser($user_id, $password, $display_name); // Supposition d'une méthode statique
+            $notification = User::createUser($user_id, $password, $display_name);
             echo $notification;
         }
         // Vue affichée indépendamment de la méthode de la requête
-        $view = new \rtff\views\CreatePostView();
+        $view = new CreateUserView();
         $view->show();
     }
 }
