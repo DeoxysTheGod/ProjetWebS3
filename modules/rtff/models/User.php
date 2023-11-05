@@ -32,7 +32,10 @@ class User {
             $_SESSION['account_id'] = $account_id;
 
             // Ajoutez ici la logique SQL pour modifier la table de la base de données
-            $updateQuery = "UPDATE ACCOUNT SET last_connection_date = date('now')   WHERE account_id = :account_id";
+            $updateQuery = "UPDATE ACCOUNT
+SET last_connection_date = strftime('%Y-%m-%d', 'now')
+WHERE account_id = :account_id;
+";
             $updateStmt = $db->prepare($updateQuery);
             $updateStmt->execute();
 
