@@ -16,4 +16,18 @@ class ProfileModel {
 
         return $stmt->execute();
     }
+
+    public function getCurrentProfileImage($userId) {
+        $database = DatabaseConnexion::getInstance();
+        $db = $database->getConnection();
+
+        $selectQuery = "SELECT image_path FROM ACCOUNT WHERE user_id = :userId";
+        $stmt = $db->prepare($selectQuery);
+        $stmt->bindParam(':userId', $userId);
+        $stmt->execute();
+
+        $result = $stmt->fetch();
+
+        return ($result) ? $result['image_path'] : null;
+    }
 }

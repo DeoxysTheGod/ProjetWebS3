@@ -23,7 +23,6 @@ class CreateUserView
             <div>
                 Sélectionnez une image de profil :
                 <input type="file" name="profileImage" accept="image/*" required>
-                <input type="submit" value="Télécharger l\'image" name="submit">
             </div>
             <div>
                 <input type="submit" value="Créer un compte">
