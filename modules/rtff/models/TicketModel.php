@@ -62,16 +62,16 @@ class TicketModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+
     public function getTicketsByCategories($categories) {
         if (empty($categories)) {
             return [];
         }
 
-        $placeholders = rtrim(str_repeat('?,', count($categories)), ',');
+        $placeholders = str_repeat('?,', count($categories) - 1) . '?';
         $query = "SELECT * FROM TICKET 
-          JOIN TicketCategory ON TICKET.ticket_id = TicketCategory.ticket_id
-          WHERE TicketCategory.category_id IN ($placeholders)";
-
+              JOIN TICKET_CATEGORIES ON TICKET.ticket_id = TICKET_CATEGORIES.ticket_id
+              WHERE TICKET_CATEGORIES.category_id IN ($placeholders)";
         $stmt = $this->db->prepare($query);
         $stmt->execute($categories);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
