@@ -24,11 +24,13 @@ class TicketController {
     public function listTickets() {
         session_start();
 
-        $tickets = $this->model->getAllTickets();
+        $categories = $this->model->getAllCategories();
+        $selectedCategories = $_GET['categories'] ?? [];
+        $tickets = $this->model->getTicketsByCategories($selectedCategories);
 
-        $this->view = new TicketView($this->model);
-        $this->view->render($tickets);
+        $this->view->render($tickets, $categories);
     }
+
 
     public function listLastFiveTickets() {
         session_start();

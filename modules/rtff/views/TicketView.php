@@ -48,18 +48,31 @@ class TicketView {
         echo "</div>";
     }
 
-    public function render($tickets) {
+    public function render($tickets, $categories) {
         if (isset($_SESSION['account_id'])) {
             // Si l'utilisateur est connecté, affichez le bouton de déconnexion
-            echo "<a  href='/authentication/logout'>Déconnexion</a>";
+            echo "<a href='/authentication/logout'>Déconnexion</a>";
         } else {
             // Si l'utilisateur n'est pas connecté, affichez le bouton de connexion
             echo "<a class='connection' href='/authentication'>Connexion</a>";
         }
+
+        // Formulaire pour filtrer les posts par catégories
+        echo "<form method='GET' action='/post/view-posts'>";
+        echo "<label for='categories'>Filtrer par catégorie:</label>";
+        echo "<select id='categories' name='categories[]' multiple>";
+        foreach ($categories as $category) {
+            echo "<option value='" . htmlspecialchars($category['category_id']) . "'>" . htmlspecialchars($category['title']) . "</option>";
+        }
+        echo "</select>";
+        echo "<input type='submit' value='Filtrer'>";
+        echo "</form>";
+
         foreach ($tickets as $row) {
             $this->renderPost($row);
         }
     }
+
     public function renderSingleTicket($ticket, $comments) {
         echo "<!DOCTYPE html>";
         echo "<html lang='fr'>";
