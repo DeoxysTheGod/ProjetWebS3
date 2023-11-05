@@ -31,7 +31,7 @@ class Homepage
             </section>
 
             <section>
-                <a>Fil de l'eau</a>
+                <a class='connection' href='/authentication'>Connexion</a>
 
             </section>
         </main>
