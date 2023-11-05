@@ -31,7 +31,7 @@ class TicketView {
         }, $categories);
         ?>
         <div class='ticket'>
-            <h2><?= $title ?></h2>
+            <h2 class="ticket-title"><?= $title ?></h2>
 
             <?php if (!empty($categoryNames)): ?>
                 <p><strong>Catégories :</strong> <?= implode(', ', $categoryNames) ?></p>
