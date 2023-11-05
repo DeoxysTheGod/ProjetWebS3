@@ -5,10 +5,13 @@ rtff\Autoloader::register();
 
 use rtff\controllers\authentication\ConnectUser;
 use rtff\controllers\authentication\CreateUser;
+use rtff\controllers\pages\AdminController;
 use rtff\controllers\pages\Homepage;
 use rtff\controllers\pages\MailController;
 use rtff\controllers\pages\TicketController;
+use rtff\models\CategoryModel;
 use rtff\models\TicketModel;
+use rtff\views\AdminView;
 use rtff\views\TicketView;
 use rtff\views\CreatePostView;
 use rtff\database\DatabaseConnexion;
@@ -69,6 +72,25 @@ $routes = [
         $logoutController = new LogoutController();
         $logoutController->logout();
     },
+    'admin/categories' => function() use ($db) {
+        $model = new CategoryModel($db);
+        $view = new AdminView();
+        $controller = new AdminController($model, $view);
+        $controller->manageCategories();
+    },
+    'admin/create-category' => function() use ($db) {
+        $model = new CategoryModel($db);
+        $view = new AdminView();
+        $controller = new AdminController($model, $view);
+        $controller->createCategory();
+    },
+    'admin/delete-category' => function() use ($db) {
+        $model = new \rtff\models\CategoryModel($db);
+        $view = new \rtff\views\AdminView();
+        $controller = new \rtff\controllers\pages\AdminController($model, $view);
+        $controller->deleteCategory();
+    },
+
 
 ];
 

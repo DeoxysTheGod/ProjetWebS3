@@ -3,8 +3,6 @@ namespace rtff\controllers\authentication;
 use rtff\models\User;
 use rtff\views\CreateUserView;
 
-session_start();
-
 class CreateUser
 {
     public function defaultMethod()
@@ -13,10 +11,35 @@ class CreateUser
             $user_id = $_POST['user_id'];
             $password = $_POST['password'];
             $display_name = $_POST['display_name'];
+            $image_path = $_POST['image_path'];
 
-            $notification = User::createUser($user_id, $password, $display_name);
-            echo $notification;
+            // Vérifiez si un fichier image de profil a été téléchargé
+            if (isset($_FILES['profileImage']) && $_FILES['profileImage']['error'] === 0) {
+                $uploadsDir = 'uploads/profiles/';
+                $fileName = uniqid() . '.' . pathinfo($_FILES['profileImage']['name'], PATHINFO_EXTENSION);
+                $destination = $uploadsDir . $fileName;
+
+                // Déplacez le fichier téléchargé vers le répertoire d'images de profil
+                if (move_uploaded_file($_FILES['profileImage']['tmp_name'], $destination)) {
+                    $image_path = $destination;
+                } else {
+                    echo "Une erreur est survenue lors du téléchargement de l'image de profil.";
+                    return;
+                }
+            }
+
+            // Créez l'utilisateur avec l'image de profil en utilisant le modèle User
+            $notification = User::createUser($user_id, $password, $image_path, $display_name);
+
+            if ($notification === "Compte créé avec succès !") {
+                // Redirigez l'utilisateur vers une page de confirmation ou une autre page
+                header('Location: confirmation.php');
+                exit;
+            } else {
+                echo $notification;
+            }
         }
+
         // Vue affichée indépendamment de la méthode de la requête
         $view = new CreateUserView();
         $view->show();
