@@ -131,6 +131,16 @@ $routes = [
         $controller = new MailController();
         $controller->sendMail();
     },
+    'pages/like-comment' => function() use ($db) {
+        $commentId = $_GET['comment_id'];
+        $accountId = $_SESSION['account_id'];
+        $model = new TicketModel($db);
+        $model->likeComment($accountId, $commentId);
+
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    },
+
 
 ];
 
