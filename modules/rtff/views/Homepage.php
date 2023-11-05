@@ -16,17 +16,17 @@ class Homepage
                 <h1>Les 5 derniers tickets</h1>
                 <button class='classic-button' onclick="location.href = '/post/create'">Créer un post</button>
                 <div id="ticket-container">
-					<?php for ($i = 0; $i < 5; $i++): ?>
+					<?php foreach($tickets as $ticket): ?>
                         <div class="ticket">
-                            <h2 class="ticket-title"><?= htmlspecialchars($tickets[$i]['title'] ?? '') ?></h2>
-                            <p><?= htmlspecialchars($tickets[$i]['message'] ?? '') ?></p>
-                            <p><em>Par <?= htmlspecialchars($tickets['username'] ?? '') ?> le <?= htmlspecialchars($tickets[$i]['date'] ?? '') ?></em></p>
-							<?php if (!empty($tickets[$i]['image_path'])): ?>
-                                <img src="<?= htmlspecialchars($tickets[$i]['image_path'] ?? '') ?>" alt="Image du ticket">
+                            <h2 class="ticket-title"><?= htmlspecialchars($ticket['title'] ?? '') ?></h2>
+                            <p><?= htmlspecialchars($ticket['message'] ?? '') ?></p>
+                            <p><em>Par <?= htmlspecialchars($ticket['display_name']); ?> le <?= htmlspecialchars($ticket['date'] ?? '') ?></em></p>
+							<?php if (!empty($ticket['image_path'])): ?>
+                                <img src="<?= htmlspecialchars($ticket['image_path']) ?>" alt="Image du ticket">
 							<?php endif; ?>
-                            <button class="classic-button" onclick="location.href = '/pages/view-ticket?ticket_id=<?= htmlspecialchars($tickets[$i]['ticket_id'] ?? '') ?>'">Répondre</button>
+                            <button class="classic-button" onclick="location.href = '/pages/view-ticket?ticket_id=<?= htmlspecialchars($ticket['ticket_id'] ?? '') ?>'">Répondre</button>
                         </div>
-					<?php endfor; ?>
+					<?php endforeach; ?>
                 </div>
                 <button class='classic-button' onclick="location.href = '/post/view-posts'">Voir tout</button>
             </section>

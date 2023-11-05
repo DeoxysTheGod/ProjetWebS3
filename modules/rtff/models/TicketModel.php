@@ -14,7 +14,7 @@ class TicketModel {
     }
 
     public function getLastFiveTickets() {
-        $query = "SELECT t.*, a.display_name AS username, t.image_path AS image_path 
+        $query = "SELECT t.*, a.display_name, t.image_path
               FROM TICKET t 
               LEFT JOIN ACCOUNT a ON t.author = a.account_id
               ORDER BY t.date DESC
