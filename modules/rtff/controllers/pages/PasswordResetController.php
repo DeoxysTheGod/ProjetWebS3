@@ -46,6 +46,7 @@ class PasswordResetController {
             }
         }
 
+
         // Chargez la vue pour afficher le résultat
         $view = new PasswordResetView();
         $view->render($message, $token);
