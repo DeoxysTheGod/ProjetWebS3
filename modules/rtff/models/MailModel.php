@@ -3,64 +3,83 @@
 namespace rtff\models;
 
 use rtff\database\DatabaseConnexion;
+use PDOException;
 
+/**
+ * Model class responsible for sending password reset emails.
+ */
 class MailModel {
 
-    public function sendPasswordReset($account_id)
-    {
-        $database = DatabaseConnexion::getInstance();
-        $db = $database->getConnection();
+    /**
+     * Sends a password reset email to the user with the provided account ID.
+     *
+     * @param string $account_id The account ID (email) of the user.
+     * @return bool Indicates whether the email was sent successfully.
+     */
+    public function sendPasswordReset(string $account_id): bool {
+        try {
+            $database = DatabaseConnexion::getInstance();
+            $db = $database->getConnection();
 
-        $query = "SELECT account_id FROM ACCOUNT WHERE account_id = :account_id";
-        $stmt = $db->prepare($query);
-        $stmt->bindParam(':account_id', $account_id);
+            // Check if the user exists
+            $query = "SELECT account_id FROM ACCOUNT WHERE account_id = :account_id";
+            $stmt = $db->prepare($query);
+            $stmt->bindParam(':account_id', $account_id);
 
-        if (!$stmt->execute() || $stmt->rowCount() <= 0) {
-            echo " Aucun utilisateur trouvé avec cet email ";
-            return false;
-        }
+            if (!$stmt->execute() || $stmt->rowCount() <= 0) {
+                echo "No user found with this email.";
+                return false;
+            }
 
-        $bndary = md5(uniqid(mt_rand()));
-        $query = "INSERT INTO TOKEN (token_id, account_id, date_creation) VALUES (:bndary, :account_id , NOW())";
-        $stmt = $db->prepare($query);
-        $stmt->bindParam(':account_id', $account_id);
-        $stmt->bindParam(':bndary', $bndary);
-        $stmt->execute();
+            // Generate a unique boundary string
+            $bndary = md5(uniqid(mt_rand()));
 
-        $link = "http://rtff.alwaysdata.net/authentication/reset-password-process?token=" . $bndary;
+            // Insert the token into the database
+            $query = "INSERT INTO TOKEN (token_id, account_id, date_creation) VALUES (:bndary, :account_id , NOW())";
+            $stmt = $db->prepare($query);
+            $stmt->bindParam(':account_id', $account_id);
+            $stmt->bindParam(':bndary', $bndary);
+            $stmt->execute();
 
-        $to = $account_id;
-        $subject = 'Changement mdp';
+            // Prepare the password reset link
+            $link = "http://rtff.alwaysdata.net/authentication/reset-password-process?token=" . $bndary;
 
-        $headers = 'Content-type: multipart/alternative; boundary="' . $bndary . '"';
-// Message texte brut
-        $message_text = 'Cliquez sur le bouton ci-dessous pour changer de mots de passe : rtff.alwaysdata.net/modifyPasswordUser.php?token=bndary';
-
-// Message HTML
-        $message_html = '
-<html>
+            // Prepare email headers and body
+            $to = $account_id;
+            $subject = 'Password Change';
+            $headers = 'Content-type: multipart/alternative; boundary="' . $bndary . '"';
+            $message_text = 'Click the button below to change your password: rtff.alwaysdata.net/modifyPasswordUser.php?token=bndary';
+            $message_html = '
+<html lang="en">
 <head>
-    <title>Changement de mot de passe</title>
+    <title>Password Change</title>
 </head>
 <body style="background-color: #2c2a2e; color: white; text-align: center; padding: 20px;">
-<p>Cliquez sur le bouton ci-dessous pour changer de mots de passe :</p>
-<a href=' . $link . ' style="display: inline-block; padding: 10px 20px; background-color: #b0baff; color: #000; text-decoration: none; border-radius: 5px;">Cliquez ici</a>
+<p>Click the button below to change your password:</p>
+<a href=' . $link . ' style="display: inline-block; padding: 10px 20px; background-color: #b0baff; color: #000; text-decoration: none; border-radius: 5px;">Click here</a>
 </body>
 </html>
 ';
 
-        $message = '--' . $bndary . "\n";
-        $message .= $message_text . "\n\n";
-        $message .= 'Content-Type: text/plain; charset=utf-8' . "\n\n";
-        $message .= '--' . $bndary . "\n";
-        $message .= 'Content-Type: text/html; charset=utf-8' . "\n\n";
-        $message .= $message_html . "\n\n";
+            // Construct the email body
+            $message = '--' . $bndary . "\n";
+            $message .= $message_text . "\n\n";
+            $message .= 'Content-Type: text/plain; charset=utf-8' . "\n\n";
+            $message .= '--' . $bndary . "\n";
+            $message .= 'Content-Type: text/html; charset=utf-8' . "\n\n";
+            $message .= $message_html . "\n\n";
 
-        // Envoyer l'e-mail
-        if (mail($to, $subject, $message, $headers))
-            echo "Mail envoyé avec succès.";
-        else
-            echo "Un problème est survenu.";
-        exit;
+            // Send the email
+            if (mail($to, $subject, $message, $headers)) {
+                echo "Email sent successfully.";
+                return true;
+            } else {
+                echo "An error occurred.";
+                return false;
+            }
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+            return false;
+        }
     }
 }
