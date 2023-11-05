@@ -11,6 +11,8 @@ use rtff\database\DatabaseConnexion;
 
 $urlPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $segments = explode('/', trim($urlPath, '/'));
+$routePath = implode('/', $segments);
+
 $controllerSegment = $segments[0] ?? 'authentication';
 $actionSegment = $segments[1] ?? 'ConnectUser';
 $methodSegment = $segments[2] ?? 'defaultMethod';
@@ -58,7 +60,7 @@ echo "Route Path: $routePath<br>";
 
 if (isset($routes[$routePath])) {
     $routes[$routePath]();
-} elseif ($routePath === '') {
+} elseif (empty($routePath)) {
     $routes['/']();
 } else {
     http_response_code(404);
