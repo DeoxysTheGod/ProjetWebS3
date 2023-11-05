@@ -16,7 +16,7 @@ class TicketView {
         echo "<p>{$message}</p>";
 
         if ($imagePath !== '') {
-            echo "<img src='{$imagePath}' alt='Image associée' style='width: 200px; height: auto;'/>";
+            echo "<img src='/$imagePath' alt='Image associée' style='width: 200px; height: auto;'/>";
         }
 
         echo "<p><strong>Auteur :</strong> {$username}</p>";
@@ -24,7 +24,7 @@ class TicketView {
         // Modifier le lien ci-dessous
         echo "<a href='/pages/view-ticket?ticket_id={$ticketId}' style='padding: 10px; background-color: blue; color: white; text-decoration: none; border-radius: 5px;'>Répondre</a>";
         echo "<button style='background-color: transparent; border: none; cursor: pointer; padding: 0; margin: 0; display: inline-block;'>";
-        echo "<img src='like.png' alt='Like' style='width: 25px; height: 25px;'/>";
+        echo "<img src='/like.png' alt='Like' style='width: 25px; height: 25px;'/>";
         echo "</button>";
         echo "</div>";
     }
