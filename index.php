@@ -3,9 +3,17 @@ namespace rtff\controllers\MailController;
 
 // index.php
 use rtff\controllers\ErrorController;
+use rtff\controllers\pages\TicketController;
+use rtff\models\TicketModel;
+use rtff\views\TicketView;
+use rtff\database\DatabaseConnexion;
 
 require_once './modules/rtff/Autoloader.php';
 require_once './modules/rtff/controllers/pages/ErrorController.php';
+require_once './modules/rtff/controllers/pages/TicketController.php';
+require_once './modules/rtff/models/TicketModel.php';
+require_once './modules/rtff/views/TicketView.php';
+require_once './modules/rtff/database/DatabaseConnexion.php';
 
 \rtff\Autoloader::register();
 
@@ -13,8 +21,18 @@ $urlPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $segments = explode('/', trim($urlPath, '/'));
 $controllerSegment = isset($segments[0]) && $segments[0] != '' ? $segments[0] : 'authentication';
 $actionSegment = isset($segments[1]) && $segments[1] != '' ? $segments[1] : 'ConnectUser';
-
 $methodSegment = $segments[2] ?? 'defaultMethod';
+
+// Condition spécifique pour la route /post/view-posts
+if ($controllerSegment === 'post' && $actionSegment === 'view-posts') {
+    $database = DatabaseConnexion::getInstance();
+    $db = $database->getConnection();
+    $model = new TicketModel($db);
+    $view = new TicketView();
+    $controller = new TicketController($model, $view);
+    $controller->listTickets();
+    exit;
+}
 
 $controllerFile = "./modules/rtff/controllers/$controllerSegment/$actionSegment.php";
 $controllerClass = "\\rtff\\controllers\\$controllerSegment\\$actionSegment";
@@ -38,6 +56,7 @@ if (file_exists($controllerFile)) {
     echo "Fichier du contrôleur $controllerFile non trouvé.";
     //resourceNotFound();
 }
+
 // Route pour gérer les erreurs 404
 if ($controllerSegment === 'error' && $actionSegment === '404') {
     $controller = new ErrorController();
