@@ -1,15 +1,30 @@
 <?php
 namespace rtff\views;
 
+/**
+ * Class PasswordResetView
+ * Responsible for rendering the password reset view.
+ */
 class PasswordResetView
 {
-    public static function render($message, $token)
+    /**
+     * Render the password reset view with a message and token.
+     *
+     * @param string $message The message to display.
+     * @param string $token The token used for password reset.
+     */
+    public static function render(string $message, string $token): void
     {
-        // Code HTML pour afficher le message et le formulaire
-        if ($message != '') {
-            echo "<p>$message</p>";
+        // Display the message if it is not empty
+        if ($message !== '') {
+            ?>
+            <p><?= $message ?></p>
+            <?php
+            // If the password was successfully changed, display the login link
             if ($message === "Mot de passe modifié avec succès !") {
-                echo '<p><html>
+                ?>
+                <!DOCTYPE html>
+                <html lang="fr">
                 <head>
                     <title>Connectez-vous</title>
                 </head>
@@ -17,16 +32,21 @@ class PasswordResetView
                 <p>Cliquez sur le bouton ci-dessous pour vous connecter :</p>
                 <a href="https://rtff.alwaysdata.net/">Cliquez ici</a>
                 </body>
-                </html></p>';
+                </html>
+                <?php
             }
         }
 
-        if (isset($token) && $message == '') {
-            echo '<form method="post" action="/authentication/reset-password-process?token=' . $token . '">
-                Nouveau Mot de Passe: <input type="password" name="new_password" required><br>
+        // If the token is set and the message is empty, display the password reset form
+        if (isset($token) && $message === '') {
+            ?>
+            <form method="post" action="/authentication/reset-password-process?token=<?= $token ?>">
+                <label for="new_password">Nouveau Mot de Passe:</label>
+                <input type="password" id="new_password" name="new_password" required><br>
                 <input type="submit" value="Modifier Mot de Passe">
-            </form>';
+            </form>
+            <?php
         }
     }
 }
-?>
+
