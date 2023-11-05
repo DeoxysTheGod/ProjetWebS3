@@ -5,6 +5,7 @@ namespace rtff\controllers\pages;
 
 use rtff\database\DatabaseConnexion;
 use rtff\models\TicketModel;
+use rtff\views\CreatePostView;
 use rtff\views\TicketView;
 
 class TicketController {
@@ -37,6 +38,8 @@ class TicketController {
 
     public function createPost() {
         session_start();
+        $this->view = new CreatePostView($this->db);
+
         if (!isset($_SESSION['account_id'])) {
             header('Location: /authentication');
             exit;
@@ -73,6 +76,7 @@ class TicketController {
 
     public function viewTicket() {
         session_start();
+
         if (!isset($_SESSION['account_id'])) {
             header('Location: /authentication');
             exit;
