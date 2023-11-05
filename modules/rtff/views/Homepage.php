@@ -35,8 +35,9 @@ class Homepage
                 <h1 class="side-panel-title">Top catégories</h1>
                 <ul>
 					<?php foreach ($categories as $category): ?>
-                        <li><a class="top-category-link" href="/post/view-posts?categories%5B%5D=<?= $category['category_id']?>&search=">
-                                <?= htmlspecialchars($category['title']);?>
+                        <li>
+                            <a class="top-category-link" href="/post/view-posts?categories%5B%5D=<?= $category['category_id'];?>&search=">
+                                <?= $category['title'];?>
                             </a>
                             <span> - <?= $category['nb_usage'];?></span>
                         </li>
