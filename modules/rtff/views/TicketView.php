@@ -20,6 +20,7 @@ class TicketView {
         $username = htmlspecialchars($row['username'] ?? 'Auteur inconnu');
         $date = htmlspecialchars($row['date'] ?? 'Date inconnue');
         $imagePath = htmlspecialchars($row['image_path'] ?? '');
+        $profileImage = htmlspecialchars($row['profile_image'] ?? '');
         $ticketId = htmlspecialchars($row['ticket_id'] ?? '');
 
         // Récupérer les catégories
@@ -27,6 +28,10 @@ class TicketView {
         $categoryNames = array_map(function($category) {
             return htmlspecialchars($category['title']);
         }, $categories);
+
+        // Image de profil par défaut
+        $defaultProfileImage = "/upload/defaultprofile.jpeg";
+
         echo "<link rel=\"stylesheet\" href=\"/assets/styles/view-posts.css\">";
         echo "<div style='border: 1px solid #ccc; margin-bottom: 10px; padding: 10px;'>";
         echo "<h2>{$title}</h2>";
@@ -34,6 +39,13 @@ class TicketView {
             echo "<p><strong>Catégories :</strong> " . implode(', ', $categoryNames) . "</p>";
         }
         echo "<p>{$message}</p>";
+
+        // Afficher l'image de profil
+        if ($profileImage !== '') {
+            echo "<img class='profile-image' src='/$profileImage' alt='Profile Image'/>";
+        } else {
+            echo "<img class='profile-image' src='$defaultProfileImage' alt='Default Profile Image'/>";
+        }
 
         if ($imagePath !== '') {
             echo "<img class='image-post' src='/$imagePath' alt='Image associée'/>";
