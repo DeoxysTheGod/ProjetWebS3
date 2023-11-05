@@ -42,7 +42,7 @@ class CreateUserView
                 <!-- Profile image upload field -->
                 <div>
                     <label for="profileImage">Profile Image</label><br>
-                    <input type="file" name="profileImage" accept="image/*" required>
+                    <input type="file" name="profileImage" accept="image/*">
                 </div>
 
                 <!-- Submit button -->
