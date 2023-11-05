@@ -156,6 +156,12 @@ $routes = [
 
         exit;
     },
+    'error' => function() {
+        echo "<h1>Erreur</h1>";
+        echo "<p>Vous n'avez pas la permission d'accéder à cette page.</p>";
+        exit;
+    },
+
 
 
 ];

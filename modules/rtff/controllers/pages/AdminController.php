@@ -14,7 +14,8 @@ class AdminController {
     }
 
     private function isAdmin(): bool {
-        return isset($_SESSION['account_id']) && $_SESSION['admin'] == 1;
+        session_start();
+        return $_SESSION['admin'] == 1;
     }
 
     #[NoReturn] private function redirectToErrorPage(): void
