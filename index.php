@@ -66,6 +66,11 @@ $routes = [
         $controller = new TicketController($model, $view);
         $controller->viewTicket();
     },
+    'authentication/logout' => function() {
+        $logoutController = new LogoutController();
+        $logoutController->logout();
+    },
+
 ];
 
 // Recherche de la route
