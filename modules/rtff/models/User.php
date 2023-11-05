@@ -33,7 +33,7 @@ class User {
 
             // Ajoutez ici la logique SQL pour modifier la table de la base de données
             $updateQuery = "UPDATE ACCOUNT
-SET last_connection_date = strftime('%Y-%m-%d', 'now')
+SET last_connection_date = DATE_FORMAT(NOW(), '%Y-%m-%d')
 WHERE account_id = :account_id;
 ";
             $updateStmt = $db->prepare($updateQuery);
