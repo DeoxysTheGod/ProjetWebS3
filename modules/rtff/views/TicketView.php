@@ -29,9 +29,12 @@ class TicketView {
         $categoryNames = array_map(function($category) {
             return htmlspecialchars($category['title']);
         }, $categories);
+
         ?>
         <div class='ticket'>
             <h2><?= $title ?></h2>
+            <link rel="stylesheet\" href="/assets/styles/view-posts.css\">
+            <div style='border: 1px solid #ccc; margin-bottom: 10px; padding: 10px;'>
 
             <?php if (!empty($categoryNames)): ?>
                 <p><strong>Catégories :</strong> <?= implode(', ', $categoryNames) ?></p>
