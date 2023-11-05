@@ -21,11 +21,6 @@ class TicketController {
         session_start();
         $tickets = $this->model->getAllTickets();
 
-        // Ajout de logs pour le débogage
-        echo '<pre>';
-        var_dump($tickets);
-        echo '</pre>';
-
         $this->view->render($tickets);
     }
 
