@@ -30,7 +30,6 @@ class CreateUser
                     $image_path = $destination;
                 } else {
                     echo "Une erreur est survenue lors du téléchargement de l'image de profil.";
-                    return;
                 }
             }
 
