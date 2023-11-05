@@ -36,7 +36,7 @@ class Homepage
                 <ul>
 					<?php foreach ($categories as $category): ?>
                         <li>
-                            <a class="top-category-link" href="/post/view-posts?categories[]=<?= $category['category_id'];?>&search=">
+                            <a class="top-category-link" href="/post/view-posts?categories[]=<?= $category['category_id']?>">
                                 <?= $category['title'];?>
                             </a>
                             <span> - <?= $category['nb_usage'];?></span>
