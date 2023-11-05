@@ -59,12 +59,12 @@ class TicketView {
     public function render(array $tickets, array $categories): void {
         ob_start();
         ?>
-        <main id="container" class="view-post">
+        <main id="container">
             <section id="history">
                 <h1 class="side-panel-title">Filtre</h1>
 
                 <!-- Form to filter posts by categories and search keywords -->
-                <form class='options' method='GET' action='/post/view-posts'>
+                <form class='options form' method='GET' action='/post/view-posts'>
                     <label for='categories'>Filtrer par catégorie:</label>
                     <select id='categories' name='categories[]' multiple>
                         <?php foreach ($categories as $category): ?>
@@ -76,7 +76,7 @@ class TicketView {
 
                     <!-- Search field -->
                     <input type='text' id='search' name='search' placeholder='Recherche...'>
-                    <input type='submit' value='Filtrer/Rechercher'>
+                    <input class="classic-button" type='submit' value='Filtrer/Rechercher'>
                 </form>
             </section>
 
@@ -107,40 +107,43 @@ class TicketView {
         $ticketUsername = htmlspecialchars($ticket['username']);
         $ticketDate = htmlspecialchars($ticket['date']);
         $ticketId = htmlspecialchars($ticket['ticket_id']);
+
+        ob_start();
         ?>
-        <!DOCTYPE html>
-        <html lang="fr">
-        <head>
-            <meta charset="UTF-8">
-            <title>View Ticket</title>
-        </head>
-        <body>
-        <div>
-            <h1><?= $ticketTitle ?></h1>
-            <p><?= $ticketMessage ?></p>
-            <p><strong>Auteur :</strong> <?= $ticketUsername ?></p>
-            <p><strong>Date :</strong> <?= $ticketDate ?></p>
-            <h2>Commentaires</h2>
-            <form method="post" action="/pages/view-ticket?ticket_id=<?= $ticketId ?>">
-                <textarea name="comment" required></textarea><br>
-                <input type="submit" value="Poster le Commentaire">
-            </form>
-            <?php foreach ($comments as $comment):
-                $commentText = htmlspecialchars($comment['text']);
-                $commentDate = htmlspecialchars($comment['date']);
-                $commentLikeCount = htmlspecialchars($comment['like_count']);
-                $commentId = htmlspecialchars($comment['comment_id']);
-                ?>
-                <div>
-                    <p><?= $commentText ?></p>
-                    <p><strong>Date :</strong> <?= $commentDate ?></p>
-                    <p><strong>Likes :</strong> <?= $commentLikeCount ?></p>
-                    <a href="/pages/like-comment?comment_id=<?= $commentId ?>">Like</a>
-                </div>
-            <?php endforeach; ?>
+        <main id="container" class="view-post">
+        <section id="content">
+
+        <div id="ticket-container">
+            <div class="ticket">
+
+                <h1><?= $ticketTitle ?></h1>
+                <p><?= $ticketMessage ?></p>
+                <p><strong>Auteur :</strong> <?= $ticketUsername ?></p>
+                <p><strong>Date :</strong> <?= $ticketDate ?></p>
+                <h2>Commentaires</h2>
+                <form method="post" action="/pages/view-ticket?ticket_id=<?= $ticketId ?>">
+                    <textarea name="comment" required></textarea><br>
+                    <input type="submit" value="Poster le Commentaire">
+                </form>
+                <?php foreach ($comments as $comment):
+                    $commentText = htmlspecialchars($comment['text']);
+                    $commentDate = htmlspecialchars($comment['date']);
+                    $commentLikeCount = htmlspecialchars($comment['like_count']);
+                    $commentId = htmlspecialchars($comment['comment_id']);
+                    ?>
+                    <div>
+                        <p><?= $commentText ?></p>
+                        <p><strong>Date :</strong> <?= $commentDate ?></p>
+                        <p><strong>Likes :</strong> <?= $commentLikeCount ?></p>
+                        <button class="classic-button" onclick="location.href = '/pages/like-comment?comment_id=<?= $commentId ?>'">Like</button>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </div>
-        </body>
-        </html>
+        </section>
+        <main>
         <?php
+
+		(new \rtff\views\Layout('Post', ob_get_clean()))->show();
     }
 }

@@ -10,7 +10,7 @@ class ConnexionPage
         <link rel="stylesheet" href="/assets/styles/connexion-page.css">
         <div class="content">
             <!-- Formulaire de connexion -->
-            <form method="post" action="/authentication">
+            <form class="form" method="post" action="/authentication">
 
                 <label for="account_id"> Email<br>
                     <input type="email" name="account_id" required>
@@ -20,7 +20,7 @@ class ConnexionPage
                     <input type="password" name="password" required><br>
                 </label><br>
 
-                <input type="submit" value="Se connecter"><br>
+                <input class="classic-button" type="submit" value="Se connecter"><br>
             </form><br>
             <a href="/authentication/reset-password">Mot de passe oublié</a><br>
             <a href="/authentication/create-user">Créer un compte</a>

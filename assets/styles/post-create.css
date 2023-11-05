@@ -7,10 +7,3 @@
     font-family: 'Philosopher-Bold', serif;
     color: #DFD3F6;
 }
-
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.6rem;
-}

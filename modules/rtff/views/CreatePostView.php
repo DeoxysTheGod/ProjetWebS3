@@ -12,10 +12,6 @@ class CreatePostView {
     }
     public function show(): void {
 
-        ob_start();
-        $navbar = new Navbar();
-        $navbar->show();
-
         $database = DatabaseConnexion::getInstance();
         $db = $database->getConnection();
         $categoriesModel = new CategoryModel($db);
@@ -23,10 +19,13 @@ class CreatePostView {
 
         ob_start();
         ?>
-        <link rel="stylesheet" href="/assets/styles/post-create.css">
-        <link rel="stylesheet" href="/assets/styles/style.css">
-        <section class="content">
-            <form method="post" action="/post/create" enctype="multipart/form-data">
+        <main id="container" class="view-post">
+
+        <section id="content">
+        <div id="ticket-container"
+        <div class="ticket">
+
+            <form class="form" method="post" action="/post/create" enctype="multipart/form-data">
                 <div>
                     <label for="title">Titre</label><br>
                     <input type="text" name="title" id="title" required>
@@ -50,10 +49,13 @@ class CreatePostView {
                     </div>
                 </div>
                 <div>
-                    <input type="submit" value="Créer le post">
+                    <input class="classic-button" type="submit" value="Créer le post">
                 </div>
             </form>
+        </div>
         </section>
+        </section>
+        </main>
         <?php
         (new Layout('Création de post', ob_get_clean()))->show();
     }

@@ -27,7 +27,7 @@ class CreateUserView
                     <input type="file" name="profileImage" accept="image/*" required>
                 </div>
                 <div>
-                    <input type="submit" value="Créer un compte">
+                    <input class="classic-button" type="submit" value="Créer un compte">
                 </div>
             </form>
         </div>
