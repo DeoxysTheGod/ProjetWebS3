@@ -8,6 +8,7 @@ use rtff\controllers\authentication\CreateUser;
 use rtff\controllers\pages\AdminController;
 use rtff\controllers\pages\Homepage;
 use rtff\controllers\pages\MailController;
+use rtff\controllers\pages\PasswordResetController;
 use rtff\controllers\pages\TicketController;
 use rtff\models\AdminModel;
 use rtff\models\CategoryModel;
@@ -141,7 +142,21 @@ $routes = [
         header('Location: ' . $_SERVER['HTTP_REFERER']);
         exit;
     },
+    'authentication/reset-password-process' => function() use ($db) {
+        session_start();
+        if (isset($_GET['token'])) {
+            $token = $_GET['token'];
+            $controller = new PasswordResetController();
+            $controller->resetPassword($token);
 
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+        } else {
+            // Vous pouvez gérer le cas où le token n'est pas présent ici
+            echo "Paramètre token manquant !";
+        }
+
+        exit;
+    },
 
 ];
 
