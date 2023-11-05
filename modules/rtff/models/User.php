@@ -63,7 +63,7 @@ class User {
             if ($stmt_check->fetchColumn() > 0) {
                 return "Cette adresse e-mail est déjà utilisée. Veuillez en choisir une différente.";
             } else {
-                $query = "INSERT INTO ACCOUNT (account_id, password, display_name, creation_date) VALUES (:account_id, :password, :display_name, NOW())";
+                $query = "INSERT INTO ACCOUNT (account_id, password, display_name, creation_date,last_connection_date) VALUES (:account_id, :password, :display_name, NOW(), NOW())";
                 $stmt = $db->prepare($query);
                 $stmt->bindParam(':account_id', $account_id);
                 $stmt->bindParam(':password', $password);
