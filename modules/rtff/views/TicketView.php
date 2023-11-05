@@ -30,7 +30,7 @@ class TicketView {
         }, $categories);
 
         // Image de profil par défaut
-        $defaultProfileImage = "/upload/defaultprofile.jpeg";
+        $defaultProfileImage = "/uploads/profiles/defaultprofile.jpeg";
 
         echo "<link rel=\"stylesheet\" href=\"/assets/styles/view-posts.css\">";
         echo "<div style='border: 1px solid #ccc; margin-bottom: 10px; padding: 10px;'>";
